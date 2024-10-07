@@ -9,4 +9,19 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!--
+  	servlet 태그의 name, class 태그를
+  	servlet-mapping 태그의 name, pattern 태그를 연결
+  -->
+  
+  <servlet>
+  	<servlet-name>aaa</servlet-name>
+  	<servlet-class>sec01.ex01.FirstServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>aaa</servlet-name>
+  	<url-pattern>first</url-pattern>
+  </servlet-mapping>
 </web-app>
