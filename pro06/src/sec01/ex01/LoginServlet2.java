@@ -12,10 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/login2")
 public class LoginServlet2 extends HttpServlet {
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 	
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=utf-8");
+		response.setContentType("text/html; charset=utf-8");	// 응답할 MIME TYPE을 text 형식의 html로 설정
 		
 		PrintWriter printWriter = response.getWriter();
 		
