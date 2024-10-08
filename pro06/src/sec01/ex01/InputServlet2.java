@@ -17,10 +17,10 @@ public class InputServlet2 extends HttpServlet {
 
 		request.setCharacterEncoding("utf-8");
 
-		Enumeration enumeration = request.getParameterNames();
+		Enumeration<String> enumeration = request.getParameterNames();
 		while (enumeration.hasMoreElements()) {
 
-			String name = (String) enumeration.nextElement();
+			String name = enumeration.nextElement();
 			String[] values = request.getParameterValues(name);
 
 			for (String value : values)
