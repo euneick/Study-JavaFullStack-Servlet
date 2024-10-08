@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>로그인</title>
+
+<script type="text/javascript">	
+	function validateLogin() {
+
+		var frmLogin = document.frmLogin;
+		var userId = frmLogin.user_id.value;
+		var userPw = frmLogin.user_pw.value;
+
+		if ((userId.length == 0 || userId == "") ||
+			(userPw.length == 0 || userPw == "")) {
+			
+			alert("아이디와 비밀번호는 필수입니다.");
+		}
+		else {
+			
+			frmLogin.method = "post";		// 전송방식 post로 변경
+			frmLogin.action = "login5";		// 서블릿 매핑명 변경
+			frmLogin.submit();				// 매핑된 서블릿 호출
+		}
+	}
+</script>
+</head>
+
+<body>
+	<form name="frmLogin" method="get" action="login" encType="UTF-8">
+		아이디 : <input type="text" name="user_id"><br>
+		비밀번호 : <input type="password" name="user_pw"><br>
+		<input type="button" value="로그인" onclick="validateLogin()">
+		<input type="reset" value="다시입력">
+		
+		<!-- 화면에 보이진 않지만 서블릿에 데이터 전송 -->
+		<input type="hidden" name="user_address" value="서울시 성북구">
+	</form>
+</body>
+
+</html>
