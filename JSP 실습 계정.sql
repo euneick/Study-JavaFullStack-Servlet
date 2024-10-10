@@ -18,3 +18,5 @@ values('kim', '1212', '김유신', 'kim@jweb.com', sysdate);
 commit;
 
 select * from t_member;
+
+desc t_member;
