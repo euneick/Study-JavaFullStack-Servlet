@@ -7,13 +7,13 @@ create table t_member(
 );
 
 insert into t_member
-values('hong', '1212', 'È«±æµ¿', 'hong@gmail.com', sysdate);
+values('hong', '1212', 'í™ê¸¸ë™', 'hong@gmail.com', sysdate);
 
 insert into t_member
-values('lee', '1212', 'ÀÌ¼ø½Å', 'lee@test.com', sysdate);
+values('lee', '1212', 'ì´ìˆœì‹ ', 'lee@test.com', sysdate);
 
 insert into t_member
-values('kim', '1212', '±èÀ¯½Å', 'kim@jweb.com', sysdate);
+values('kim', '1212', 'ê¹€ìœ ì‹ ', 'kim@jweb.com', sysdate);
 
 commit;
 
