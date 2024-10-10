@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>회원가입</title>
+	
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript">
+		function validateRegist() {
+			
+			let idInput = $("input[name='id']");
+			let pwdInput = $("input[name='pwd']");
+			let nameInput = $("input[name='name']");
+			let emailInput = $("input[name='email']");
+			
+			let formTag = document.frmMember;
+			
+			if (idInput.val() == "" || idInput.val().length == 0) alert("아이디를 입력해주세요.");
+			else if (pwdInput.val() == "" || pwdInput.val().length == 0) alert("비밀번호를 입력해주세요.");
+			else if (nameInput.val() == "" || nameInput.val().length == 0) alert("이름을 입력해주세요.");
+			else if (emailInput.val() == "" || emailInput.val().length == 0) alert("이메일을 입력해주세요.");
+			else {
+				formTag.action = "member4";
+				formTag.method = "post";
+				formTag.submit();
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<h1>회원 가입 화면</h1>
+	<form action="" name="frmMember">
+		<input type="hidden" name="command" value="registMember">
+		<table>
+			<tr>
+				<td>아이디</td>
+				<td><input type="text" name="id"></td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td><input type="password" name="pwd"></td>
+			</tr>
+			<tr>
+				<td>이름</td>
+				<td><input type="text" name="name"></td>
+			</tr>
+			<tr>
+				<td>이메일</td>
+				<td><input type="email" name="email"></td>
+			</tr>
+		</table>
+		<input type="button" value="가입요청" onclick="validateRegist()">
+		<input type="reset" value="다시입력">
+	</form>
+</body>
+
+</html>
