@@ -30,7 +30,7 @@ public class MemberServlet extends HttpServlet {
 		
 		printWriter.print("<table border=1>"
 				+ "<tr align='center' bgcolor='lightgreen'>"
-				+ "<td>아이디</td><td>비밀번호</td><td>이름</td><td>이메일</td><td>가입일</td>"
+				+ "<th>아이디</th><th>비밀번호</th><th>이름</th><th>이메일</th><th>가입일</th>"
 				+ "</tr>");
 		
 		for (MemberVO member : memberList) {			
@@ -43,7 +43,7 @@ public class MemberServlet extends HttpServlet {
 					+ "</tr>");
 		}
 		
-		printWriter.print("</body></html>");
+		printWriter.print("</table></body></html>");
 	}
 
 }
