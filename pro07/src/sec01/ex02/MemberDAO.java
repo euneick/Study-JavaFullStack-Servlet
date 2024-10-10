@@ -52,7 +52,13 @@ public class MemberDAO {
 
 			String query = "select * from t_member";
 			System.out.println("query : " + query);
-
+			
+			/*
+			 * 쿼리문을 미리 준비해두고 필요 할 때만 executeQuery() 메소드를 통해 바로 실행 할 수 있음
+			 * 매번 쿼리문을 새로 준비해야하는 Statement 객체보다 훨씬 안정적임
+			 * 변수를 처리하거나 동일한 쿼리를 여러번 실행 할 때 유리
+			 * 보안과 성능 측면에서 큰 이점을 제공
+			 */
 			preparedStatement = connection.prepareStatement(query);
 			
 			resultSet = preparedStatement.executeQuery();
