@@ -34,6 +34,7 @@
 		maxWait				새로운 연결이 생길 때 까지 기다릴 최대 시간
 		
 		톰캣 서버를 지웠다가 새로 추가 할 경우에 이 구문이 사라지므로 새로 추가해야 함
+			 프로젝트 폴더/WebContent/META_INF 폴더에 추가하여 해결 할 수 도 있음
 	-->
 	<Resource 
 		name="jdbc/oracle" 
