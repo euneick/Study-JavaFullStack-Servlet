@@ -3,7 +3,7 @@ package sec01.ex01;
 import java.sql.Date;
 
 /**
- * 	VO (Value Obejct) 역할 클래스
+ * 	VO (Value Object) 역할 클래스
  * 		- DB의 데이블에서 조회한 값들을 한번에 받아와서 저장하는 객체
  */
 public class MemberVO {
