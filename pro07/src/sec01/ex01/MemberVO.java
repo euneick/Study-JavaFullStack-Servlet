@@ -12,7 +12,7 @@ public class MemberVO {
 	private String pwd;
 	private String name;
 	private String email;
-	private Date joinDate;
+	private Date joinDate;		// java.uitl 라이브러리가 아닌 java.sql 라이브러리로 선택해야 함
 
 	public MemberVO() {
 		System.out.println("MemberVO 생성자 호출");
