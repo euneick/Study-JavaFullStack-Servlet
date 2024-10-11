@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 	회원 정보를 화면에 보여주는걸 전담하는 서블릿
+ */
 @WebServlet("/viewMembers")
 public class ViewServlet extends HttpServlet {
 
@@ -32,8 +35,6 @@ public class ViewServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		
 		PrintWriter printWriter = response.getWriter();
-		
-		MemberDAO memberDAO = new MemberDAO();
 		
 		ArrayList<MemberVO> memberList = (ArrayList<MemberVO>)request.getAttribute("membersList");
 		

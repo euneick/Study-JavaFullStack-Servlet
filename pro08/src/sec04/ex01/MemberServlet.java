@@ -1,7 +1,6 @@
 package sec04.ex01;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -59,10 +58,9 @@ public class MemberServlet extends HttpServlet {
 		}
 	}
 	
-	private void ProcessMemberSelect(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void ProcessMemberSelect(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 
-		PrintWriter printWriter = response.getWriter();
-		
 		MemberDAO memberDAO = new MemberDAO();
 		
 		ArrayList<MemberVO> memberList = memberDAO.getMembersList();
