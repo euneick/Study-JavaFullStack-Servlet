@@ -21,7 +21,7 @@ public class SecondServlet2 extends HttpServlet {
 		PrintWriter printWriter = response.getWriter();
 		
 		printWriter.print("<html><body>"
-				+ "sendRedirect를 이용한 redirect 실습"
+				+ "addHeader를 이용한 redirect 실습"
 				+ "</body></html>");
 	}
 
