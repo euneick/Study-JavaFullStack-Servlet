@@ -23,7 +23,7 @@ public class ContextParamServlet extends HttpServlet {
 		PrintWriter printWriter = response.getWriter();
 		
 		printWriter.print("<html><body>"
-				+ "<table corder=1 cellspacing=0>"
+				+ "<table border=1 cellspacing=0>"
 				+ "<tr>메뉴 이름</tr>"
 				+ "<tr><td>"+ context.getInitParameter("menu_member") +"</td></tr>"
 				+ "<tr><td>"+ context.getInitParameter("menu_order") +"</td></tr>"
