@@ -84,7 +84,9 @@ public class MemberServlet4 extends HttpServlet {
 					+ "</tr>");
 		}
 		
-		printWriter.print("</table></body></html>");
+		printWriter.print("</table>");
+		printWriter.print("<a href='memberForm.html'>회원가입</a>");
+		printWriter.print("</body></html>");
 	}
 	
 	private void ProcessMemberDelete(HttpServletRequest request) {
