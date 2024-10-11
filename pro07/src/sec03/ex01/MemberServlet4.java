@@ -30,32 +30,31 @@ public class MemberServlet4 extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8");
+
+		String command = request.getParameter("command");
 		
-		ProcessMemberInsert(request);
+		if (command != null && command.equals("registMember"))
+			ProcessMemberInsert(request);
+		else if (command != null && command.equals("deleteMember"))
+			ProcessMemberDelete(request);
 
 		ProcessMemberSelect(response);
 	}
 	
 	private void ProcessMemberInsert(HttpServletRequest request) throws ServletException, IOException {
-		
+
 		MemberDAO memberDAO = new MemberDAO();
-		
-		String command = request.getParameter("command");		
-		if (command != null && command.equals("registMember")) {
-				
-			MemberVO memberVO = new MemberVO(
-				request.getParameter("id"),
+
+		MemberVO memberVO = new MemberVO(request.getParameter("id"),
 				request.getParameter("pwd"),
 				request.getParameter("name"),
-				request.getParameter("email")					
-			);
-			
-			if (memberDAO.RegistMember(memberVO)) {
-				System.out.println("회원가입 성공");
-			}
-			else {
-				System.out.println("회원가입 실패");
-			}
+				request.getParameter("email"));
+
+		if (memberDAO.RegistMember(memberVO)) {
+			System.out.println("회원가입 성공");
+		}
+		else {
+			System.out.println("회원가입 실패");
 		}
 	}
 	
@@ -71,20 +70,31 @@ public class MemberServlet4 extends HttpServlet {
 		
 		printWriter.print("<table border=1>"
 				+ "<tr align='center' bgcolor='lightgreen'>"
-				+ "<th>아이디</th><th>비밀번호</th><th>이름</th><th>이메일</th><th>가입일</th>"
+				+ "<th>아이디</th><th>비밀번호</th><th>이름</th><th>이메일</th><th>가입일</th><th>삭제</th>"
 				+ "</tr>");
 		
-		for (MemberVO member : memberList) {			
+		for (MemberVO member : memberList) {
 			printWriter.print("<tr>"
 					+ "<td>" + member.getId() + "</td>"
 					+ "<td>" + member.getPwd() + "</td>"
 					+ "<td>" + member.getName() + "</td>"
 					+ "<td>" + member.getEmail() + "</td>"
 					+ "<td>" + member.getJoinDate() + "</td>"
+					+ "<td><a href='/pro07/member4?command=deleteMember&id=" + member.getId() + "'>삭제</a></td>"
 					+ "</tr>");
 		}
 		
 		printWriter.print("</table></body></html>");
+	}
+	
+	private void ProcessMemberDelete(HttpServletRequest request) {
+		
+		MemberDAO memberDAO = new MemberDAO();	
+		
+		if (memberDAO.DeleteMember(request.getParameter("id")))
+			System.out.println("회원정보 삭제 완료");
+		else
+			System.out.println("회원정보 삭제 실패");
 	}
 }
 

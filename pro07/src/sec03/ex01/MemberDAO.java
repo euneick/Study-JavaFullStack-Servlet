@@ -103,6 +103,29 @@ public class MemberDAO {
 		
 		return result;
 	}
+	
+	public boolean DeleteMember(String deleteId) {
+		
+		boolean result = false;
+		String query = "delete from t_member where id = ?";
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, deleteId);
+			
+			result = preparedStatement.executeUpdate() == 1;
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			Release();
+		}
+		
+		return result;
+	}
 }
 
 
