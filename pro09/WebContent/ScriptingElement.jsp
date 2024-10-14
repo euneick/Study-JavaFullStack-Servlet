@@ -16,7 +16,7 @@
 	 3. 표현식
 	 	- JSP에 변수의 값을 출력하는 영역
 	 	- <%= ... %>
-	 	- 표현식 안에는 세미콜론 ; 를 작성하면 에러가 발생
+	 	- PrintWriter.print() 메소드 내부에 작성되기 때문에  표현식 안에는 세미콜론 ; 를 작성하면 에러가 발생
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
