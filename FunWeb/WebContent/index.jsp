@@ -30,9 +30,9 @@
 	<div id="wrap">
 		<header>
 			<div id="login">
-				<a href="member/login.html">login</a> | <a href="member/join.html">join</a>
+				<a href="member/login.jsp">login</a> | 
+				<a href="member/join.jsp">join</a>
 			</div>
-			
 			<div class="clear"></div>
 
 			<div id="logo">
@@ -41,10 +41,10 @@
 
 			<nav id="top_menu">
 				<ul>
-					<li><a href="index.html">HOME</a></li>
-					<li><a href="company/welcome.html">COMPANY</a></li>
+					<li><a href="index.jsp">HOME</a></li>
+					<li><a href="company/welcome.jsp">COMPANY</a></li>
 					<li><a href="#">SOLUTIONS</a></li>
-					<li><a href="center/notice.html">CUSTOMER CENTER</a></li>
+					<li><a href="center/notice.jsp">CUSTOMER CENTER</a></li>
 					<li><a href="#">CONTACT US</a></li>
 				</ul>
 			</nav>
@@ -118,9 +118,9 @@
 				</table>
 			</div>
 		</article>
-		<!-- 메인 콘텐츠 들어가는 곳 -->
+
 		<div class="clear"></div>
-		<!-- 푸터 들어가는 곳 -->
+
 		<footer>
 			<hr>
 			<div id="copy">
@@ -129,8 +129,9 @@
 				4315 Fax +82 64 123 4321
 			</div>
 			<div id="social">
-				<img src="images/facebook.gif" width="33" height="33" alt="Facebook">
-				<img src="images/twitter.gif" width="34" height="34" alt="Twitter">
+				<img src="../images/facebook.gif" width="33" height="33"
+					alt="Facebook"> <img src="../images/twitter.gif" width="34"
+					height="34" alt="Twitter">
 			</div>
 		</footer>
 	</div>

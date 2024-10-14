@@ -28,28 +28,8 @@
 
 <body>
 	<div id="wrap">
-
-		<header>
-			<div id="login">
-				<a href="../member/login.html">login</a> | <a
-					href="../member/join.html">join</a>
-			</div>
-			<div class="clear"></div>
-			<!-- 로고들어가는 곳 -->
-			<div id="logo">
-				<img src="../images/logo.gif" width="265" height="62" alt="Fun Web">
-			</div>
-			<!-- 로고들어가는 곳 -->
-			<nav id="top_menu">
-				<ul>
-					<li><a href="../index.html">HOME</a></li>
-					<li><a href="../company/welcome.html">COMPANY</a></li>
-					<li><a href="#">SOLUTIONS</a></li>
-					<li><a href="../center/notice.html">CUSTOMER CENTER</a></li>
-					<li><a href="#">CONTACT US</a></li>
-				</ul>
-			</nav>
-		</header>
+		<!-- 헤더 영역 -->
+		<%@ include file="../includes/top.jsp" %>
 
 		<div id="sub_img"></div>
 
@@ -97,19 +77,8 @@
 
 		<div class="clear"></div>
 
-		<footer>
-			<hr>
-			<div id="copy">
-				All contents Copyright 2011 FunWeb 2011 FunWeb Inc. all rights
-				reserved<br> Contact mail:funweb@funwebbiz.com Tel +82 64 123
-				4315 Fax +82 64 123 4321
-			</div>
-			<div id="social">
-				<img src="../images/facebook.gif" width="33" height="33"
-					alt="Facebook"> <img src="../images/twitter.gif" width="34"
-					height="34" alt="Twitter">
-			</div>
-		</footer>
+		<!-- 푸터 영역 -->
+		<%@ include file="../includes/bottom.jsp" %>
 	</div>
 </body>
 
