@@ -16,6 +16,8 @@
 	 	- isELIgnored 	EL 사용 유무 지정(JSP 2.0 버전 이상) 				(기본값 : true)
 	 	- isThreadSafe 	JSP페이지의 스레드 안정성 여부 지정 						(기본값 : true)
 	 					동시 엑세스의 문제가 예상 될 경우 false로 지정하고 올바른 동기화코드를 작성
+	 					
+	 ※ 속성 입력시 대소문자 구분 반드시, JSP 작성 시 반드시 Page Directive Tag를 한 쌍 이상 작성 해야 함
 -->
 
 <%@ page
@@ -44,6 +46,15 @@
 <body>
 	<h1>hello JSP</h1>
 	<h1>JSP 실습</h1>
+	
+	<!-- 자바 코드 작성 -->
+	<%		
+		double randValue = Math.random();
+		Date date = new Date();
+		
+		System.out.println(randValue);
+		System.out.println(date);
+	%>
 </body>
 
 </html>
