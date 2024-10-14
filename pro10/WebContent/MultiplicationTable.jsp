@@ -22,7 +22,35 @@
 <%
 		for (int i = 1; i < 10; i++) {
 %>
-			<tr align="center">
+<%-- 방법 1.
+<%
+			if (i % 2 == 0) {
+%>
+				<tr align="center" bgcolor="green">
+<%
+			}
+			else {
+%>
+				<tr align="center" bgcolor="pink">
+<%
+			}
+%>
+--%>
+<%-- 방법 2.
+			<tr align="center" bgcolor=<%
+				if (i % 2 == 0) {
+			%>
+					"pink"
+			<%
+				}
+				else {
+			%>
+					"green"
+			<%
+				}
+			%>>
+--%>
+			<tr align="center" bgcolor=<%=(i % 2 == 0) ? "pink" : "green" %>>
 				<td width="400">
 					<%=dan%> * <%=i%>
 				</td>
