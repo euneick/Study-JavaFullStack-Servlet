@@ -5,12 +5,7 @@
 	 - 액션 태그 사이에 주석 작성 시 에러 발생
 	 - 속성 값 부여 할 때 표현식 <%= %> 사용 가능
 	 
-		 * 문법
-		 	<jsp:include page=".jsp 파일" flush="true | false">
-		 	...
-		 	</jsp>
-	 
-	 	<jsp:include>
+		<jsp:include>
 	 	 - 외부 파일을 현재 파일에 포함
 	 	 - page : 포함 할 JSP 경로
 	 	   flush : 지정한 JSP를 실행 하기 전 출력 버퍼 비움 여부
@@ -24,10 +19,20 @@
 	 			변수			포함시킨 파일에서 생성한 변수 사용 가능		포함시킨 파일에서 생성한 변수 사용 불가
 	 			page영역		공유됨							공유되지 않음
 	 			request영역	공유됨							공유됨
+		 * 문법
+			<jsp:include page=".jsp 파일" flush="true | false">
+			...
+			</jsp>
 	 		
 	 		
 	 	<jsp:forward>
 	 	 - 다른 페이지로 포워딩
+	 	 - RequestDispatcher 클래스 대신해서 포워딩
+	 	 - 포워딩 시 값을 전달 할 수 있음
+	 	 * 문법
+	 	 	<jsp:forward page="포워딩 할 JSP경로">]
+	 	 	...
+	 	 	</jsp:forward>
 	 		
 	 	<jsp:useBean>, <jsp:setProperty>, <jsp:getProperty>
 	 	 - 자바빈즈를 생성하고 설정 및 추출
