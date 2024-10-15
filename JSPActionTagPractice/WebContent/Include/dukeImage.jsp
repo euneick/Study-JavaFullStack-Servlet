@@ -16,7 +16,7 @@
 
 <body>
 	<h2>이름 : <%=name%></h2>
-	<img src="./Image/<%=imgName%>" />
+	<img src="../Image/<%=imgName%>" />
 </body>
 
 </html>
