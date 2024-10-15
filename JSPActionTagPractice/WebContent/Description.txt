@@ -34,4 +34,6 @@
 	 		
 	 	<jsp:param>
 	 	 - 다른 페이지로 매개변수를 전달
+	 	 - request 객체에 parameter를 바인딩
+	 	 - <jsp:include>, <jsp:forward> 태그와 함께 사용
  --%>
