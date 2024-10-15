@@ -55,14 +55,14 @@ public class MemberDAO {
 			resultSet = preparedStatement.executeQuery();
 			
 			while (resultSet.next()) {
-				MemberBean memberVO = new MemberBean();
-				memberVO.setId(resultSet.getString("id"));
-				memberVO.setPwd(resultSet.getString("pwd"));
-				memberVO.setName(resultSet.getString("name"));
-				memberVO.setEmail(resultSet.getString("email"));
-				memberVO.setJoinDate(resultSet.getDate("joinDate"));
+				MemberBean memberBean = new MemberBean();
+				memberBean.setId(resultSet.getString("id"));
+				memberBean.setPwd(resultSet.getString("pwd"));
+				memberBean.setName(resultSet.getString("name"));
+				memberBean.setEmail(resultSet.getString("email"));
+				memberBean.setJoinDate(resultSet.getDate("joinDate"));
 
-				memberList.add(memberVO);
+				memberList.add(memberBean);
 			}
 		}
 		catch (SQLException e) {
