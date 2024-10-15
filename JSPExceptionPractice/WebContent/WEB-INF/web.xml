@@ -9,4 +9,21 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- 
+  	각 에러에 대응하는 JSP 지정 방법
+	  <error-page>
+	  	<error-code>에러코드</error-code>
+	  	<location>오류 페이지 위치</location>
+	  </error-page>
+  -->
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/Error/error404.jsp</location>
+  </error-page>
+  
+  <error-page>
+  	<error-code>500</error-code>
+  	<location>/Error/error500.jsp</location>
+  </error-page>
 </web-app>
