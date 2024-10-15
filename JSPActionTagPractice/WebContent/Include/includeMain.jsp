@@ -16,7 +16,7 @@
 </head>
 
 <body>
-	<h1>Directive Include (지시어) 사용</h2>
+	<h1>Directive Include (지시어) 사용</h1>
 	<%-- <%@ include file="<%=outerPath1%>" %> --%>
 	<%@ include file="outerPage1.jsp" %>	
 	<p>outerPage1.jsp 외부 페이지에 선언한 변수 : <%=str1%></p>
@@ -27,7 +27,7 @@
 	
 	<hr>
 	
-	<h1>Action Tag Include (액션태그) 사용</h2>
+	<h1>Action Tag Include (액션태그) 사용</h1>
 	<jsp:include page="<%=outerPath2%>"></jsp:include>
 	<p>outerPage2.jsp 외부 페이지에 선언한 변수 : <%-- <%=str2%> --%></p>
 	
