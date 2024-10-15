@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%!
+	String message = "아이디를 입력하지 않았습니다. <br> 아이디를 입력해 주세요.";
+%>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
 <!DOCTYPE html>
 <html>
 
@@ -10,8 +16,6 @@
 
 <body>
 <%
-	request.setCharacterEncoding("utf-8");	
-
 	String userID = request.getParameter("user_id");
 
 	if (userID == null || userID.length() == 0) {
@@ -20,7 +24,9 @@
 		dispatcher.forward(request, response);
 	*/
 	%>
-		<jsp:forward page="forwardLogin.jsp"></jsp:forward>
+		<jsp:forward page="forwardLogin.jsp">
+			<jsp:param value="<%=message%>" name="message"/>
+		</jsp:forward>
 	<%	
 	}
 %>

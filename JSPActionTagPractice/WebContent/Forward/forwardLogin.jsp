@@ -12,7 +12,15 @@
 </head>
 
 <body>
-	<h3>아이디를 입력하지 않았습니다.<br>아이디를 입력해주세요.</h3>
+<%
+	String message = request.getParameter("message");
+
+	if (message != null) {
+	%>
+		<h3><%=message%></h1>
+	<%
+	}
+%>	
 	<form action="forwardResult.jsp" method="post">
 		아이디 : <input type="text" name="user_id"><br>
 		비밀번호 : <input type="password" name="user_pw"><br>
