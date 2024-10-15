@@ -36,6 +36,13 @@
 	 		
 	 	<jsp:useBean>, <jsp:setProperty>, <jsp:getProperty>
 	 	 - 자바빈즈를 생성하고 설정 및 추출
+	 	 
+	 	 	* 자바 빈(Bean)
+	 	 	 - 데이터를 저장하거나 전달하는 데 사용하는 클래스
+	 	 	 - DTO(Data Transfer Obejct), VO(Value Object) 클래스과 같은 개념
+	 	 	 - 속성의 접근 제한자는 private
+	 	 	 - 각 속성(attribute, property)은 각각의 getter/setter를 가짐 (첫 글자는 반드시 소문자)
+	 	 	 - 기본 생성자가 반드시 작성해야 하며, 다른 생성자도 추가로 생성 할 수 있음 
 	 		
 	 	<jsp:param>
 	 	 - 다른 페이지로 매개변수를 전달
