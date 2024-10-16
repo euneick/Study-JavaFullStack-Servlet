@@ -40,16 +40,16 @@
 
 		<article>
 			<h1>Login</h1>
-			<form action="" id="join">
+			<form action="loginPro.jsp" method="post" id="join">
 				<fieldset>
 					<legend>Login Info</legend>
 					<label>User ID</label> <input type="text" name="id"><br>
-					<label>Password</label> <input type="password" name="pass"><br>
+					<label>Password</label> <input type="password" name="pwd"><br>
 				</fieldset>
 				<div class="clear"></div>
 				<div id="buttons">
-					<input type="button" value="Submit" class="submit"> <input
-						type="button" value="Cancel" class="cancel">
+					<input type="submit" value="로그인" class="submit">
+					<input type="reset" value="취소" class="cancel">
 				</div>
 			</form>
 		</article>

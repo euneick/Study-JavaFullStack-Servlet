@@ -111,8 +111,30 @@ public class MemberDAO implements IMemberDAO{
 
 	@Override
 	public int checkUser(String id, String pwd) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		int result = 0;
+		String sql = "";
+		
+		try {
+			connection = getConnection();
+			
+			sql = "select id, pwd from member where id=?";
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, id);
+			
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) result = pwd.equals(resultSet.getString("pwd")) ? 1 : 0;
+			else result = 0;
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			Release();
+		}
+		
+		return result;
 	}
 
 }
