@@ -29,7 +29,7 @@
 <body>
 	<div id="wrap">
 		<!-- 헤더 영역 -->
-		<%@ include file="../includes/top.jsp" %>
+		<jsp:include page="../includes/top.jsp"></jsp:include>
 
 		<div id="sub_img"></div>
 
@@ -78,7 +78,7 @@
 		<div class="clear"></div>
 
 		<!-- 푸터 영역 -->
-		<%@ include file="../includes/bottom.jsp" %>
+		<jsp:include page="../includes/bottom.jsp"></jsp:include>
 	</div>
 </body>
 
