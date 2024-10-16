@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="../css/default.css" rel="stylesheet" type="text/css">
-<link href="../css/front.css" rel="stylesheet" type="text/css">
+<link href="css/default.css" rel="stylesheet" type="text/css">
+<link href="css/front.css" rel="stylesheet" type="text/css">
 
 <!--[if lt IE 9]>
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js" type="text/javascript"></script>
@@ -28,11 +28,11 @@
 
 <body>
 	<div id="wrap">
-		<jsp:include page="../includes/top.jsp"></jsp:include>
+		<jsp:include page="includes/top.jsp"></jsp:include>
 
 		<div class="clear"></div>
 		<div id="main_img">
-			<img src="../images/main_img.jpg" width="971" height="282">
+			<img src="images/main_img.jpg" width="971" height="282">
 		</div>
 
 		<article id="front">
@@ -101,7 +101,7 @@
 
 		<div class="clear"></div>
 
-		<jsp:include page="../includes/bottom.jsp"></jsp:include>
+		<jsp:include page="includes/bottom.jsp"></jsp:include>
 	</div>
 </body>
 </html>
