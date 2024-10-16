@@ -34,16 +34,28 @@
 	 	 	...
 	 	 	</jsp:forward>
 	 		
-	 	<jsp:useBean>, <jsp:setProperty>, <jsp:getProperty>
-	 	 - 자바빈즈를 생성하고 설정 및 추출
+	 	<jsp:useBean>
+	 	 - 자바빈즈 객체 생성
 	 	 
 	 	 * 문법
 	 	 	<jsp:useBean id="변수 이름" class="패키지 명이 포함된 자바 빈 클래스 이름", [scope="접근범위]/>
 	 	 	 - scope : 자바빈에 대한 접근 범위(page, request, session, application)
 	 	 	 	속성 값을 page로 지정하면 같은 페이지 내에서만 사용 할 수 있음
+	 	 	 	
+ 	 	<jsp:setProperty>
+ 	 	 - 생성된 자바빈즈 객체에 값을 set
+ 		 - input 태그의 name 속성 값과 자바빈 객체의 변수명이 같을 경우 param 속성을 통해 자동으로 값을 set 할 수 있음
+ 		 - input 태그의 name 속성 값과 property의 변수 명이 같을 경우 value 또는 param 속성을 생략 할 수 있음
+ 		 - 전달된 input 태그의  name 속성들의 개수와 값이 자바빈 객체의 멤버변수들의 개수와 이름이 일치하면 * 기호로 줄일 수 있음
+ 		 
  	 	 * 문법
  	 	 	<jsp:setProperty name="값을 set 할 자바빈 객체 변수 명" property="set 할 변수 명" value="set 할 값" />
- 	 	 	
+ 	 	 	<jsp:setProperty name="값을 set 할 자바빈 객체 변수 명" property="set 할 변수 명" param="input 태그의 name && Beans객체의 멤버변수" />
+ 	 	 	<jsp:setProperty name="값을 set 할 자바빈 객체 변수 명" property="set 할 변수 명(input-name 속성 값과 같을 경우)" />
+ 	 	 		
+ 	 	<jsp:getProperty>
+ 	 	 - 생성된 자바빈즈 객체에서 값을 get
+ 	 	 
  	 	 * 문법
  	 	 	<jsp:getProperty name="값을 get 할 자바빈 객체 변수 명" property="get 할 변수 명" />
 	 	 
