@@ -39,43 +39,45 @@
 				<li><a href="#">Service Policy</a></li>
 			</ul>
 		</nav>
-
+	<%
+		String id = (String) session.getAttribute("id");
+	
+		if (id == null || id.length() == 0) {
+			response.sendRedirect("../member/login.jsp");
+		}
+	%>
 		<article>
-			<h1>Notice</h1>
-			<table id="notice">
-				<tr>
-					<th class="tno">No.</th>
-					<th class="ttitle">Title</th>
-					<th class="twrite">Writer</th>
-					<th class="tdate">Date</th>
-					<th class="tread">Read</th>
-				</tr>
-			</table>
-			
-			<div id="table_search">
-				<input type="text" name="search" class="input_box">
-				<input type="button" value="검색" class="btn">
-			<%
-				String id = (String) session.getAttribute("id");
-			
-				if (id != null && id.length() != 0) {
-				%>
-					<input type="button" value="글쓰기" class="btn" onclick="location.href = 'boardWrite.jsp'">
-				<%
-				}
-			%>
-			</div>
-			
-			<div class="clear"></div>
-			
-			<div id="page_control">
-				<a href="#">Prev</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a>
-				<a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a>
-				<a href="#">8</a> <a href="#">9</a> <a href="#">10</a> <a href="#">Next</a>
-			</div>
+			<h1>Notice Write</h1>
+			<form action="boardWritePro.jsp" method="post">
+				<table id="notice">
+					<tr>
+						<td>작성자</td>
+						<td><input type="text" name="name" value="<%=id%>" readonly></td>
+					</tr>
+					<tr>
+						<td>게시글 비밀번호</td>
+						<td><input type="password" name="pwd"></td>
+					</tr>
+					<tr>
+						<td>게시글 제목</td>
+						<td><input type="text" name="subject"></td>
+					</tr>
+					<tr>
+						<td>게시글 내용</td>
+						<td><textarea rows="13" cols="40" name="content"></textarea></td>
+					</tr>
+				</table>
+				
+				<div id="table_search">
+					<input type="submit" value="글 쓰기" class="btn">
+					<input type="reset" value="다시 쓰기" class="btn">
+					<input type="button" value="글 목록" class="btn" onclick="location.href = 'notice.jsp'">
+				</div>
+			</form>
 		</article>
 
 		<div class="clear"></div>
+		<div id="page_control"></div>
 
 		<!-- 푸터 영역 -->
 		<jsp:include page="../includes/bottom.jsp"></jsp:include>

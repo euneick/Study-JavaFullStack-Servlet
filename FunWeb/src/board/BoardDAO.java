@@ -49,8 +49,28 @@ public class BoardDAO implements IBoardDAO {
 
 	@Override
 	public void insertBoard(BoardBean boardBean) {
-		// TODO Auto-generated method stub
 
+		try {
+			connection = dataSource.getConnection();
+			
+			statement = connection.prepareStatement("insert into board(name, pwd, subject, content, ip, join_date, id)"
+					+ " values (?, ?, ?, ?, ?, ?, ?)");
+			statement.setString(1, boardBean.getName());
+			statement.setString(2, boardBean.getPwd());
+			statement.setString(3, boardBean.getSubject());
+			statement.setString(4, boardBean.getContent());
+			statement.setString(5, boardBean.getIp());
+			statement.setTimestamp(6, boardBean.getJoinDate());
+			statement.setString(7, boardBean.getId());
+			
+			statement.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			Release();
+		}
 	}
 
 	@Override
