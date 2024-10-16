@@ -23,14 +23,21 @@
 		<jsp:forward page="memberForm.html"></jsp:forward>
 	<%
 	}
-	else {		
-		MemberBean memberBean = new MemberBean(id, pwd, name, email);
+	else {
+		//MemberBean memberBean = new MemberBean(id, pwd, name, email);
+	%>
+		<jsp:useBean id="memberBean" class="JavaBeans.MemberBean" scope="page"></jsp:useBean>
+	<%
+		memberBean.setId(id);
+		memberBean.setPwd(pwd);
+		memberBean.setName(name);
+		memberBean.setEmail(email);
 		
 		MemberDAO memberDAO = new MemberDAO();
 		
 		memberDAO.RegistMember(memberBean);
 		
-		memberList = memberDAO.getMembersList();	
+		memberList = memberDAO.getMembersList();
 	}
 %>
 <!DOCTYPE html>
