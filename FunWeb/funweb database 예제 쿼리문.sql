@@ -54,17 +54,14 @@ insert into board(name, passwd, subject, content, pos, depth, count, ip, regdate
 values('이순신', '1234', '제목1', '글내용1', 0, 0, 0, 'localhost', now(), 'lee');
 
 insert into board(name, passwd, subject, content, pos, depth, count, ip, regdate, id)
-values('이순신', '1234', '제목1', '글내용1', 0, 0, 0, 'localhost', now(), 'lee');
+values('이순신', '1234', '제목22', '글내용22', 0, 0, 0, 'localhost', now(), 'lee');
 
 insert into board(name, passwd, subject, content, pos, depth, count, ip, regdate, id)
-values('이순신', '1234', '제목1', '글내용1', 0, 0, 0, 'localhost', now(), 'lee');
+values('이순신', '1234', '제목333', '글내용333', 0, 0, 0, 'localhost', now(), 'lee');
 
+delete from board;
 
 select * from board;
-
-
-
-
 
 
 
