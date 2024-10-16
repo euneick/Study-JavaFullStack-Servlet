@@ -20,7 +20,10 @@
 	%>
 		<jsp:useBean id="memberBean" class="JavaBeans.MemberBean" scope="page"></jsp:useBean>
 	<%
-		memberBean.setInfos(id, pwd, name, email);
+		memberBean.setId(id);
+		memberBean.setPwd(pwd);
+		memberBean.setName(name);
+		memberBean.setEmail(email);
 		
 		memberDAO.RegistMember(memberBean);
 	}
