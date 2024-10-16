@@ -20,6 +20,14 @@ public class MemberBean {
 		this.email = email;
 	}
 	
+	public void setInfos(String id, String pwd, String name, String email) {
+	
+		this.id = id;
+		this.pwd = pwd;
+		this.name = name;
+		this.email = email;
+	}
+	
 	public String getId() {
 		return id;
 	}

@@ -2,12 +2,7 @@
 	import="java.util.*, JavaBeans.*"
     pageEncoding="UTF-8"%>
 <%!
-	ArrayList<MemberBean> memberList;
-
-	public boolean validateString(String str) {
-		
-		return (str != null && str.length() != 0);
-	}
+	public boolean validateString(String str) { return (str != null && str.length() != 0); }
 %>    
 <%
 	request.setCharacterEncoding("utf-8");
@@ -15,30 +10,22 @@
 	String id = request.getParameter("id");
 	String pwd = request.getParameter("pwd");
 	String name = request.getParameter("name");
-	String email = request.getParameter("email");
+	String email = request.getParameter("email");	
+
+	MemberDAO memberDAO = new MemberDAO();
 	
-	if (!validateString(id) || !validateString(pwd) ||
-			!validateString(name) || !validateString(email) ) {
-	%>
-		<jsp:forward page="memberForm.html"></jsp:forward>
-	<%
-	}
-	else {
+	if (validateString(id) && validateString(pwd) &&
+			validateString(name) && validateString(email) ) {
 		//MemberBean memberBean = new MemberBean(id, pwd, name, email);
 	%>
 		<jsp:useBean id="memberBean" class="JavaBeans.MemberBean" scope="page"></jsp:useBean>
 	<%
-		memberBean.setId(id);
-		memberBean.setPwd(pwd);
-		memberBean.setName(name);
-		memberBean.setEmail(email);
-		
-		MemberDAO memberDAO = new MemberDAO();
+		memberBean.setInfos(id, pwd, name, email);
 		
 		memberDAO.RegistMember(memberBean);
-		
-		memberList = memberDAO.getMembersList();
 	}
+	
+	ArrayList<MemberBean> memberList = memberDAO.getMembersList();
 %>
 <!DOCTYPE html>
 <html>
