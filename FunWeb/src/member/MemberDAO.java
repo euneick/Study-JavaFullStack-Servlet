@@ -3,6 +3,7 @@ package member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -26,11 +27,11 @@ public class MemberDAO implements IMemberDAO{
 	 * 			- 현재 Web Application이 사용 할 수 있는 위치는 "java:comp/env" 아래에 위치함 <br>
 	 * 			- context.xml 파일 내 context 태그 위치를 뜻함
 	 */
-	private Connection getConnection() throws Exception{
+	private Connection getConnection() throws Exception {
 		
 		Context initContext = new InitialContext();
 		
-		Context context = (Context) initContext.lookup("java:comp/evn");
+		Context context = (Context) initContext.lookup("java:comp/env");
 		
 		// context 태그 내에 name 속성 값이 "jdbc/funweb" 인 Resource를 lookup
 		dataSource = (DataSource) context.lookup("jdbc/funweb");
@@ -39,17 +40,73 @@ public class MemberDAO implements IMemberDAO{
 		
 		return connection;
 	}
+	
+	private void Release() {
+		
+		try {
+			if (resultSet != null) resultSet.close();
+			if (statement != null) statement.close();
+			if (connection != null) connection.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public int validateID(String id) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		int result = 0;			//  1 : 중복		0 : 중복 아님
+		
+		try {			
+			connection = getConnection();
+			
+			statement = connection.prepareStatement("select * from member where id=?");
+			statement.setString(1, id);
+			
+			resultSet = statement.executeQuery();
+			
+			result = resultSet.next() ? 1 : 0;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			Release();
+		}
+		
+		return result;
 	}
 
 	@Override
 	public int insertMember(MemberBean memberBean) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		int result = 0;
+		
+		try {			
+			connection = getConnection();
+			
+			statement = connection.prepareStatement("insert into member(id, pwd, name, join_date, email, address, tel, mtel)"
+					+ " values (?, ?, ?, ?, ?, ?, ?, ?)");
+			statement.setString(1, memberBean.getId());
+			statement.setString(2, memberBean.getPwd());
+			statement.setString(3, memberBean.getName());
+			statement.setTimestamp(4, memberBean.getJoinDate());
+			statement.setString(5, memberBean.getEmail());
+			statement.setString(6, memberBean.getAddress());
+			statement.setString(7, memberBean.getTel());
+			statement.setString(8, memberBean.getMtel());
+			
+			result = statement.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			Release();
+		}
+		
+		return result;
 	}
 
 	@Override
