@@ -28,27 +28,7 @@
 
 <body>
 	<div id="wrap">
-		<header>
-			<div id="login">
-				<a href="member/login.jsp">login</a> | 
-				<a href="member/join.jsp">join</a>
-			</div>
-			<div class="clear"></div>
-
-			<div id="logo">
-				<img src="images/logo.gif" width="265" height="62" alt="Fun Web">
-			</div>
-
-			<nav id="top_menu">
-				<ul>
-					<li><a href="index.jsp">HOME</a></li>
-					<li><a href="company/welcome.jsp">COMPANY</a></li>
-					<li><a href="#">SOLUTIONS</a></li>
-					<li><a href="center/notice.jsp">CUSTOMER CENTER</a></li>
-					<li><a href="#">CONTACT US</a></li>
-				</ul>
-			</nav>
-		</header>
+		<jsp:include page="../includes/top.jsp"></jsp:include>
 
 		<div class="clear"></div>
 		<div id="main_img">
@@ -121,18 +101,7 @@
 
 		<div class="clear"></div>
 
-		<footer>
-			<hr>
-			<div id="copy">
-				All contents Copyright 2011 FunWeb 2011 FunWeb Inc. all rights
-				reserved<br> Contact mail:funweb@funwebbiz.com Tel +82 64 123
-				4315 Fax +82 64 123 4321
-			</div>
-			<div id="social">
-				<img src="../images/facebook.gif" width="33" height="33" alt="Facebook">
-				<img src="../images/twitter.gif" width="34" height="34" alt="Twitter">
-			</div>
-		</footer>
+		<jsp:include page="../includes/bottom.jsp"></jsp:include>
 	</div>
 </body>
 </html>
