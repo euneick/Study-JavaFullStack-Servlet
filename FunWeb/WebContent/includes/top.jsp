@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
+	// index.jsp와 그 외 페이지의 경로가 달라 생기는 문제에 대응
 	String contextPath = request.getContextPath();
+
+	String id = (String) session.getAttribute("id");
 %>
 <!DOCTYPE html>
 <html>
@@ -14,9 +17,22 @@
 <body>
 	<header>
 		<div id="login">
-			<a href="<%=contextPath%>/member/login.jsp">login</a> |
-			<a href="<%=contextPath%>/member/join.jsp">join</a>
+		<%
+			if (id == null || id.length() == 0) {
+			%>
+				<a href="<%=contextPath%>/member/login.jsp">login</a> |
+				<a href="<%=contextPath%>/member/join.jsp">join</a>
+			<%				
+			}
+			else {
+			%>
+				<span style="color: blue;"><%=id%>님 환영합니다!</span>&nbsp;&nbsp;
+				<a href="<%=contextPath%>/member/logout.jsp">logout</a>
+			<%
+			}
+		%>
 		</div>
+		
 		<div class="clear"></div>
 
 		<div id="logo">
