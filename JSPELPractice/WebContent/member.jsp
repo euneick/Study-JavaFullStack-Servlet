@@ -52,10 +52,7 @@
 <jsp:useBean id="addr" class="sec01.ex01.Address"></jsp:useBean>
 <jsp:setProperty name="addr" property="city" value="한양"/>
 <jsp:setProperty name="addr" property="zipcode" value="00001"/>
-<%-- <jsp:setProperty name="memberBean" property="address" value="addr"/> --%>
-<%
-	memberBean.setAddress(addr);
-%>
+<jsp:setProperty name="memberBean" property="address" value="<%=addr%>"/>
 
 <!DOCTYPE html>
 <html>
