@@ -139,6 +139,13 @@
 			<td>${memberBean.address.city}</td>
 			<td>${memberBean.address.zipcode}</td>
 		</tr>
+		<tr align="center">
+			<td>${id}</td>			<!-- request에 바인딩 된 id 값 -->
+			<td>${pwd}</td>			<!-- request에 바인딩 된 pwd 값 -->
+			<td>${name}</td>		<!-- session에 바인딩 된 name 값 -->
+			<td>${email}</td>		<!-- application에 바인딩 된 email 값 -->
+			<td>${address}</td>
+		</tr>
 		<tr bgcolor="#99ccff">
 			<td colspan="7"></td>
 		</tr>
