@@ -1,14 +1,13 @@
 package sec01.ex01;
 
-import java.sql.Date;
-
 public class MemberBean {
 
 	private String id;
 	private String pwd;
 	private String name;
 	private String email;
-	private Date joinDate;
+	
+	private Address address;
 	
 	public MemberBean() {}
 	
@@ -52,11 +51,11 @@ public class MemberBean {
 		this.email = email;
 	}
 
-	public Date getJoinDate() {
-		return joinDate;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setJoinDate(Date joinDate) {
-		this.joinDate = joinDate;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 }
