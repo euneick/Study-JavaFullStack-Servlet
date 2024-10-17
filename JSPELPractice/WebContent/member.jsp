@@ -25,6 +25,8 @@
  	 * Bean 객체 사용 가능
  	 
  	 * 표현언어는 JAVA의 반복문과 같이 작성 할 수 없음
+ 	 
+ 	 * Scope 생략시 page - request - session - application 순으로 Scope에 접근 함 
 --%>
 <%
 	request.setCharacterEncoding("utf-8");
