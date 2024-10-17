@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="sec01.ex01.MemberBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -33,7 +34,7 @@
 
 <jsp:useBean id="membersList" class="java.util.ArrayList"></jsp:useBean>
 <%
-	MemberBean memberBean2 = new MemberBean("joo", "1111", "주몽", "joo@kokuryeo.go.kr");
+	MemberBean memberBean2 = new MemberBean("joo", "1111", "주몽", "joo@goguryeo.go.kr");
 
 	membersList.add(memberBean);
 	membersList.add(memberBean2);
@@ -145,6 +146,25 @@
 			<td>${name}</td>		<!-- session에 바인딩 된 name 값 -->
 			<td>${email}</td>		<!-- application에 바인딩 된 email 값 -->
 			<td>${address}</td>
+		</tr>
+	<%
+		ArrayList<MemberBean> bindedList = (ArrayList<MemberBean>) request.getAttribute("bindingList");
+		for (MemberBean member : bindedList) {
+		%>
+			<tr align="center">
+				<td><%=member.getId()%></td>
+				<td><%=member.getPwd()%></td>
+				<td><%=member.getName()%></td>
+				<td><%=member.getEmail()%></td>
+			</tr>
+		<%
+		}
+	%>
+		<tr align="center">
+			<td>${bindingList[0].id}</td>
+			<td>${bindingList[0].pwd}</td>
+			<td>${bindingList[0].name}</td>
+			<td>${bindingList[0].email}</td>
 		</tr>
 		<tr bgcolor="#99ccff">
 			<td colspan="7"></td>

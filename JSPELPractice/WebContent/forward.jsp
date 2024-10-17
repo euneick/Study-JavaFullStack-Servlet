@@ -1,3 +1,5 @@
+<%@page import="sec01.ex01.MemberBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="sun.rmi.server.Dispatcher"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -15,6 +17,13 @@
 	
 	/* Dispatcher dispatcher = request.getRequestDispatcher("member.jsp");
 	dispatcher.forward(request, response); */
+	
+	ArrayList<MemberBean> bindingList = new ArrayList<MemberBean>();
+	
+	bindingList.add(new MemberBean("choi","1512","최영","choi@korea.go.kr"));
+	bindingList.add(new MemberBean("kang","5124","강감찬","kang@goguryeo.go.kr"));
+	
+	request.setAttribute("bindingList", bindingList);
 %>
 
 <%-- Dispatcher 방식으로 포워딩 (request 객체 공유) --%>
