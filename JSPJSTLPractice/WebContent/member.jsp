@@ -55,6 +55,7 @@
 			<td>${age}</td>
 			<td>${address}</td>
 		</tr>
+		<%--
 		<tr align="center">
 			<td>${membersMap.memList[0].id}</td>
 			<td>${membersMap.memList[0].pwd}</td>
@@ -76,6 +77,16 @@
 			<td>${mList[2].age}</td>
 			<td>${mList[2].address}</td>
 		</tr>
+		--%>
+		<c:forEach var="member" items="${mList}">
+			<tr align="center">
+				<td>${member.id}</td>
+				<td>${member.pwd}</td>
+				<td>${member.name}</td>
+				<td>${member.age}</td>
+				<td>${member.address}</td>
+			</tr>
+		</c:forEach>
 		<tr bgcolor="lightgreen">
 			<td colspan="5"></td>
 		</tr>
