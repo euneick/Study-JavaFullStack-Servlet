@@ -28,6 +28,9 @@
 %>
 <c:set var="mList" value="${membersMap.memList}" />
 
+<c:remove var="age"/>
+<c:remove var="address"/>
+
 <!DOCTYPE html>
 <html>
 
