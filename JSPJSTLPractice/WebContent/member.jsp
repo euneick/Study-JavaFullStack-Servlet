@@ -87,6 +87,16 @@
 				<td>${member.address}</td>
 			</tr>
 		</c:forEach>
+		<c:if test="${not empty param.id and not empty param.pwd and not empty param.name and
+			not empty param.age and not empty param.address}">
+			<tr align="center">
+				<td>${param.id}</td>
+				<td>${param.pwd}</td>
+				<td>${param.name}</td>
+				<td>${param.age}</td>
+				<td>${param.address}</td>
+			</tr>				
+		</c:if>
 		<tr bgcolor="lightgreen">
 			<td colspan="5"></td>
 		</tr>
