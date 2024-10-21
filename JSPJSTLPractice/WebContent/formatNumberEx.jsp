@@ -17,6 +17,25 @@
 </head>
 
 <body>
+	<%--
+		formatNumber 태그의 속성
+		 - value			출력될 숫자를 지정
+		 - type				출력될 타입을 지정
+		 	* number			숫자 타입
+		 	* currency			통화 타입
+		 	* percent			퍼센트 타입
+		 - dateStyle		날짜 출력 형식 지정
+		 					DateFormat 클래스의 full, long, medium, short 등의 값으로 사용
+		 - groupingUsed		3자리 단위의 콤마 기호로 구분 여부를 지정 		(default : true)
+		 - currencyCode		통화 코드를 지정		(한국 원화 : KRW)
+		 - currentSimbol	통화를 표시할 때 사용할 기호 지정
+		 - var				formatNumber 태그의 결과를 저장 할 변수의 이름
+		 					설정 시 값을 출력하지 않고 변수에 값을 저장함
+		 - scope			변수의 접근 범위 지정
+		 - pattern			숫자가 출력 될 양식을 지정
+		 					자바의 DecimalFormat 클래스에 정의된 형식을 사용
+		 					
+	--%>
 	<h1>formatNumber 예제</h1>
 	
 	<c:set var="price" value="100000000" />
