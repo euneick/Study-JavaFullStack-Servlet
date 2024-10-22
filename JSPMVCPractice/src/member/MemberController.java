@@ -49,11 +49,11 @@ public class MemberController extends HttpServlet {
 
 			request.setAttribute("membersList", membersList);
 
-			nextPage = "/Member/listMembers.jsp";
+			nextPage = "/memberView/listMembers.jsp";
 		}
 		else if (action.equals("/memberForm.do")) {
 			
-			nextPage = "/Member/memberForm.jsp";
+			nextPage = "/memberView/memberForm.jsp";
 		}
 		else if (action.equals("/insertMember.do")) {
 			
@@ -71,7 +71,7 @@ public class MemberController extends HttpServlet {
 
 			request.setAttribute("membersList", membersList);
 
-			nextPage = "/Member/listMembers.jsp";
+			nextPage = "/memberView/listMembers.jsp";
 		}
 
 		// request에 바인딩 된 값을 공유하기 위해 dispatcher 방식으로 포워딩
