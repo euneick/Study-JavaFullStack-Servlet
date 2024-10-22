@@ -20,8 +20,9 @@ public class MemberDAO {
 	public MemberDAO() {
 		
 		try {
-			Context context = (Context) new InitialContext().lookup("java:/comp/env");
-			dataSource = (DataSource) context.lookup("jdbc/oracle");
+			Context context = new InitialContext();
+			Context envContext = (Context) context.lookup("java:/comp/env");
+			dataSource = (DataSource) envContext.lookup("jdbc/oracle");
 		}
 		catch (Exception e) {
 			System.out.println("DB 연결 실패");
