@@ -150,11 +150,34 @@ public class MemberDAO {
 			statement.setString(3, memberVO.getId());
 			
 			result = statement.executeUpdate();
-			System.out.println("result : " + result);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("데이터 수정 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return result;
+	}
+	
+	public int deleteMember(String id) {
+		
+		int result = 0;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "delete from t_member where id=?";
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, id);
+			
+			result = statement.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("데이터 삭제 실패");
 		}
 		finally {
 			Release();

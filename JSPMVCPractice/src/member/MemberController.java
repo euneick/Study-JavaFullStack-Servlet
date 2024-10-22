@@ -111,6 +111,16 @@ public class MemberController extends HttpServlet {
 
 	private void processDeleteMember(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		String id = request.getParameter("id");
+		
+		memberDAO.deleteMember(id);
 
+		response.setHeader("Cache-Control", "no-cache");
+		response.addHeader("Cache-Control", "no-store");
+		
+		request.setAttribute("message", "delete");
+		
+		processSelectMembers(request, response);
 	}
 }
