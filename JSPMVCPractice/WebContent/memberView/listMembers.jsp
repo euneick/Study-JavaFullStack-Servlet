@@ -33,8 +33,6 @@
 <body>
 	<p class="cls1">회원 정보</p>
 	
-	
-	${membersList.size()}
 	<table width="100%">
 		<tr align="center" bgcolor="lightgreen">
 			<th width="20%">아이디</th>
