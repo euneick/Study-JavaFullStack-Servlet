@@ -42,6 +42,11 @@
 				alert("회원 정보를 수정했습니다.");
 			}
 		}
+		else if (message == "delete") {
+			window.onload = function () {
+				alert("회원 정보를 삭제했습니다.");
+			}			
+		}
 	</script>
 </head>
 
@@ -77,7 +82,7 @@
 							<a href="${contextPath}/member/modifyMemberForm.do?id=${member.id}">수정</a>
 						</td>
 						<td>
-							<a href="${contextPath}/member/deleteMember.do?id${member.id}">삭제</a>
+							<a href="${contextPath}/member/deleteMember.do?id=${member.id}">삭제</a>
 						</td>
 					</tr>
 				</c:forEach>
