@@ -18,7 +18,7 @@
 </head>
 
 <body>
-	<form action="${contextPath}/member/addMember.do" method="post">
+	<form action="${contextPath}/member/insertMember.do" method="post">
 		<h1 style="text-align:center" >회원 등록창</h1>
 		<table align="center">
 			<tr> 
