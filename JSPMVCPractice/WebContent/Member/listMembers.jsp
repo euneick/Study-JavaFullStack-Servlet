@@ -8,6 +8,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html>
@@ -69,7 +70,7 @@
 	
 	<br>
 	
-	<a href="#"><p class="cls2">회원가입하기</p></a>
+	<a href="${contextPath}/member/memberForm.do"><p class="cls2">회원가입하기</p></a>
 </body>
 
 </html>
