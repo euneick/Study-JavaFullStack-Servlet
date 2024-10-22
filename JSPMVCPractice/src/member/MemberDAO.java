@@ -66,6 +66,7 @@ public class MemberDAO {
 			}
 		}
 		catch (Exception e) {
+			System.out.println("데이터 조회 실패");
 			e.printStackTrace();
 		}
 		finally {
@@ -73,6 +74,33 @@ public class MemberDAO {
 		}
 		
 		return membersList;
+	}
+	
+	public int insertMember(MemberVO memberVO) {
+		
+		int result = 0;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "insert into t_member(id, pwd, name, email) values (?, ?, ?, ?)";			
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, memberVO.getId());
+			statement.setString(2, memberVO.getPwd());
+			statement.setString(3, memberVO.getName());
+			statement.setString(4, memberVO.getEmail());
+			
+			result = statement.executeUpdate();
+		}
+		catch (Exception e) {
+			System.out.println("데이터 추가 실패");
+			e.printStackTrace();
+		}
+		finally {
+			Release();
+		}
+		
+		return result;
 	}
 }
 
