@@ -18,7 +18,33 @@
 </head>
 
 <body>
-	bottom.jsp
+	<hr width="1000" color="red" size="3">
+	
+	<!-- 로고 부분 -->
+	<a href="#">
+		<img src="img/bo.jpg" width="500" height="50">
+	</a>
+	
+	<font size="2">
+		<b>
+			<!-- 회사 소개 -->
+			<a href="#">
+				<img src="img/sodog.jpg" border="0">
+			</a>
+			<a href="#">
+				<img src="img/info.jpg"> | 사이버 신문고 | 이용약관 | 인재채용
+			</a>
+		</b>
+	</font>
+	
+	<br><br>
+	
+	<small>
+		(주) SM렌탈 사업자 등록번호 214-98754-9874 통신 판매업신고 번호 : 제 2010-충남-05호<br>
+		서울시 강남구 역삼동 역삼빌딩 2층 21호<br><br>
+		대표전화 : 02-000-0000<br>
+		FAX : 01-0000-0000
+	</small>
 </body>
 
 </html>
