@@ -47,6 +47,7 @@ public class MemberController extends HttpServlet {
 		if (action == null || action.equals("/listMembers.do")) { processSelectMembers(request, response); }
 		else if (action.equals("/memberForm.do")) { nextPage = "/memberView/memberForm.jsp"; }
 		else if (action.equals("/insertMember.do")) { processInsertMember(request, response); }
+		else if (action.equals("/modifyMemberForm.do")) { openModifyMemberPage(request, response); }
 		else if (action.equals("/modifyMember.do")) { processModifyMember(request, response); }
 		else if (action.equals("/deleteMember.do")) { processDeleteMember(request, response); }
 		else { processSelectMembers(request, response); }
@@ -78,9 +79,22 @@ public class MemberController extends HttpServlet {
 		nextPage = "/member/listMembers.do";
 	}
 	
+	private void openModifyMemberPage(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		String id = request.getParameter("id");
+		
+		MemberVO selectedMember = memberDAO.selectMember(id);
+		
+		request.setAttribute("selectedMember", selectedMember);
+		
+		nextPage = "memberView/modifyMemberForm.jsp";
+	}
+	
 	private void processModifyMember(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		nextPage = "/memberView/listMembers.jsp";
 	}
 
 	private void processDeleteMember(HttpServletRequest request, HttpServletResponse response)
