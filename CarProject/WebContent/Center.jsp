@@ -18,7 +18,9 @@
 </head>
 
 <body>
-	center.jsp
+	<a href="#">
+		<img src="img/Main.jpg" width="1000" border="0">
+	</a>
 </body>
 
 </html>

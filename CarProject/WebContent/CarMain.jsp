@@ -26,7 +26,7 @@
 
 <body>
 	<center>
-		<table width="1000" height="700" border="1">
+		<table width="1000" height="700">
 			<tr>
 				<td><jsp:include page="Top.jsp"/></td>
 			</tr>
