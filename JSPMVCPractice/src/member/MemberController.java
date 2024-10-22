@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/mem.do")
+@WebServlet("/member/*")		/* .../member/ 로 요청된 주소를 모두 받기 */
 public class MemberController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -39,12 +39,44 @@ public class MemberController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
-		ArrayList<MemberVO> membersList = memberDAO.getMembersList();
+		String nextPage = null;
 		
-		request.setAttribute("membersList", membersList);
+		String action = request.getPathInfo(); 		// 마지막 요청 페이지 주소
+		System.out.println("action : " + action);
 		
+		if (action == null || action.equals("/listMembers.do")) {
+
+			ArrayList<MemberVO> membersList = memberDAO.getMembersList();
+
+			request.setAttribute("membersList", membersList);
+
+			nextPage = "/Member/listMembers.jsp";
+		}
+		else if (action.equals("/insertMember.do")) {
+			
+			memberDAO.insertMember(new MemberVO(
+					request.getParameter("id"),
+					request.getParameter("pwd"),
+					request.getParameter("name"),
+					request.getParameter("email")));
+			
+			nextPage = "/member/listMembers.do";
+		}
+		else if (action.equals("/memberForm.do")) {
+			
+			nextPage = "/Member/memberForm.jsp";
+		}
+		else {
+
+			ArrayList<MemberVO> membersList = memberDAO.getMembersList();
+
+			request.setAttribute("membersList", membersList);
+
+			nextPage = "/Member/listMembers.jsp";
+		}
+
 		// request에 바인딩 된 값을 공유하기 위해 dispatcher 방식으로 포워딩
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/member/listMembers.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
 	}
 }
