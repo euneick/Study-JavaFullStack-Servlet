@@ -32,14 +32,22 @@
 			<tr> 
 				<td width="200"> <p align="center">아이디</p> </td> 
 				<td width="400"><input type="text" name="id" value="${selectedMember.id}" disabled></td> 
-			</tr> 
-			<tr> 
+			</tr>
+			<tr>
+				<td width="200"><p align="center">비밀번호</p></td> 
+				<td width="400"><input type="password" name="pwd" value="${selectedMember.pwd}" disabled></td> 
+			</tr>
+			<tr>
 				<td width="200"><p align="center">이름</p></td> 
 				<td width="400"><input type="text" name="name" value="${selectedMember.name}"></td> 
 			</tr>
 			<tr> 
 				<td width="200"><p align="center">이메일</p></td> 
 				<td width="400"><input type="email" name="email" value="${selectedMember.email}"></td> 
+			</tr>
+			<tr> 
+				<td width="200"><p align="center">가입일</p></td> 
+				<td width="400"><input type="text" name="joinDate" value="${selectedMember.joinDate}" disabled></td> 
 			</tr>
 			<tr align="center"> 
 				<td width="400" colspan="2">
