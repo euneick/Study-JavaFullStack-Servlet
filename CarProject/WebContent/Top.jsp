@@ -18,7 +18,32 @@
 </head>
 
 <body>
-	top.jsp
+	<a><img src="img/RENT.jpg" width="300" height="80"></a>
+	
+	<table width="1000" background="img/aa.jpg" height="5">
+		<tr>
+			<!-- 예약하기 -->
+			<td align="center" bgcolor="red">
+				<a href="#"><img src="img/bb.jpg" border="0"></a>
+			</td>
+			<!-- 예약확인 -->
+			<td align="center" bgcolor="red">
+				<a href="#"><img src="img/cc.jpg" border="0"></a>
+			</td>
+			<!-- 자유게시판 -->
+			<td align="center" bgcolor="red">
+				<a href="#"><img src="img/dd.jpg" border="0"></a>
+			</td>
+			<!-- 이벤트 -->
+			<td align="center" bgcolor="red">
+				<a href="#"><img src="img/even.jpg" border="0"></a>
+			</td>
+			<!-- 고객센터 -->
+			<td align="center" bgcolor="red">
+				<a href="#"><img src="img/ee.jpg" border="0"></a>
+			</td>
+		</tr>
+	</table>
 </body>
 
 </html>
