@@ -28,6 +28,21 @@
 			text-align: center;
 		}
 	</style>
+	
+	<script type="text/javascript">
+		var message = '${message}';
+		
+		if (message == "insert") {
+			window.onload = function () {
+				alert("회원 정보를 추가했습니다.");
+			}
+		}
+		else if (message == "modify") {
+			window.onload = function () {
+				alert("회원 정보를 수정했습니다.");
+			}
+		}
+	</script>
 </head>
 
 <body>

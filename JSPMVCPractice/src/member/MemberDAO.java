@@ -135,6 +135,33 @@ public class MemberDAO {
 		
 		return result;
 	}
+	
+	public int updateMember(MemberVO memberVO) {
+		
+		int result = 0;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "update t_member set name=?, email=? where id=?";
+			statement = connection.prepareStatement(sql);			
+			statement.setString(1, memberVO.getName());
+			statement.setString(2, memberVO.getEmail());
+			statement.setString(3, memberVO.getId());
+			
+			result = statement.executeUpdate();
+			System.out.println("result : " + result);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("데이터 수정 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return result;
+	}
 }
 
 

@@ -76,6 +76,8 @@ public class MemberController extends HttpServlet {
 				request.getParameter("name"),
 				request.getParameter("email")));
 		
+		request.setAttribute("message", "insert");
+		
 		nextPage = "/member/listMembers.do";
 	}
 	
@@ -88,13 +90,23 @@ public class MemberController extends HttpServlet {
 		
 		request.setAttribute("selectedMember", selectedMember);
 		
-		nextPage = "memberView/modifyMemberForm.jsp";
+		nextPage = "/memberView/modifyMemberForm.jsp";
 	}
 	
 	private void processModifyMember(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		MemberVO memberVO = new MemberVO(
+				request.getParameter("id"), 
+				request.getParameter("pwd"), 
+				request.getParameter("name"), 
+				request.getParameter("email"));
+		
+		memberDAO.updateMember(memberVO);
+		
+		request.setAttribute("message", "modify");
 
-		nextPage = "/memberView/listMembers.jsp";
+		processSelectMembers(request, response);
 	}
 
 	private void processDeleteMember(HttpServletRequest request, HttpServletResponse response)

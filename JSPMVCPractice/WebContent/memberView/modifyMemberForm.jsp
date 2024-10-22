@@ -26,7 +26,7 @@
 </head>
 
 <body>
-	<form action="${contextPath}/member/modifyMember.do?id=${selectedMember.id}" method="post">
+	<form action="${contextPath}/member/modifyMember.do" method="post">
 		<h1 class="cls1">회원 정보 수정 창</h1>
 		<table align="center">
 			<tr> 
