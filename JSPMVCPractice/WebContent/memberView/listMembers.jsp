@@ -33,19 +33,21 @@
 <body>
 	<p class="cls1">회원 정보</p>
 	
-	<table width="100%">
+	<table align="center">
 		<tr align="center" bgcolor="lightgreen">
-			<th width="20%">아이디</th>
-			<th width="20%">비밀번호</th>
-			<th width="20%">이름</th>
-			<th width="20%">이메일</th>
-			<th width="20%">가입일</th>
+			<th width="10%">아이디</th>
+			<th width="10%">비밀번호</th>
+			<th width="10%">이름</th>
+			<th width="10%">이메일</th>
+			<th width="10%">가입일</th>
+			<th width="10%">수정</th>
+			<th width="10%">삭제</th>
 		</tr>
 		
 		<c:choose>
 			<c:when test="${empty membersList}">
 				<tr align="center">
-					<td colspan="5">등록된 회원이 없습니다.</td>
+					<td colspan="7">등록된 회원이 없습니다.</td>
 				</tr>
 			</c:when>
 			<c:otherwise>
@@ -56,13 +58,19 @@
 						<td>${member.name}</td>
 						<td>${member.email}</td>
 						<td>${member.joinDate}</td>
+						<td>
+							<a href="${contextPath}/member/modifyMemberForm.do?id=${member.id}">수정</a>
+						</td>
+						<td>
+							<a href="${contextPath}/member/deleteMember.do?id${member.id}">삭제</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
 		
 		<tr>
-			<td colspan="5" bgcolor="lightgreen"></td>
+			<td colspan="7" bgcolor="lightgreen"></td>
 		</tr>
 	</table>
 	
