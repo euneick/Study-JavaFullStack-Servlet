@@ -42,7 +42,6 @@ public class MemberController extends HttpServlet {
 		String nextPage = null;
 		
 		String action = request.getPathInfo(); 		// 마지막 요청 페이지 주소
-		System.out.println("action : " + action);
 		
 		if (action == null || action.equals("/listMembers.do")) {
 
@@ -51,6 +50,10 @@ public class MemberController extends HttpServlet {
 			request.setAttribute("membersList", membersList);
 
 			nextPage = "/Member/listMembers.jsp";
+		}
+		else if (action.equals("/memberForm.do")) {
+			
+			nextPage = "/Member/memberForm.jsp";
 		}
 		else if (action.equals("/insertMember.do")) {
 			
@@ -61,10 +64,6 @@ public class MemberController extends HttpServlet {
 					request.getParameter("email")));
 			
 			nextPage = "/member/listMembers.do";
-		}
-		else if (action.equals("/memberForm.do")) {
-			
-			nextPage = "/Member/memberForm.jsp";
 		}
 		else {
 
