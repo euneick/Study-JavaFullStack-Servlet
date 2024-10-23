@@ -43,8 +43,8 @@ public class CarDAO {
 			e.printStackTrace();
 		}
 	}
-	
-	private Vector<CarListVO> selectCarList(String category) {
+
+	public Vector<CarListVO> selectCategoryCarList(String category) {
 		
 		Vector<CarListVO> carList = new Vector<CarListVO>();
 		
@@ -84,7 +84,4 @@ public class CarDAO {
 		
 		return carList;
 	}
-	
-	public Vector<CarListVO> selectAllCarList() { return selectCarList(null); }	
-	public Vector<CarListVO> selectCategoryCarList(String category) { return selectCarList(category); }
 }
