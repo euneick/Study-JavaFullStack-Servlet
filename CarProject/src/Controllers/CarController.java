@@ -1,6 +1,7 @@
 package Controllers;
 
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -10,14 +11,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAOs.CarDAO;
+import VOs.CarListVO;
+
 @WebServlet("/Car/*")
 public class CarController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private CarDAO carDAO;
 	
 	private String nextPage;
 
 	public void init(ServletConfig config) throws ServletException {
 
+		carDAO = new CarDAO();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,16 +47,31 @@ public class CarController extends HttpServlet {
 		System.out.println("action : " + action);
 		
 		if (action.equals("/Main")) { nextPage = "/CarMain.jsp"; }
-		else if (action.equals("/Reservation")) {
-			
-			String center = request.getParameter("center");
-			
-			request.setAttribute("center", center);
-
-			nextPage = "/CarMain.jsp";
-		}
+		else if (action.equals("/Reservation")) { openReservationPage(request, response); }
+		else if (action.equals("/CarList.do")) { openAllCarListPage(request, response); }
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
+	}
+	
+	private void openReservationPage(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String center = request.getParameter("center");
+		
+		request.setAttribute("center", center);
+
+		nextPage = "/CarMain.jsp";
+	}
+	
+	private void openAllCarListPage(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		Vector<CarListVO> carVector = carDAO.selectAllCarList();
+		
+		request.setAttribute("carVector", carVector);		
+		request.setAttribute("center", "CarList.jsp");
+
+		nextPage = "/CarMain.jsp";
 	}
 }
