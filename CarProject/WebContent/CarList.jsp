@@ -1,3 +1,5 @@
+<%@page import="VOs.CarListVO"%>
+<%@page import="java.util.Vector"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -23,7 +25,28 @@
 		<img src="${contextPath}/img/cis.jpg">
 		
 		<form action="${contextPath}/Car/CarCategory.do">
-			<table width="1000" height="470">
+			<table width="1000" height="470">			
+			<%
+				Vector<CarListVO> carList = (Vector<CarListVO>)request.getAttribute("carVector");
+			
+				int index = 0;
+				for (CarListVO car : carList) {
+					
+					if (index % 4 == 0) { %> <tr align="center"> <% }
+				%>
+					<td>
+						<a href="${contextPath}/Car/CarInfo.do?carno=<%=car.getCarno()%>">
+							<img src="${contextPath}/img/<%=car.getCarimg()%>" width="220" height="180"><br>
+							차량명 : <%=car.getCarname()%><br>
+							가격 : <%=car.getCarprice()%><br>
+						</a>
+					</td>
+				<%
+					index++;
+				}
+			%>
+				</tr>
+				<%--
 				<c:set var="j" value="0"/>
 				
 				<c:forEach var="car" items="${requestScope.carVector}">
@@ -41,6 +64,7 @@
 					<c:set var="j" value="${j + 1}"/>
 				</c:forEach>
 				</tr>
+				--%>
 				
 				<tr height="70">
 					<td colspan="4" align="center">
