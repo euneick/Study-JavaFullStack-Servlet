@@ -49,6 +49,7 @@ public class CarController extends HttpServlet {
 		if (action.equals("/Main")) { nextPage = "/CarMain.jsp"; }
 		else if (action.equals("/Reservation")) { openReservationPage(request, response); }
 		else if (action.equals("/CarList.do") || action.equals("/CarCategory.do")) { openCarCategoryPage(request, response); }
+		else if (action.equals("/CarInfo.do")) { openCarInfoPage(request, response); }
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
@@ -69,10 +70,23 @@ public class CarController extends HttpServlet {
 
 		String category = request.getParameter("carcategory");
 
-		Vector<CarListVO> carVector = carDAO.selectCategoryCarList(category);
+		Vector<CarListVO> carVector = carDAO.selectCarLists(category);
 
 		request.setAttribute("carVector", carVector);
 		request.setAttribute("center", "CarList.jsp");
+		
+		nextPage = "/CarMain.jsp";
+	}
+	
+	private void openCarInfoPage(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		int carNo = Integer.parseInt(request.getParameter("carno"));
+		
+		CarListVO car = carDAO.selectCarList(carNo);
+		
+		request.setAttribute("carInfo", car);
+		request.setAttribute("center", "CarInfo.jsp");
 		
 		nextPage = "/CarMain.jsp";
 	}
