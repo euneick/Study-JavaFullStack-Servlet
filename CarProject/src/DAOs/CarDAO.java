@@ -1,5 +1,6 @@
 package DAOs;
 
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,9 +8,11 @@ import java.util.Vector;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import VOs.CarListVO;
+import VOs.CarOrderVO;
 
 public class CarDAO {
 	
@@ -119,5 +122,50 @@ public class CarDAO {
 		}		
 		
 		return car;
+	}
+	
+	public int insertCarOrder(CarOrderVO carOrderVO, HttpSession session) {
+		
+		int result = 0;
+
+		String id = (String) session.getAttribute("id");
+		
+		try {
+			connection = dataSource.getConnection();
+
+			String sql = "";
+			
+			if (id == null) {
+				sql = "insert into non_carorder(non_orderid, carno, carqty, carreserveday, "
+						+ "carbegindate, carins, carwifi, carnave, carbabyseat, memberphone, memberpass)"
+						+ "values(non_carorder_non_orderid.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				
+				statement = connection.prepareStatement(sql);
+				statement.setInt(1, carOrderVO.getCarno());
+				statement.setInt(2, carOrderVO.getCarqty());
+				statement.setInt(3, carOrderVO.getCarreserveday());
+				statement.setString(4, carOrderVO.getCarbegindate());
+				statement.setInt(5, carOrderVO.getCarins());
+				statement.setInt(6, carOrderVO.getCarwifi());
+				statement.setInt(7, carOrderVO.getCarnave());
+				statement.setInt(8, carOrderVO.getCarbabyseat());
+				statement.setString(9, carOrderVO.getMemberphone());
+				statement.setString(10, carOrderVO.getMemberpass());
+			}
+			else {
+				
+			}
+			
+			result = statement.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 수정 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return result;
 	}
 }
