@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import DAOs.CarDAO;
 import VOs.CarListVO;
@@ -123,9 +124,19 @@ public class CarController extends HttpServlet {
 		
 		request.setAttribute("carOrder", carOrderVO);
 		request.setAttribute("totalReserve", totalReserve);
-		request.setAttribute("totalOption", totalOption);		
+		request.setAttribute("totalOption", totalOption);
 
-		request.setAttribute("center", "CarOrder.jsp");
+		HttpSession session = request.getSession();
+		
+		String id = (String) session.getAttribute("id");
+		
+		if (id == null) {
+			request.setAttribute("center", "CarOrder.jsp");
+		}
+		else {
+			request.setAttribute("center", "LoginCarOrder.jsp");
+		}
+
 		nextPage = "/CarMain.jsp";
 	}
 }
