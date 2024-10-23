@@ -18,6 +18,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>차량 조회 결과</title>
+	
+	<style>
+		a {
+			text-decoration: none;
+		}
+	</style>
 </head>
 
 <body>
