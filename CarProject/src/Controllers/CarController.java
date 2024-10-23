@@ -50,6 +50,7 @@ public class CarController extends HttpServlet {
 		else if (action.equals("/Reservation")) { openReservationPage(request, response); }
 		else if (action.equals("/CarList.do") || action.equals("/CarCategory.do")) { openCarCategoryPage(request, response); }
 		else if (action.equals("/CarInfo.do")) { openCarInfoPage(request, response); }
+		else if (action.equals("/CarOption.do")) {openCarOptionPage(request, response);}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
@@ -88,6 +89,13 @@ public class CarController extends HttpServlet {
 		request.setAttribute("carInfo", car);
 		request.setAttribute("center", "CarInfo.jsp");
 		
+		nextPage = "/CarMain.jsp";
+	}
+	
+	private void openCarOptionPage(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		request.setAttribute("center", "CarOption.jsp");
 		nextPage = "/CarMain.jsp";
 	}
 }
