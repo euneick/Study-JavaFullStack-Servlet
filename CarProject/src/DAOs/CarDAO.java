@@ -44,7 +44,7 @@ public class CarDAO {
 		}
 	}
 	
-	public Vector<CarListVO> selectAllCarList() {
+	private Vector<CarListVO> selectCarList(String category) {
 		
 		Vector<CarListVO> carList = new Vector<CarListVO>();
 		
@@ -52,6 +52,9 @@ public class CarDAO {
 			connection = dataSource.getConnection();
 			
 			String sql = "select * from carlist";
+			
+			if(category != null) sql += " where carcategory='" + category + "'";
+			
 			statement = connection.prepareStatement(sql);
 			
 			resultSet = statement.executeQuery();
@@ -81,4 +84,7 @@ public class CarDAO {
 		
 		return carList;
 	}
+	
+	public Vector<CarListVO> selectAllCarList() { return selectCarList(null); }	
+	public Vector<CarListVO> selectCategoryCarList(String category) { return selectCarList(category); }
 }
