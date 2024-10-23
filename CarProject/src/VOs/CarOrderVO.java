@@ -17,6 +17,23 @@ public class CarOrderVO {
 
 	public CarOrderVO() {
 	}
+	
+	
+
+	public CarOrderVO(int carno, int carqty, int carreserveday, String carbegindate, int carins, int carwifi,
+			int carnave, int carbabyseat) {
+		
+		this.carno = carno;
+		this.carqty = carqty;
+		this.carreserveday = carreserveday;
+		this.carbegindate = carbegindate;
+		this.carins = carins;
+		this.carwifi = carwifi;
+		this.carnave = carnave;
+		this.carbabyseat = carbabyseat;
+	}
+
+
 
 	public CarOrderVO(int orderId, String id, int carno, int carqty, int carreserveday, String carbegindate, int carins,
 			int carwifi, int carnave, int carbabyseat, String memberphone, String memberpass) {
