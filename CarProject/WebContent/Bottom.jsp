@@ -8,6 +8,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html>
@@ -22,17 +23,17 @@
 	
 	<!-- 로고 부분 -->
 	<a href="#">
-		<img src="img/bo.jpg" width="500" height="50">
+		<img src="${contextPath}/img/bo.jpg" width="500" height="50">
 	</a>
 	
 	<font size="2">
 		<b>
 			<!-- 회사 소개 -->
 			<a href="#">
-				<img src="img/sodog.jpg" border="0">
+				<img src="${contextPath}/img/sodog.jpg" border="0">
 			</a>
 			<a href="#">
-				<img src="img/info.jpg"> | 사이버 신문고 | 이용약관 | 인재채용
+				<img src="${contextPath}/img/info.jpg"> | 사이버 신문고 | 이용약관 | 인재채용
 			</a>
 		</b>
 	</font>

@@ -8,6 +8,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html>
@@ -19,7 +20,7 @@
 
 <body>
 	<a href="#">
-		<img src="img/Main.jpg" width="1000" border="0">
+		<img src="${contextPath}/img/Main.jpg" width="1000" border="0">
 	</a>
 </body>
 
