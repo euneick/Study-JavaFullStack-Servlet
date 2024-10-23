@@ -1,6 +1,7 @@
 package Controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
@@ -54,6 +55,7 @@ public class CarController extends HttpServlet {
 		else if (action.equals("/CarInfo.do")) { openCarInfoPage(request, response); }
 		else if (action.equals("/CarOption.do")) { openCarOptionPage(request, response); }
 		else if (action.equals("/CarOptionResult.do")) { openCarOptionResultPage(request, response); }
+		else if (action.equals("/CarOrder.do")) { processCarOrderData(request, response); return; }
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
@@ -102,25 +104,33 @@ public class CarController extends HttpServlet {
 		nextPage = "/CarMain.jsp";
 	}
 	
-	private void openCarOptionResultPage(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	private CarOrderVO parseCarOrderVO(HttpServletRequest request) {
 		
 		int carno = Integer.parseInt(request.getParameter("carno"));
 		String carbegindate = request.getParameter("carbegindate");
 		int carqty = Integer.parseInt(request.getParameter("carqty"));
-		int carprice = Integer.parseInt(request.getParameter("carprice"));
 		int carreserveday = Integer.parseInt(request.getParameter("carreserveday"));
 		int carins = Integer.parseInt(request.getParameter("carins"));
 		int carwifi = Integer.parseInt(request.getParameter("carwifi"));
 		int carnave = Integer.parseInt(request.getParameter("carnave"));
 		int carbabyseat = Integer.parseInt(request.getParameter("carbabyseat"));
 		
-		int totalReserve = carprice * carqty * carreserveday;		
-		int totalOption = (carins + carwifi + carbabyseat) * carreserveday * carqty * 10000;
-		
 		CarOrderVO carOrderVO = new CarOrderVO(
 				carno, carqty, carreserveday, carbegindate, 
 				carins, carwifi, carnave, carbabyseat);
+		
+		return carOrderVO;
+	}
+	
+	private void openCarOptionResultPage(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		CarOrderVO carOrderVO = parseCarOrderVO(request);
+		int carprice = Integer.parseInt(request.getParameter("carprice"));
+
+		int totalReserve = carprice * carOrderVO.getCarqty() * carOrderVO.getCarreserveday();		
+		int totalOption = (carOrderVO.getCarins() + carOrderVO.getCarwifi() + carOrderVO.getCarbabyseat())
+				* carOrderVO.getCarreserveday() * carOrderVO.getCarqty() * 10000;
 		
 		request.setAttribute("carOrder", carOrderVO);
 		request.setAttribute("totalReserve", totalReserve);
@@ -138,5 +148,40 @@ public class CarController extends HttpServlet {
 		}
 
 		nextPage = "/CarMain.jsp";
+	}
+	
+	private void processCarOrderData(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		CarOrderVO carOrderVO = parseCarOrderVO(request);
+		
+		HttpSession session = request.getSession();
+		
+		String id = (String) session.getAttribute("id");
+		
+		if (id == null) {
+			String memberphone = request.getParameter("memberphone");
+			String memberpass = request.getParameter("memberpass");
+			
+			carOrderVO.setMemberphone(memberphone);
+			carOrderVO.setMemberpass(memberpass);
+		}
+		else {
+			String memberid = request.getParameter("memberid");
+			String memberpass = request.getParameter("memberpass");
+			
+			carOrderVO.setId(memberid);
+			carOrderVO.setMemberpass(memberpass);
+		}
+		
+		int result = carDAO.insertCarOrder(carOrderVO, session);
+		String message = result == 1 ? "예약되었습니다." : "예약에 실패했습니다.";
+		
+		PrintWriter printWriter = response.getWriter();
+		
+		printWriter.print("<script>");
+		printWriter.print("alert('" + message + "');");
+		printWriter.print("location.href = '" + request.getContextPath() + "/Car/CarList.do';");
+		printWriter.print("</script>");
 	}
 }
