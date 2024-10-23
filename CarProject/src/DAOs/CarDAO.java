@@ -3,10 +3,13 @@ package DAOs;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Vector;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import VOs.CarListVO;
 
 public class CarDAO {
 	
@@ -20,8 +23,7 @@ public class CarDAO {
 		
 		try {
 			Context context = new InitialContext();
-			Context envContext = (Context) context.lookup("java:/comp/env");
-			dataSource = (DataSource) envContext.lookup("jdbc/oracle");
+			dataSource = (DataSource) context.lookup("java:/comp/env/jdbc/oracle");
 		}
 		catch (Exception e) {
 			System.out.println("DB 연결 실패");
@@ -40,5 +42,43 @@ public class CarDAO {
 			System.out.println("자원 해제 실패");
 			e.printStackTrace();
 		}
+	}
+	
+	public Vector<CarListVO> selectAllCarList() {
+		
+		Vector<CarListVO> carList = new Vector<CarListVO>();
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "select * from carlist";
+			statement = connection.prepareStatement(sql);
+			
+			resultSet = statement.executeQuery();
+			
+			while (resultSet.next()) {
+				
+				CarListVO car = new CarListVO(
+						resultSet.getInt("carno"),
+						resultSet.getString("carname"),
+						resultSet.getString("carcompany"),
+						resultSet.getInt("carprice"),
+						resultSet.getInt("carusepeople"),
+						resultSet.getString("carinfo"),
+						resultSet.getString("carimg"),
+						resultSet.getString("carcategory"));
+				
+				carList.add(car);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 조회 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return carList;
 	}
 }
