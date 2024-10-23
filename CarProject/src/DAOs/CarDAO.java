@@ -44,7 +44,7 @@ public class CarDAO {
 		}
 	}
 
-	public Vector<CarListVO> selectCategoryCarList(String category) {
+	public Vector<CarListVO> selectCarLists(String category) {
 		
 		Vector<CarListVO> carList = new Vector<CarListVO>();
 		
@@ -83,5 +83,41 @@ public class CarDAO {
 		}
 		
 		return carList;
+	}
+	
+	public CarListVO selectCarList(int carNo) {
+		
+		CarListVO car = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "select * from carlist where carno=?";			
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, carNo);
+			
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				car = new CarListVO(
+						resultSet.getInt("carno"),
+						resultSet.getString("carname"),
+						resultSet.getString("carcompany"),
+						resultSet.getInt("carprice"),
+						resultSet.getInt("carusepeople"),
+						resultSet.getString("carinfo"),
+						resultSet.getString("carimg"),
+						resultSet.getString("carcategory"));
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 조회 실패");
+		}
+		finally {
+			Release();
+		}		
+		
+		return car;
 	}
 }
