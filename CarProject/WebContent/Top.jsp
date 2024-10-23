@@ -7,7 +7,10 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
+
+	String contextPath = request.getContextPath();
 %>
+<%-- <c:set var="contextPath" value="${pageContext.request.contextPath}"/> --%>
 
 <!DOCTYPE html>
 <html>
@@ -24,7 +27,7 @@
 		<tr>
 			<!-- 예약하기 -->
 			<td align="center" bgcolor="red">
-				<a href="#"><img src="img/bb.jpg" border="0"></a>
+				<a href="<%=contextPath%>/Car/bb?center=CarReservation.jsp"><img src="img/bb.jpg" border="0"></a>
 			</td>
 			<!-- 예약확인 -->
 			<td align="center" bgcolor="red">
