@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import DAOs.CarDAO;
 import VOs.CarListVO;
+import VOs.CarOrderVO;
 
 @WebServlet("/Car/*")
 public class CarController extends HttpServlet {
@@ -50,7 +51,8 @@ public class CarController extends HttpServlet {
 		else if (action.equals("/Reservation")) { openReservationPage(request, response); }
 		else if (action.equals("/CarList.do") || action.equals("/CarCategory.do")) { openCarCategoryPage(request, response); }
 		else if (action.equals("/CarInfo.do")) { openCarInfoPage(request, response); }
-		else if (action.equals("/CarOption.do")) {openCarOptionPage(request, response);}
+		else if (action.equals("/CarOption.do")) { openCarOptionPage(request, response); }
+		else if (action.equals("/CarOptionResult.do")) { openCarOptionResultPage(request, response); }
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
@@ -96,6 +98,34 @@ public class CarController extends HttpServlet {
 			throws ServletException, IOException {
 		
 		request.setAttribute("center", "CarOption.jsp");
+		nextPage = "/CarMain.jsp";
+	}
+	
+	private void openCarOptionResultPage(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		int carno = Integer.parseInt(request.getParameter("carno"));
+		String carbegindate = request.getParameter("carbegindate");
+		int carqty = Integer.parseInt(request.getParameter("carqty"));
+		int carprice = Integer.parseInt(request.getParameter("carprice"));
+		int carreserveday = Integer.parseInt(request.getParameter("carreserveday"));
+		int carins = Integer.parseInt(request.getParameter("carins"));
+		int carwifi = Integer.parseInt(request.getParameter("carwifi"));
+		int carnave = Integer.parseInt(request.getParameter("carnave"));
+		int carbabyseat = Integer.parseInt(request.getParameter("carbabyseat"));
+		
+		int totalReserve = carprice * carqty * carreserveday;		
+		int totalOption = (carins + carwifi + carbabyseat) * carreserveday * carqty * 10000;
+		
+		CarOrderVO carOrderVO = new CarOrderVO(
+				carno, carqty, carreserveday, carbegindate, 
+				carins, carwifi, carnave, carbabyseat);
+		
+		request.setAttribute("carOrder", carOrderVO);
+		request.setAttribute("totalReserve", totalReserve);
+		request.setAttribute("totalOption", totalOption);		
+
+		request.setAttribute("center", "CarOrder.jsp");
 		nextPage = "/CarMain.jsp";
 	}
 }
