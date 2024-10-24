@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DAOs.CarDAO;
+import VOs.CarConfirmVO;
 import VOs.CarListVO;
 import VOs.CarOrderVO;
 
@@ -57,6 +58,7 @@ public class CarController extends HttpServlet {
 		else if (action.equals("/CarOptionResult.do")) { openCarOptionResultPage(request, response); }
 		else if (action.equals("/CarOrder.do")) { processCarOrderData(request, response); return; }
 		else if (action.equals("/ReserveConfirm")) { openReserveConfirmPage(request, response); }
+		else if (action.equals("CarReserveConfirm.do")) { openReserveResultPage(request, response); }
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
@@ -190,6 +192,20 @@ public class CarController extends HttpServlet {
 			throws ServletException, IOException {		
 		
 		request.setAttribute("center", request.getParameter("center"));
+		nextPage = "/CarMain.jsp";
+	}
+	
+	private void openReserveResultPage(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		String memberphone = request.getParameter("memberphone");
+		String memberpass = request.getParameter("memberpass");
+		
+		Vector<CarConfirmVO> carConfirmList = carDAO.selectCarConfirms(memberphone, memberpass);
+		
+		request.setAttribute("carConfirmList", carConfirmList);
+
+		request.setAttribute("center", "CarReserveResult.jsp");
 		nextPage = "/CarMain.jsp";
 	}
 }
