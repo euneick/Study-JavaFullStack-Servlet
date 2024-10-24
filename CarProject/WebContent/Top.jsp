@@ -33,7 +33,9 @@
 			</td>
 			<!-- 예약확인 -->
 			<td align="center" bgcolor="red">
-				<a href="#"><img src="<%=contextPath%>/img/cc.jpg" border="0"></a>
+				<a href="<%=contextPath%>/Car/ReserveConfirm?center=CarReserveConfirm.jsp">
+					<img src="<%=contextPath%>/img/cc.jpg" border="0">
+				</a>
 			</td>
 			<!-- 자유게시판 -->
 			<td align="center" bgcolor="red">
