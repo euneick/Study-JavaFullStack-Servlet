@@ -56,6 +56,7 @@ public class CarController extends HttpServlet {
 		else if (action.equals("/CarOption.do")) { openCarOptionPage(request, response); }
 		else if (action.equals("/CarOptionResult.do")) { openCarOptionResultPage(request, response); }
 		else if (action.equals("/CarOrder.do")) { processCarOrderData(request, response); return; }
+		else if (action.equals("/ReserveConfirm")) { openReserveConfirmPage(request, response); }
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
@@ -183,5 +184,12 @@ public class CarController extends HttpServlet {
 		printWriter.print("alert('" + message + "');");
 		printWriter.print("location.href = '" + request.getContextPath() + "/Car/CarList.do';");
 		printWriter.print("</script>");
+	}
+	
+	private void openReserveConfirmPage(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {		
+		
+		request.setAttribute("center", request.getParameter("center"));
+		nextPage = "/CarMain.jsp";
 	}
 }
