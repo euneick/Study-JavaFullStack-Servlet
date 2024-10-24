@@ -68,7 +68,7 @@
 						<c:if test="${not result}">미적용</c:if>
 					</td>
 					<td align="center" width="100">
-						<a href="${contextPath}/Car/ReserveUpdate.do?orderid=${carConfirm.orderid}&
+						<a href="${contextPath}/Car/ReserveUpdate?orderid=${carConfirm.orderid}&
 							carimg=${carConfirm.carimg}&memberphone=${memberphone}&memberpass=${memberpass}">
 							예약수정
 						</a>
