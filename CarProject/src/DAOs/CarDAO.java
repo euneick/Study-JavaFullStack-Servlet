@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import VOs.CarConfirmVO;
 import VOs.CarListVO;
 import VOs.CarOrderVO;
 
@@ -167,5 +168,50 @@ public class CarDAO {
 		}
 		
 		return result;
+	}
+	
+	public Vector<CarConfirmVO> selectCarConfirms(String memberphone, String memberpass) {
+		
+		Vector<CarConfirmVO> carConfirmList = new Vector<CarConfirmVO>();
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "select * from non_carorder natural join carlist "
+					+ "where sysdate < to_date(carbegindate, 'yyyy-mm-dd') and "
+					+ "memberphone=? and memberpass=?";
+			
+			statement = connection.prepareStatement(sql);			
+			statement.setString(1, memberphone);
+			statement.setString(2, memberpass);
+			
+			resultSet = statement.executeQuery();
+			
+			while (resultSet.next()) {
+				CarConfirmVO carConfirm = new CarConfirmVO(
+						resultSet.getString("carname"),
+						resultSet.getString("carimg"),
+						resultSet.getInt("carprice"),
+						resultSet.getInt("none_orderid"),
+						resultSet.getInt("carreserveday"),
+						resultSet.getInt("carqty"),
+						resultSet.getInt("carins"),
+						resultSet.getInt("carwifi"),
+						resultSet.getInt("carnave"),
+						resultSet.getInt("carbabyseat"),
+						resultSet.getString("carbegindate"));
+				
+				carConfirmList.add(carConfirm);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 조회 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return carConfirmList;
 	}
 }
