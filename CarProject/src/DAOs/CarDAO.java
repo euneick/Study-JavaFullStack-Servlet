@@ -286,6 +286,31 @@ public class CarDAO {
 		
 		return result;
 	}
+	
+	public int deleteCarOrder(int orderid, String memberpass) {
+		
+		int result = 0;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "delete from non_carorder where non_orderid=? and memberpass=?";
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, orderid);
+			statement.setString(2, memberpass);
+			
+			result = statement.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 삭제 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return result;
+	}
 }
 
 
