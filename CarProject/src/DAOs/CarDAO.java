@@ -1,6 +1,5 @@
 package DAOs;
 
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -213,5 +212,41 @@ public class CarDAO {
 		}
 		
 		return carConfirmList;
+	}
+	
+	public CarConfirmVO selectCarConfirm(int orderId) {
+		
+		CarConfirmVO carConfirmVO = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "select * from non_carorder where non_orderid=?";
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, orderId);
+			
+			resultSet = statement.executeQuery();
+			if (resultSet.next()) {
+				carConfirmVO = new CarConfirmVO();
+				
+				carConfirmVO.setOrderid(resultSet.getInt("non_orderid"));
+				carConfirmVO.setCarbegindate(resultSet.getString("carbegindate"));
+				carConfirmVO.setCarreserveday(resultSet.getInt("carreserveday"));
+				carConfirmVO.setCarins(resultSet.getInt("carins"));
+				carConfirmVO.setCarwifi(resultSet.getInt("carwifi"));
+				carConfirmVO.setCarnave(resultSet.getInt("carnave"));
+				carConfirmVO.setCarbabyseat(resultSet.getInt("carbabyseat"));
+				carConfirmVO.setCarqty(resultSet.getInt("carqty"));
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 조회 실패 ");
+		}
+		finally {
+			Release();
+		}
+		
+		return carConfirmVO;
 	}
 }
