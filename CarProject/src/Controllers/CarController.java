@@ -22,6 +22,7 @@ import VOs.CarOrderVO;
 public class CarController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	private PrintWriter printWriter;
 	private CarDAO carDAO;
 	
 	private String nextPage;
@@ -46,6 +47,8 @@ public class CarController extends HttpServlet {
 
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
+		
+		printWriter = response.getWriter();
 
 		String action = request.getPathInfo();
 		System.out.println("action : " + action);
@@ -60,6 +63,7 @@ public class CarController extends HttpServlet {
 		else if (action.equals("/ReserveConfirm")) { openReserveConfirmPage(request, response); }
 		else if (action.equals("/CarReserveConfirm.do")) { openReserveResultPage(request, response); }
 		else if (action.equals("/ReserveUpdate")) { openReserveUpdatePage(request, response); }
+		else if (action.equals("/ReserveUpdate.do")) { processReserveUpdate(request, response); return; }
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
@@ -181,8 +185,6 @@ public class CarController extends HttpServlet {
 		int result = carDAO.insertCarOrder(carOrderVO, session);
 		String message = result == 1 ? "예약되었습니다." : "예약에 실패했습니다.";
 		
-		PrintWriter printWriter = response.getWriter();
-		
 		printWriter.print("<script>");
 		printWriter.print("alert('" + message + "');");
 		printWriter.print("location.href = '" + request.getContextPath() + "/Car/CarList.do';");
@@ -229,5 +231,25 @@ public class CarController extends HttpServlet {
 		
 		request.setAttribute("center", "CarReserveUpdate.jsp");
 		nextPage = "/CarMain.jsp";
+	}
+	
+	private void processReserveUpdate(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		int result = carDAO.updateCarOrder(request);
+		
+		int orderid = Integer.parseInt(request.getParameter("orderid"));
+		String memberphone = request.getParameter("memberphone");
+		String carimg = request.getParameter("carimg");
+		
+		printWriter.print("<script>");
+		printWriter.print("alert('" + (result == 1 ? "예약이 변경되었습니다." : "예약 변경에 실패했습니다.") + "');");
+		printWriter.print(
+					result == 1 ?
+					"location.href = '" + request.getContextPath()
+					+ "/Car/ReserveUpdate?orderid=" + orderid + "&carimg=" + carimg + "&memberphone=" + memberphone + "';" :
+					"history.back();"
+				);
+		printWriter.print("</script>");
 	}
 }
