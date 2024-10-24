@@ -204,6 +204,8 @@ public class CarController extends HttpServlet {
 		Vector<CarConfirmVO> carConfirmList = carDAO.selectCarConfirms(memberphone, memberpass);
 		
 		request.setAttribute("carConfirmList", carConfirmList);
+		request.setAttribute("memberphone", memberphone);
+		request.setAttribute("memberpass", memberpass);
 
 		request.setAttribute("center", "CarReserveResult.jsp");
 		nextPage = "/CarMain.jsp";
