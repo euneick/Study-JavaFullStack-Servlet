@@ -22,7 +22,7 @@
 	<div align="center">
 		<img src="<%=contextPath%>/img/hwakin.jpg">
 		
-		<form action="<%=contextPath%>/Car/CarReserveConfirm.do" method="post">
+		<form action="<%=contextPath%>/Car/CarReserveConfirm" method="post">
 			<table width="400">
 				<tr height="60" align="center">
 					<td width="200" align="center">휴대폰 번호 입력</td>
