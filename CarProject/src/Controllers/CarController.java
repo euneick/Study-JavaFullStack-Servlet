@@ -64,7 +64,8 @@ public class CarController extends HttpServlet {
 		else if (action.equals("/CarReserveConfirm.do")) { openReserveResultPage(request, response); }
 		else if (action.equals("/ReserveUpdate")) { openReserveUpdatePage(request, response); }
 		else if (action.equals("/ReserveUpdate.do")) { processReserveUpdate(request, response); return; }		
-		else if (action.equals("/ReserveDelete")) { openReserveDeletePage(request, response); }		
+		else if (action.equals("/ReserveDelete")) { openReserveDeletePage(request, response); }
+		else if (action.equals("/ReserveDelete.do")) { processReserveDelete(request, response); return; }
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
@@ -257,7 +258,26 @@ public class CarController extends HttpServlet {
 	private void openReserveDeletePage(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		request.setAttribute("center", request.getAttribute("center"));
+		request.setAttribute("center", request.getParameter("center"));
 		nextPage = "/CarMain.jsp";
+	}
+
+	private void processReserveDelete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		int orderid = Integer.parseInt(request.getParameter("orderid"));
+		String memberphone = request.getParameter("memberphone");
+		String memberpass = request.getParameter("memberpass");
+		
+		int result = carDAO.deleteCarOrder(orderid, memberpass);
+
+		printWriter.print("<script>");
+		printWriter.print("alert('" + (result == 1 ? "예약이 삭제 되었습니다." : "예약 삭제에 실패했습니다.") + "');");
+		if (result == 1)
+			printWriter.printf("location.href='%s/Car/CarReserveConfirm.do?memberphone=%s&memberpass=%s';",
+					request.getContextPath(), memberphone, memberpass);
+		else
+			printWriter.print("history.back();");
+		printWriter.print("</script>");
 	}
 }
