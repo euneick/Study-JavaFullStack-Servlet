@@ -192,7 +192,7 @@ public class CarDAO {
 						resultSet.getString("carname"),
 						resultSet.getString("carimg"),
 						resultSet.getInt("carprice"),
-						resultSet.getInt("none_orderid"),
+						resultSet.getInt("non_orderid"),
 						resultSet.getInt("carreserveday"),
 						resultSet.getInt("carqty"),
 						resultSet.getInt("carins"),

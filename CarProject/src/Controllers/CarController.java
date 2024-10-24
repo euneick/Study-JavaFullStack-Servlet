@@ -58,7 +58,7 @@ public class CarController extends HttpServlet {
 		else if (action.equals("/CarOptionResult.do")) { openCarOptionResultPage(request, response); }
 		else if (action.equals("/CarOrder.do")) { processCarOrderData(request, response); return; }
 		else if (action.equals("/ReserveConfirm")) { openReserveConfirmPage(request, response); }
-		else if (action.equals("CarReserveConfirm.do")) { openReserveResultPage(request, response); }
+		else if (action.equals("/CarReserveConfirm.do")) { openReserveResultPage(request, response); }
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
