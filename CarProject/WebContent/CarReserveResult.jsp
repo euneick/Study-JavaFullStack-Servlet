@@ -74,7 +74,7 @@
 						</a>
 					</td>
 					<td align="center" width="100">
-						<a href="${contextPath}/Car/ReserveDelete.do?orderid=${carConfirm.orderid}&
+						<a href="${contextPath}/Car/ReserveDelete?orderid=${carConfirm.orderid}&
 							memberphone=${memberphone}&center=CarReserveDelete.jsp">
 							예약취소
 						</a>

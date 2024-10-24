@@ -63,7 +63,8 @@ public class CarController extends HttpServlet {
 		else if (action.equals("/ReserveConfirm")) { openReserveConfirmPage(request, response); }
 		else if (action.equals("/CarReserveConfirm.do")) { openReserveResultPage(request, response); }
 		else if (action.equals("/ReserveUpdate")) { openReserveUpdatePage(request, response); }
-		else if (action.equals("/ReserveUpdate.do")) { processReserveUpdate(request, response); return; }
+		else if (action.equals("/ReserveUpdate.do")) { processReserveUpdate(request, response); return; }		
+		else if (action.equals("/ReserveDelete")) { openReserveDeletePage(request, response); }		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
@@ -251,5 +252,12 @@ public class CarController extends HttpServlet {
 					"history.back();"
 				);
 		printWriter.print("</script>");
+	}
+	
+	private void openReserveDeletePage(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		request.setAttribute("center", request.getAttribute("center"));
+		nextPage = "/CarMain.jsp";
 	}
 }
