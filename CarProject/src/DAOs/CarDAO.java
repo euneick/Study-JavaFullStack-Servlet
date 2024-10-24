@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
@@ -249,4 +250,69 @@ public class CarDAO {
 		
 		return carConfirmVO;
 	}
+	
+	public int updateCarOrder(HttpServletRequest request) {
+		
+		int result = 0;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "update non_carorder "
+					+ "set carbegindate=?, carreserveday=?, carins=?, carwifi=?, carnave=?, carbabyseat=?, carqty=? "
+					+ "where non_orderid=? and memberpass=?";
+			statement = connection.prepareStatement(sql);
+			
+			int index = 1;
+			statement.setString(index++, request.getParameter("carbegindate"));
+			statement.setInt(index++, Integer.parseInt(request.getParameter("carreserveday")));
+			statement.setInt(index++, Integer.parseInt(request.getParameter("carins")));
+			statement.setInt(index++, Integer.parseInt(request.getParameter("carwifi")));
+			statement.setInt(index++, Integer.parseInt(request.getParameter("carnave")));
+			statement.setInt(index++, Integer.parseInt(request.getParameter("carbabyseat")));
+			statement.setInt(index++, Integer.parseInt(request.getParameter("carqty")));
+			statement.setInt(index++, Integer.parseInt(request.getParameter("orderid")));
+			statement.setString(index++, request.getParameter("memberpass"));
+			
+			result = statement.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 수정 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return result;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
