@@ -59,6 +59,7 @@ public class CarController extends HttpServlet {
 		else if (action.equals("/CarOrder.do")) { processCarOrderData(request, response); return; }
 		else if (action.equals("/ReserveConfirm")) { openReserveConfirmPage(request, response); }
 		else if (action.equals("/CarReserveConfirm.do")) { openReserveResultPage(request, response); }
+		else if (action.equals("/ReserveUpdate.do")) { openReserveUpdatePage(request, response); }
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
@@ -208,6 +209,25 @@ public class CarController extends HttpServlet {
 		request.setAttribute("memberpass", memberpass);
 
 		request.setAttribute("center", "CarReserveResult.jsp");
+		nextPage = "/CarMain.jsp";
+	}
+	
+	private void openReserveUpdatePage(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		int orderId = Integer.parseInt(request.getParameter("orderid"));
+		String carimg = request.getParameter("carimg");
+		String memberphone = request.getParameter("memberphone");
+		String memberpass = request.getParameter("memberpass");
+		
+		CarConfirmVO carConfirm = carDAO.selectCarConfirm(orderId);
+		carConfirm.setCarimg(carimg);
+		
+		request.setAttribute("carConfirm", carConfirm);
+		request.setAttribute("memberphone", memberphone);
+		request.setAttribute("memberpass", memberpass);
+		
+		request.setAttribute("center", "CarReserveUpdate.jsp");
 		nextPage = "/CarMain.jsp";
 	}
 }
