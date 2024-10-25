@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+
+<body>
+	<div id="container">
+		<div class="letters">
+			<div class="letter" id="target">
+				<h3><a href="#">클릭</a></h3>
+			</div>
+		</div>
+		<div id="dictionary"></div>
+	</div>
+	
+	
+	<script type="text/javascript">
+		/*
+			$.getJSON() 메소드
+			 - jQuery에서 JSON데이터를 비동기로 요청하고, 응답받은 데이터를 쉽게 처리 할 수 있도록 도와주는 메소드
+			 - 기본적으로 GET요청을 사용
+			 - REST API와 같은 서비스에서 JSON 형식의 데이터를 받아오는데 사용
+			 * 문법
+			 	$.getJSON(url, data, callback(data){})
+			 		- url		데이터가 있는 서버페이지 경로
+			 		- data		요청 할 서버에 전송 할 데이터 (객체 형태로 작성, 생략 가능)
+					- callback	요청 성공 시 실행 할 콜백 함수
+						- data 		요청 성공 시 응답 받을 데이터가 저장되어 있는 매개변수
+		*/
+		$("#target").click(function() {
+			
+			$.getJSON("data.json", function(datas) {
+				
+				let html = "";
+				
+				$.each(datas, function(index, obj) {
+					
+					html += '<div class="entry">';
+					html += '<div class="term">' + obj.term + '</div>';
+					html += '<div class="part">' + obj.part + '</div>';
+					html += '<div class="definition">' + obj.definition + '</div>';
+					if (obj.author != null) html += '<div class="author">' + obj.author + '</div>';
+					html += '</div>'
+				});
+				
+				$("#dictionary").html(html);
+			});
+			
+			return false;		// a태그 기본이벤트 제거
+		});
+	</script>
+</body>
+
+</html>
