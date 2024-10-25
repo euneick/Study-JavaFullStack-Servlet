@@ -1,0 +1,22 @@
+{
+	"student": {
+		"name": "Alpha",
+		"age": 17,
+		"major": "Computer Science",
+		"classes": [
+			{
+				"name": "Data Structures",
+				"grade": "A"
+			},			
+			{
+				"name": "Algorithms",
+				"grade": "B+"
+			},
+			{
+				"name": "Operation System",
+				"grade": "A-"
+			}
+		],
+		"isGraduated": false
+	}
+}
