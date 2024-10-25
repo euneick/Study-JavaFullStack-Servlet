@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript">
+		/*
+			$.ajax() 메소드
+				- get, post 로 서버페이지에 비동기 통신으로 데이터를 요청
+				
+				$.ajax({
+					url: "요청 할 서버 페이지 주소",
+					type: "요청 방식",					// GET, POST, PUT, DELETE 등 (default : GET)
+					data: 서버페이지에 요청 할 값,			// 객체 또는 문자열 형태 (전송 할 파라미터가 없을 시 생략 가능)
+					dataType: "응답데이터형식", 			// json, xml, html, text 등
+					success: function(response, status, jqxhr) {	// 요청 성공 시 호출 할 콜백 함수 
+						(response : 서버페이지가 응답한 데이터)
+						(status : 상태코드를 담는 변수, 생략가능)
+						(jqxhr : XMLHttpRequest 객체, 생략 가능
+							"success", "notmodified", "nocontent", "error", "timeout", "parsererror" 등 요청 상태가 저장되어 있음)
+					},
+					error: function(xhr, status, error) {			// 요청 실패 시 호출 할 콜백 함수 (생략 가능)
+						(xhr : XMLHttpRequest 객체)
+						(status : 오류 상태 코드를 담는 변수
+							"timeout", "abort", "parsererror" 등 상태 값이 저장되어있음)
+						(error : 오류의 상태 메세지, 생략 가능
+							"Not Found", "Internal Server Error" 등 메세지가 저장되어있음)
+					},
+					complete: function() {	// 요청완료 이후 무조건 호출 할 콜백 함수 (생략 가능)
+						
+					}
+				});
+		*/
+		$(document).ready(function() {
+			$("#cal").click(function() {
+				$.ajax({
+					url: "calc.jsp",
+					type: "GET",
+					data: { 
+						param1: $("#v1").val(),
+						param2: $("#v2").val()
+					},
+					dataType: "text",
+					success: function(responseData, status, jqxhr) {
+						$("#result").text(responseData);
+					},
+					error: function(xhr, status, error) {
+						console.log(error);
+					}
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+	값1 : <input type="text" name="v1" id="v1"><br>
+	값2 : <input type="text" name="v2" id="v2"><br>
+	
+	<button id="cal">계산</button>
+	
+	<div id="result"></div>
+</body>
+
+</html>
