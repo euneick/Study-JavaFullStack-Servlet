@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	
+	<script type="text/javascript">
+		let xhttp;
+		
+		function createXMLHttpRequest() {
+			xhttp = new XMLHttpRequest();
+		}
+		
+		function callFunction() {
+			// readyState == 4 && status == 200 일 경우 서버와 클라이언트 간의 통신이 성공적으로 완료됨
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+				/*
+					XMLHttpRequest.responseText		txt 형식으로 수신
+					XMLHttpRequest.responseXML		XML 형식으로 수신
+				*/
+				let responsedData = xhttp.responseText;
+				
+				document.getElementById("result").innerHTML = responsedData;
+			}
+		}
+		
+		function readFile() {
+			createXMLHttpRequest();
+			
+			xhttp.onreadystatechange = callFunction;
+			
+			/*
+				XMLHttpRequest.open()
+					1. 요청 method 방법 (GET 또는 POST)
+					2. 요청 URL
+					3. true : 비동기 	//	false : 동기
+			*/
+			xhttp.open("GET", "sample.txt", true);
+			
+			/*
+				XMLHttpRequest.send()
+					GET 전송 방식에서 open() 함수의 두 번째 매개변수로 파라미터들을 지정하고, send() 함수에 null값을 지정하여 전송
+					GET 전송 방식은 기본적으로 한글을 지원 함
+					
+					POST 전송 방식에서 open() 함수 두 번째 매개변수에는 호출 페이지만 지정하고
+					XMLHttpRequest.setRequestHeader("Content-Type", "application/x-www-form-url");
+					함수를 통해 한글화를 설정하고
+					send() 함수의 매개변수에 전송할 파라미터들의 키, 값을 작성하여 호출하면 됨
+			*/
+			xhttp.send(null);
+		}
+	</script>
+</head>
+
+<body>
+	<button onclick="readFile();">파일 수신 요청</button>
+	
+	<div id="result"></div>
+</body>
+
+</html>
