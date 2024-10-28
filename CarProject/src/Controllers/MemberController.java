@@ -49,9 +49,7 @@ public class MemberController extends HttpServlet {
 		System.out.println("action : " + action);
 		
 		switch (action) {
-		case "/join.me":
-			openJoinView(request, response);
-			break;
+		case "/join.me": openJoinView(request, response); break;
 
 		default:
 		}
