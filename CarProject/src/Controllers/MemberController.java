@@ -52,6 +52,7 @@ public class MemberController extends HttpServlet {
 		case "/join.me": openJoinView(request, response); break;
 		case "/joinIdCheck.me": checkJoinId(request, response); return;
 		case "/joinPro.me": processMemberInsert(request, response); break;
+		case "/login.me": openLoginView(request, response); break;
 
 		default:
 		}
@@ -84,6 +85,16 @@ public class MemberController extends HttpServlet {
 		
 		memberService.processMemberInsert(request);
 
+		nextPage = "/CarMain.jsp";
+	}
+	
+	private void openLoginView(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		String center = memberService.getLoginView(request);
+
+		request.setAttribute("center", center);
+		
 		nextPage = "/CarMain.jsp";
 	}
 }

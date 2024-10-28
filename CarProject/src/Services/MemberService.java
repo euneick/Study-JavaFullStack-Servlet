@@ -48,4 +48,9 @@ public class MemberService {
 		memberDAO.insertMember(memberVO);
 		
 	}
+	
+	public String getLoginView(HttpServletRequest request) {
+		
+		return "Members/login.jsp";
+	}
 }
