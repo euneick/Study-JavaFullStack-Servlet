@@ -26,7 +26,7 @@
 </head>
 <body>
 
-<form action="" class="form">	
+<form action="<%=contextPath%>/Member/joinPro.me" class="form" method="post">
 	<div style="height: 100px;"></div>
 	<div class="container">
 		<div class="row justify-content-lefts">
