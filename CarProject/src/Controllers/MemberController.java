@@ -50,6 +50,8 @@ public class MemberController extends HttpServlet {
 		
 		switch (action) {
 		case "/join.me": openJoinView(request, response); break;
+		case "/joinIdCheck.me": checkJoinId(request, response); return;
+		case "/joinPro.me": processMemberInsert(request, response); break;
 
 		default:
 		}
@@ -67,5 +69,19 @@ public class MemberController extends HttpServlet {
 		request.setAttribute("center", center);
 		
 		nextPage = "/CarMain.jsp";
+	}
+	
+	private void checkJoinId(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		boolean result = memberService.checkJoinId(request);
+		
+		printWriter.print(result ? "not usable" : "usable");
+	}
+	
+	private void processMemberInsert(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		memberService.processMemberInsert(request);
 	}
 }

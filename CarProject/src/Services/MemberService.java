@@ -17,4 +17,15 @@ public class MemberService {
 
 		return request.getParameter("center");
 	}
+	
+	public boolean checkJoinId(HttpServletRequest request) {
+		
+		String id = request.getParameter("inputId");		// ajax 메소드로 호출하면서 등록한 data의 키 값
+
+		return memberDAO.checkJoinId(id);
+	}
+	
+	public void processMemberInsert(HttpServletRequest request) {
+		
+	}
 }
