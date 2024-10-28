@@ -78,7 +78,7 @@
 				%>		
 					<div id="login" align="center">
 					
-			          <button type="button" class="btn btn-warning" onclick="location.href='<%=contextPath%>/member/login.me'">로그인</button>
+			          <button type="button" class="btn btn-warning" onclick="location.href='<%=contextPath%>/Member/login.me'">로그인</button>
 			          <button type="button" class="btn btn-warning" onclick="location.href='<%=contextPath%>/Member/join.me?center=Members/join.jsp'">회원가입</button> 
 					  <button id="joinBtn" class="btn btn-info" onclick="location.href='<%=contextPath%>/Guestbook/GuestbookListAction.gb'">방명록</button>
 						<nav class="navbar navbar-light">

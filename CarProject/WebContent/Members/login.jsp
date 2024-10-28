@@ -12,7 +12,7 @@
 	    <div class="container">
 	 
 	    <%--MemberController서블릿에.. 로그인 처리 요청시! 입력한 id와 패스워드 전달 --%>   
-	      <form class="form-signin" action="<%=request.getContextPath()%>/member/loginPro.me" id="join">    
+	      <form class="form-signin" action="<%=request.getContextPath()%>/Member/loginPro.me" id="join">    
 	        <h2 class="form-signin-heading">로그인 화면</h2>
 	        	<label class="sr-only">아이디</label>
 	        		<input type="text" id="id" name="id"  placeholder="아이디" required autofocus>
