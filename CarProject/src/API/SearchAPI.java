@@ -20,6 +20,9 @@ public class SearchAPI extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
 
 		/* 인증정보 설정*/
 		String clientId = "kx8sREeigxnmZSoSZfkp";
@@ -55,7 +58,8 @@ public class SearchAPI extends HttpServlet {
 		/* API를 호출하여  JSON을 문자열 형태로 반환 */
 		String responseBody = get(apiURL, requestHeaders);
 		
-		System.out.println(responseBody);
+		PrintWriter out = response.getWriter();
+		out.print(responseBody);
 	}
 	
 	private String get(String apiUrl, Map<String, String> requestHeaders) {
