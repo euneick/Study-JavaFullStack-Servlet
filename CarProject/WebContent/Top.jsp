@@ -98,7 +98,7 @@
 				%>		
 					<div id="login">
 						<%=id%>&nbsp;&nbsp;
-						<button type="button" class="btn btn-warning" onclick="location.href='<%=contextPath%>/Member/logout.me'">정보수정</button>&nbsp;&nbsp;
+						<button type="button" class="btn btn-warning" onclick="location.href='<%=contextPath%>/Member/update.me'">정보수정</button>&nbsp;&nbsp;
 						<button type="button" class="btn btn-warning" onclick="location.href='<%=contextPath%>/Member/logout.me'">로그아웃</button> 
 						<button id="joinBtn" class="btn btn-info" onclick="location.href='<%=contextPath%>/Guestbook/GuestbookListAction.gb'">방명록</button>
 						<nav class="navbar navbar-light">
