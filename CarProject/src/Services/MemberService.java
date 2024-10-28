@@ -15,7 +15,6 @@ public class MemberService {
 	
 	public String getJoinView(HttpServletRequest request) {
 
-		System.out.println(request.getParameter("center"));
 		return request.getParameter("center");
 	}
 }
