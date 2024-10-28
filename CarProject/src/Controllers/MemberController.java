@@ -83,5 +83,7 @@ public class MemberController extends HttpServlet {
 			throws ServletException, IOException {
 		
 		memberService.processMemberInsert(request);
+
+		nextPage = "/CarMain.jsp";
 	}
 }

@@ -8,6 +8,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import VOs.MemberVO;
+
 public class MemberDAO {
 	
 	private DataSource dataSource;
@@ -74,9 +76,37 @@ public class MemberDAO {
 		return result;
 	}
 	
-	public int insertMember() {
+	public int insertMember(MemberVO memberVO) {
 		
 		int result = 0;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "insert into member(id, pass, name, reg_date, age, gender, address, email, tel, hp) "
+					+ "values(?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?)";
+			statement = connection.prepareStatement(sql);
+			
+			int index = 1;
+			statement.setString(index++, memberVO.getId());
+			statement.setString(index++, memberVO.getPass());
+			statement.setString(index++, memberVO.getName());
+			statement.setInt(index++, memberVO.getAge());
+			statement.setString(index++, memberVO.getGender());
+			statement.setString(index++, memberVO.getAddress());
+			statement.setString(index++, memberVO.getEmail());
+			statement.setString(index++, memberVO.getTel());
+			statement.setString(index++, memberVO.getHp());
+			
+			result = statement.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 추가 실패");
+		}
+		finally {
+			Release();
+		}
 		
 		return result;
 	}

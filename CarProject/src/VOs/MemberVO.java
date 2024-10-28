@@ -18,13 +18,12 @@ public class MemberVO {
 	public MemberVO() {
 	}
 
-	public MemberVO(String id, String pass, String name, Date regDate, int age, String gender, String address,
+	public MemberVO(String id, String pass, String name, int age, String gender, String address,
 			String email, String tel, String hp) {
 		
 		this.id = id;
 		this.pass = pass;
 		this.name = name;
-		this.regDate = regDate;
 		this.age = age;
 		this.gender = gender;
 		this.address = address;
