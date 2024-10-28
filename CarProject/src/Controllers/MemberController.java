@@ -54,6 +54,7 @@ public class MemberController extends HttpServlet {
 		case "/joinPro.me": processMemberInsert(request, response); break;
 		case "/login.me": openLoginView(request, response); break;
 		case "/loginPro.me": if (!processMemberLogin(request, response)) return; break;
+		case "/logout.me": processMemberLogout(request, response); break;
 
 		default:
 		}
@@ -115,5 +116,13 @@ public class MemberController extends HttpServlet {
 		}
 		
 		return result;
+	}
+	
+	private void processMemberLogout(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		memberService.processMemberLogout(request);
+
+		nextPage = "/CarMain.jsp";
 	}
 }

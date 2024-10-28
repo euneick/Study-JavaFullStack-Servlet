@@ -71,4 +71,12 @@ public class MemberService {
 		
 		return result;
 	}
+	
+	public void processMemberLogout(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();			// 기존에 생성 한 세션 객체 얻기
+		//HttpSession session = request.getSession(true);	// 세션 새로 만들기
+		
+		session.removeAttribute("id");
+	}
 }
