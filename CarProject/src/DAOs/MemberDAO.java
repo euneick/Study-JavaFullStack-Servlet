@@ -110,6 +110,33 @@ public class MemberDAO {
 		
 		return result;
 	}
+	
+	public boolean checkMemberLogin(String id, String pass) {
+		
+		boolean result = false;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "select * from member where id=? and pass=?";
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, id);
+			statement.setString(2, pass);
+			
+			resultSet = statement.executeQuery();
+			
+			result = resultSet.next();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB조회 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return result;
+	}
 }
 
 

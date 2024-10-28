@@ -53,6 +53,7 @@ public class MemberController extends HttpServlet {
 		case "/joinIdCheck.me": checkJoinId(request, response); return;
 		case "/joinPro.me": processMemberInsert(request, response); break;
 		case "/login.me": openLoginView(request, response); break;
+		case "/loginPro.me": if (!processMemberLogin(request, response)) return; break;
 
 		default:
 		}
@@ -96,5 +97,23 @@ public class MemberController extends HttpServlet {
 		request.setAttribute("center", center);
 		
 		nextPage = "/CarMain.jsp";
+	}
+	
+	private boolean processMemberLogin(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		boolean result = memberService.processMemberLogin(request);
+		
+		if (result) {
+			nextPage = "/CarMain.jsp";
+		}
+		else {
+			printWriter.print("<script>");
+			printWriter.print("window.alert('아이디 또는 비밀번호가 잘못되었습니다.');");
+			printWriter.print("history.go(-1);");
+			printWriter.print("</script>");
+		}
+		
+		return result;
 	}
 }

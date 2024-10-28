@@ -1,6 +1,7 @@
 package Services;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import DAOs.MemberDAO;
 import VOs.MemberVO;
@@ -52,5 +53,22 @@ public class MemberService {
 	public String getLoginView(HttpServletRequest request) {
 		
 		return "Members/login.jsp";
+	}
+	
+	public boolean processMemberLogin(HttpServletRequest request) {
+		
+		boolean result = false;
+		
+		String id = request.getParameter("id");
+		String pass = request.getParameter("pass");
+		
+		result = memberDAO.checkMemberLogin(id, pass);
+		
+		if (result) {
+			HttpSession session = request.getSession();
+			session.setAttribute("id", id);
+		}
+		
+		return result;
 	}
 }
