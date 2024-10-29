@@ -137,6 +137,38 @@ public class MemberDAO {
 		
 		return result;
 	}
+	
+	public MemberVO selectMember(String id) {
+		
+		MemberVO member = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "select id, name, email member where id=?";
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, id);
+			
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				member = new MemberVO();
+				
+				member.setId(resultSet.getString("id"));
+				member.setName(resultSet.getString("name"));
+				member.setEmail(resultSet.getString("email"));
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 조회 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return member;
+	}
 }
 
 

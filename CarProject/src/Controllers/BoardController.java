@@ -11,9 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Services.BoardService;
 import VOs.BoardVO;
+import VOs.MemberVO;
 
 @WebServlet("/Board/*")
 public class BoardController extends HttpServlet {
@@ -76,6 +78,9 @@ public class BoardController extends HttpServlet {
 	private void openBoardWriteView(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		MemberVO member = boardService.selectMember(request);
+		
+		request.setAttribute("member", member);
 		request.setAttribute("center", "board/BoardWrite.jsp");
 		
 		nextPage = "/CarMain.jsp";

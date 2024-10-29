@@ -3,10 +3,12 @@ package Services;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import DAOs.BoardDAO;
 import DAOs.MemberDAO;
 import VOs.BoardVO;
+import VOs.MemberVO;
 
 public class BoardService {
 
@@ -30,5 +32,13 @@ public class BoardService {
 		String word = request.getParameter("word");
 		
 		return boardDAO.selectSearchedBoards(key, word);
+	}
+	
+	public MemberVO selectMember(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();		
+		String id = (String) session.getAttribute("id");
+		
+		return memberDAO.selectMember(id);
 	}
 }
