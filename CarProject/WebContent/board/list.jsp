@@ -129,7 +129,7 @@
 			            	if (id != null) {
 		            		%>
 		            			<input type="image" id="newContent" 
-		            					src="<%=contextPath%>/borad/images/write.gif"
+		            					src="<%=contextPath%>/board/images/write.gif"
 		            					onclick="location.href='<%=contextPath%>/Board/write.bo';">
 		            		<%
 			            	}
