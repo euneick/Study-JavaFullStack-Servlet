@@ -2,6 +2,7 @@ package Controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Services.BoardService;
+import VOs.BoardVO;
 
 @WebServlet("/Board/*")
 public class BoardController extends HttpServlet {
@@ -38,7 +40,7 @@ public class BoardController extends HttpServlet {
 	}
 
 	protected void doHandle(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException  {		
+			throws ServletException, IOException {		
 
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
@@ -48,9 +50,34 @@ public class BoardController extends HttpServlet {
 		String action = request.getPathInfo();
 		System.out.println("action : " + action);
 		
-		
+		switch (action) {
+		case "/list.bo": openBoardListView(request, response); break;
+		case "/write.bo": openBoardWriteView(request, response); break;
+		case "/searchlist.bo": break;
+
+		default:
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
+	}
+	
+	private void openBoardListView(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		ArrayList<BoardVO> boardsList = boardService.selectBoards();
+		
+		request.setAttribute("boardsList", boardsList);
+		request.setAttribute("center", "board/list.jsp");
+		
+		nextPage = "/CarMain.jsp";
+	}
+	
+	private void openBoardWriteView(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		request.setAttribute("center", "board/BoardWrite.jsp");
+		
+		nextPage = "/CarMain.jsp";
 	}
 }
