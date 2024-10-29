@@ -1,3 +1,4 @@
+<%@page import="VOs.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -8,6 +9,12 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String contextPath = request.getContextPath();
+	
+	MemberVO member = (MemberVO) request.getAttribute("member");
+	
+	String name = member.getName();
+	String id = member.getName();
+	String email = member.getEmail();
 %>
 
 <!DOCTYPE html>
@@ -25,7 +32,7 @@
 		<table width="90%" border="0" cellspacing="0" cellpadding="0">
 			<tr height="40">
 				<td width="41%" style="text-align: left">&nbsp;&nbsp;&nbsp; <img
-					src="<%=contextPath%>/Board/images/board02.gif" width="150"
+					src="<%=contextPath%>/board/images/board02.gif" width="150"
 					height="30">
 				</td>
 				<td width="57%">&nbsp;</td>
@@ -33,7 +40,7 @@
 			</tr>
 			<tr>
 				<td colspan="3"><div align="center">
-						<img src="<%=contextPath%>/Board/images/line_870.gif" width="870" height="4">
+						<img src="<%=contextPath%>/board/images/line_870.gif" width="870" height="4">
 					</div>
 				</td>
 			</tr>
@@ -60,10 +67,9 @@
 												<td width="13%" height="29" bgcolor="#e4e4e4" class="text2">
 													<div align="center">아 이 디</div>
 												</td>
-
 												<td width="34%" bgcolor="#f5f5f5" style="text-align: left">
 													<input type="text" name="writer_id" size="20" class="text2"
-														value="" readonly />
+														value="<%=id%>" readonly />
 												</td>
 											</tr>
 											<tr>
@@ -74,7 +80,7 @@
 												</td>
 												<td colspan="3" bgcolor="#f5f5f5" style="text-align: left">
 													<input type="text" name="email" size="40" class="text2"
-														value="" readonly />
+														value="<%=email%>" readonly />
 												</td>
 											</tr>
 											<tr>
@@ -114,16 +120,16 @@
 								<td width="48%">
 									<!-- 등록 버튼 -->
 									<div align="right">
-										<a href="" id="registration1"> <img
-											src="<%=contextPath%>/Board/images/confirm.gif" border="0" />
+										<a href="#" id="registration1">
+											<img src="<%=contextPath%>/board/images/confirm.gif" border="0" />
 										</a>
 									</div>
 								</td>
 								<td width="10%">
 									<!-- 목록보기 -->
 									<div align="center">
-										<a href="" id="list"> <img
-											src="<%=contextPath%>/Board/images/list.gif" border="0" />
+										<a href="#" id="list">
+											<img src="<%=contextPath%>/board/images/list.gif" border="0" />
 										</a>
 									</div>
 								</td>
@@ -137,8 +143,45 @@
 	</form>
 
 
-	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>	
 	<script type="text/javascript">
+		$("#list").click(function(event) {
+			
+			event.preventDefault();		// a 태그 기본 이벤트 제거
+			
+			location.href = "<%=contextPath%>/Board/list.bo";
+		});
+		
+		$("#registration1").click(function(event) {
+			
+			event.preventDefault();		// a 태그 기본 이벤트 제거
+			
+			$.ajax({
+				url: "<%=contextPath%>/Board/writePro.bo",
+				type: "post",
+				async: true,
+				data: {
+					writer: $("input[name=writer]").val(),
+					id: $("input[name=id]").val(),
+					email: $("input[name=email]").val(),
+					title: $("input[name=title]").val(),
+					content: $("textarea[name=content]").val(),
+					pass: $("input[name=pass]").val()
+				},
+				dataType: "text",
+				success: function(responsedData) {
+					
+					if (responsedData == "1") {
+						$("#resultInsert").text("글 작성 완료").css("color", "blue");
+					}
+					else {
+						$("#resultInsert").text("글 작성 실패").css("color", "red");
+					}
+				},
+				error: function() {
+					alert("글 작성 도중 에러가 발생했습니다.");
+				}
+			});
+		});
 	</script>
 </body>
 
