@@ -13,9 +13,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Insert title here</title>
 	
-	<link rel="stylesheet" type="text/css" href="/MVCBoard/style.css"/>
+	<!-- <link rel="stylesheet" type="text/css" href="/MVCBoard/style.css"/> -->
 	<script type="text/javascript">
-		function fnSearch() {
+		function onSearchClick() {
 			var word = document.getElementById("word").value;
 			
 			if (word == null || word == "") {
@@ -108,7 +108,7 @@
 					<tr>
 						<form action="<%=contextPath%>/Board/searchlist.bo" 
 								method="post" 
-								name="frmSearch" onsubmit="javascript:fnSearch();">
+								name="frmSearch" onsubmit="javascript:onSearchClick();">
 			            	<td colspan="2">
 			            		<div align="right"> 
 				            		<select name="key">
