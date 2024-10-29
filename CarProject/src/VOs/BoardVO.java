@@ -14,13 +14,13 @@ public class BoardVO {
 	private int group;
 	private int level;
 	private Date date;
-	private int count;
+	private int cnt;
 	
 	public BoardVO() {
 	}
 
 	public BoardVO(int idx, String id, String pw, String name, String email, String title, String content, int group,
-			int level, int count) {
+			int level, int cnt) {
 		
 		this.idx = idx;
 		this.id = id;
@@ -31,11 +31,11 @@ public class BoardVO {
 		this.content = content;
 		this.group = group;
 		this.level = level;
-		this.count = count;
+		this.cnt = cnt;
 	}
 	
 	public BoardVO(int idx, String id, String pw, String name, String email, String title, String content, int group,
-			int level, Date date, int count) {
+			int level, Date date, int cnt) {
 
 		this.idx = idx;
 		this.id = id;
@@ -47,7 +47,7 @@ public class BoardVO {
 		this.group = group;
 		this.level = level;
 		this.date = date;
-		this.count = count;
+		this.cnt = cnt;
 	}
 
 	public int getIdx() {
@@ -130,11 +130,11 @@ public class BoardVO {
 		this.date = date;
 	}
 
-	public int getCount() {
-		return count;
+	public int getCnt() {
+		return cnt;
 	}
 
-	public void setCount(int count) {
-		this.count = count;
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
 }
