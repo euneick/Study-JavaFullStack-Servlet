@@ -41,4 +41,18 @@ public class BoardService {
 		
 		return memberDAO.selectMember(id);
 	}
+	
+	public int insertBoard(HttpServletRequest request) {
+
+		BoardVO board = new BoardVO();
+		
+		board.setName(request.getParameter("writer"));
+		board.setId(request.getParameter("id"));
+		board.setEmail(request.getParameter("email"));
+		board.setTitle(request.getParameter("title"));
+		board.setContent(request.getParameter("content"));
+		board.setPw(request.getParameter("pass"));		
+		
+		return boardDAO.insertBoard(board);
+	}
 }

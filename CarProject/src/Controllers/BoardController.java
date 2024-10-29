@@ -55,6 +55,7 @@ public class BoardController extends HttpServlet {
 		switch (action) {
 		case "/list.bo": openBoardListView(request, response); break;
 		case "/write.bo": openBoardWriteView(request, response); break;
+		case "/writePro.bo": processBoardWrite(request, response); return;
 		case "/searchlist.bo": processBoardSearch(request, response); break;
 
 		default:
@@ -84,6 +85,14 @@ public class BoardController extends HttpServlet {
 		request.setAttribute("center", "board/BoardWrite.jsp");
 		
 		nextPage = "/CarMain.jsp";
+	}
+	
+	private void processBoardWrite(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		int result = boardService.insertBoard(request);
+		
+		printWriter.print(result);
 	}
 	
 	private void processBoardSearch(HttpServletRequest request, HttpServletResponse response)

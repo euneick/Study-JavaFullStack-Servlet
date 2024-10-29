@@ -136,4 +136,36 @@ public class BoardDAO {
 		
 		return boards;
 	}
+	
+	public int insertBoard(BoardVO board) {
+		
+		int result = 0;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "insert into board(b_idx, b_id, b_pw, b_name, b_email, "
+					+ "b_title, b_content, b_group, b_level, b_date, b_cnt) "
+					+ "values(border_b_idx.nextval, ?, ?, ?, ?, ?, ?, 1, 0, sysdate, 0)";
+			statement = connection.prepareStatement(sql);
+			int index = 1;
+			statement.setString(index++, board.getId());
+			statement.setString(index++, board.getPw());
+			statement.setString(index++, board.getName());
+			statement.setString(index++, board.getEmail());
+			statement.setString(index++, board.getTitle());
+			statement.setString(index++, board.getContent());
+			
+			result = statement.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 추가 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return result;
+	}
 }
