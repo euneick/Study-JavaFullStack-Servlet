@@ -145,7 +145,7 @@ public class MemberDAO {
 		try {
 			connection = dataSource.getConnection();
 			
-			String sql = "select id, name, email member where id=?";
+			String sql = "select id, name, email from member where id=?";
 			statement = connection.prepareStatement(sql);
 			statement.setString(1, id);
 			
