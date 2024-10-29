@@ -29,7 +29,11 @@
 		}		
 	</script>
 </head>
-<body>	
+
+<body>
+<%
+	String id = (String) session.getAttribute("id");
+%>
 	<table width="97%" border="0" cellspacing="0" cellpadding="0">
 		<tr height="40"> 
 			<td width="46%" style="text-align: left"> 
@@ -75,25 +79,41 @@
 		        		<td colspan="4">&nbsp;</td>
 		        	</tr>
 					<tr>
-						<form action="<%=contextPath%>/board1/searchlist.bo" 
+						<form action="<%=contextPath%>/Board/searchlist.bo" 
 								method="post" 
 								name="frmSearch" onsubmit="javascript:fnSearch();">
-		            	<td colspan="2">
-		            		<div align="right"> 
-			            		<select name="key">
-			              			<option value="titleContent">제목 + 내용</option>
-			              			<option value="name">작성자</option>
-			              		</select>
-			              	</div>
-		              	</td>
-			            <td width="26%">
-			            	<div align="center"> &nbsp;
-			            		<input type="text" name="word" id="word"/>
-			            		<input type="submit" value="검색"/>
-			            	</div>
-			            </td>
+			            	<td colspan="2">
+			            		<div align="right"> 
+				            		<select name="key">
+				              			<option value="titleContent">제목 + 내용</option>
+				              			<option value="name">작성자</option>
+				              		</select>
+				              	</div>
+			              	</td>
+				            <td width="26%">
+				            	<div align="center"> &nbsp;
+				            		<input type="text" name="word" id="word"/>
+				            		<input type="submit" value="검색"/>
+				            	</div>
+				            </td>
 			            </form>
-		           
+			            <td width="38%" style="text-align: left">
+			            
+			            	<input type="image" id="newContent" 
+		            					src="<%=contextPath%>/borad/images/write.gif"
+		            					onclick="location.href='<%=contextPath%>/Board/write.bo';">
+		            								            
+			            <%
+			            	if (id != null) {
+		            		%>
+		            			<input type="image" id="newContent" 
+		            					src="<%=contextPath%>/borad/images/write.gif"
+		            					onclick="location.href='<%=contextPath%>/Board/write.bo';">
+		            		<%
+			            	}
+			            %>
+			            </td>
+		            </tr>
 		       		<tr>
 		       			<td colspan="4">&nbsp;</td>
 		       		</tr>
@@ -108,24 +128,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
