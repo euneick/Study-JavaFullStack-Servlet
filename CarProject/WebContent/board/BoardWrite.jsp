@@ -161,7 +161,7 @@
 				async: true,
 				data: {
 					writer: $("input[name=writer]").val(),
-					id: $("input[name=id]").val(),
+					id: $("input[name=writer_id]").val(),
 					email: $("input[name=email]").val(),
 					title: $("input[name=title]").val(),
 					content: $("textarea[name=content]").val(),
