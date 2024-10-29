@@ -51,7 +51,7 @@ public class BoardDAO {
 		try {
 			connection = dataSource.getConnection();
 			
-			String sql = "select * from board order by b_group asc";
+			String sql = "select * from board order by b_idx desc";
 			statement = connection.prepareStatement(sql);
 			
 			resultSet = statement.executeQuery();
