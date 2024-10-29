@@ -124,12 +124,7 @@
 				            	</div>
 				            </td>
 			            </form>
-			            <td width="38%" style="text-align: left">
-			            
-			            	<input type="image" id="newContent" 
-		            					src="<%=contextPath%>/borad/images/write.gif"
-		            					onclick="location.href='<%=contextPath%>/Board/write.bo';">
-		            								            
+			            <td width="38%" style="text-align: left">			                      
 			            <%
 			            	if (id != null) {
 		            		%>
