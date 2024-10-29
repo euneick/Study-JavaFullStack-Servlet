@@ -22,7 +22,7 @@
 				alert("검색어를 입력하세요.");
 				document.getElementById("word").focus();
 				
-				return false;
+				return;
 			}
 			else {
 				document.frmSearch.submit();
@@ -108,7 +108,7 @@
 					<tr>
 						<form action="<%=contextPath%>/Board/searchlist.bo" 
 								method="post" 
-								name="frmSearch" onsubmit="javascript:onSearchClick();">
+								name="frmSearch">
 			            	<td colspan="2">
 			            		<div align="right"> 
 				            		<select name="key">
@@ -120,7 +120,7 @@
 				            <td width="26%">
 				            	<div align="center"> &nbsp;
 				            		<input type="text" name="word" id="word"/>
-				            		<input type="submit" value="검색"/>
+				            		<input type="button" value="검색" onclick="onSearchClick()"/>
 				            	</div>
 				            </td>
 			            </form>
