@@ -1,4 +1,4 @@
-<%@page import="java.util.ArrayList"%>
+<%@page import="org.json.simple.JSONArray"%>
 <%@page import="org.json.simple.parser.JSONParser"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -20,8 +20,9 @@
 			text-decoration: none;
 		}
 		
-		ul {
-			border: 2px #ccc solid;
+		th {
+			color: white;
+			font-size: 120%;
 		}
 	</style>
 </head>
@@ -34,21 +35,34 @@
 		JSONParser parser = new JSONParser();
 		JSONObject jsonObject = (JSONObject) parser.parse(jsonData);
 		
-		ArrayList<JSONObject> items = (ArrayList<JSONObject>) jsonObject.get("items");
+		JSONArray items = (JSONArray) jsonObject.get("items");
 		
-		for(JSONObject item : items) {
-		%>
-			<ul>
-				<li><%=item.get("title")%></li>
-				<li><%=item.get("description")%></li>
-				<li><%=item.get("bloggername")%></li>
-				<li><%=item.get("bloggerlink")%></li>
-				<li><%=item.get("postdate")%></li>
-				<li><a href='<%=item.get("link")%>'>블로그로 이동</a></li>
-			</ul>
-		<%
-		}
 	%>
+		<hr width="100%" color="red">
+		
+		<table width="100%" border="1">
+			<tr style="background-color: red;" align="center">
+				<th width="10%">제목</th>
+				<th width="66%">요약내용</th>
+				<th width="10%">블로거 명</th>
+				<th width="7%">작성 날짜</th>
+				<th width="7%">링크</th>
+			</tr>
+		<%
+			for (int i = 0; i < items.size(); i++) {
+				JSONObject item = (JSONObject) items.get(i);
+			%>
+				<tr>
+					<td align="center"><%=item.get("title")%></td>
+					<td align="center"><%=item.get("description")%></td>
+					<td align="center"><%=item.get("bloggername")%></td>
+					<td align="center"><%=item.get("postdate")%></td>
+					<td align="center"><a href='<%=item.get("link")%>'>바로가기</a></td>
+				</tr>
+			<%
+			}
+		%>
+		</table>
 	</div>
 </body>
 
