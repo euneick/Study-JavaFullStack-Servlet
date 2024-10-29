@@ -53,7 +53,7 @@ public class BoardController extends HttpServlet {
 		switch (action) {
 		case "/list.bo": openBoardListView(request, response); break;
 		case "/write.bo": openBoardWriteView(request, response); break;
-		case "/searchlist.bo": break;
+		case "/searchlist.bo": processBoardSearch(request, response); break;
 
 		default:
 		}
@@ -77,6 +77,17 @@ public class BoardController extends HttpServlet {
 			throws ServletException, IOException {
 		
 		request.setAttribute("center", "board/BoardWrite.jsp");
+		
+		nextPage = "/CarMain.jsp";
+	}
+	
+	private void processBoardSearch(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		ArrayList<BoardVO> boardsList = boardService.selectSearchedBoards(request);
+
+		request.setAttribute("boardsList", boardsList);
+		request.setAttribute("center", "board/list.jsp");
 		
 		nextPage = "/CarMain.jsp";
 	}

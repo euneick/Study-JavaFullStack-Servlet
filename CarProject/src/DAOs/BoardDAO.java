@@ -84,4 +84,56 @@ public class BoardDAO {
 		
 		return boards;
 	}
+	
+	public ArrayList<BoardVO> selectSearchedBoards(String key, String word) {
+				
+		if (word.equals("")) return selectBoards();
+
+		String sql = "";
+		
+		if (key.equals("titleContent"))
+			sql = "select * from board "
+					+ "where b_title like '%" + word + "%' "
+					+ "or b_content like '%" + word + "%' order by b_idx desc";
+		else if (key.equals("name"))
+			sql = "select * from board "
+					+ "where b_name like '%" + word + "%' order by b_idx desc";
+
+		ArrayList<BoardVO> boards = new ArrayList<BoardVO>();
+		
+		try {
+			connection = dataSource.getConnection();			
+			
+			statement = connection.prepareStatement(sql);
+			
+			resultSet = statement.executeQuery();
+			
+			while (resultSet.next()) {
+				
+				BoardVO board = new BoardVO(
+						resultSet.getInt("b_idx"),
+						resultSet.getString("b_id"),
+						resultSet.getString("b_pw"),
+						resultSet.getString("b_name"),
+						resultSet.getString("b_email"),
+						resultSet.getString("b_title"),
+						resultSet.getString("b_content"),
+						resultSet.getInt("b_group"),
+						resultSet.getInt("b_level"),
+						resultSet.getDate("b_date"),
+						resultSet.getInt("b_cnt"));
+				
+				boards.add(board);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 조회 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return boards;
+	}
 }
