@@ -1,3 +1,4 @@
+<%@page import="VOs.BoardVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
 <%
@@ -33,6 +34,9 @@
 <body>
 <%
 	String id = (String) session.getAttribute("id");
+
+	ArrayList<BoardVO> boardsList = (ArrayList<BoardVO>) request.getAttribute("boardsList");
+	int totalListCount = boardsList.size();
 %>
 	<table width="97%" border="0" cellspacing="0" cellpadding="0">
 		<tr height="40"> 
@@ -68,7 +72,30 @@
 									<td align="left">이름</td>
 									<td align="left">날짜</td>
 									<td align="left">조회수</td>
-								</tr>			
+								</tr>
+							<%
+								if (boardsList.isEmpty()) {
+								%>
+									<tr align="center">
+										<td colspan="5">작성된 게시글이 없습니다.</td>
+									</tr>
+								<%
+								}
+								else {
+									for(int i = 0; i < totalListCount; i++) {
+										BoardVO board = boardsList.get(i);										
+									%>
+										<tr align="center" height="120%">
+											<td align="left"><%=board.getIdx()%></td>
+											<td align="left"><%=board.getTitle()%></td>
+											<td align="left"><%=board.getName()%></td>
+											<td align="left"><%=board.getDate()%></td>
+											<td align="left"><%=board.getCnt()%></td>
+										</tr>										
+									<%
+									}
+								}
+							%>
 							</table>
 		        		</td>
 		        	</tr>
