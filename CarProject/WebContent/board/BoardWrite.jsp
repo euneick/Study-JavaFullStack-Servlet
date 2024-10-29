@@ -13,7 +13,7 @@
 	MemberVO member = (MemberVO) request.getAttribute("member");
 	
 	String name = member.getName();
-	String id = member.getName();
+	String id = member.getId();
 	String email = member.getEmail();
 %>
 
