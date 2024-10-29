@@ -176,6 +176,12 @@
 					else {
 						$("#resultInsert").text("글 작성 실패").css("color", "red");
 					}
+					
+					let result = window.confirm("게시판 목록으로 이동하시겠습니까?");
+					
+					if (result) {
+						location.href = '<%=contextPath%>/Board/list.bo';
+					}
 				},
 				error: function() {
 					alert("글 작성 도중 에러가 발생했습니다.");
