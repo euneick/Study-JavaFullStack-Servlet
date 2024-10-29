@@ -31,6 +31,23 @@ public class MemberVO {
 		this.tel = tel;
 		this.hp = hp;
 	}
+	
+	
+
+	public MemberVO(String id, String pass, String name, Date regDate, int age, String gender, String address,
+			String email, String tel, String hp) {
+	
+		this.id = id;
+		this.pass = pass;
+		this.name = name;
+		this.regDate = regDate;
+		this.age = age;
+		this.gender = gender;
+		this.address = address;
+		this.email = email;
+		this.tel = tel;
+		this.hp = hp;
+	}
 
 	public String getId() {
 		return id;
