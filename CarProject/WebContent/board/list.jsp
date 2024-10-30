@@ -103,7 +103,6 @@
 								<%
 								}
 								else {
-									System.out.println("firstIdxPerPage : " + firstIdxPerPage);
 									for(int i = firstIdxPerPage; i < firstIdxPerPage + countPerPage; i++) {
 										if (i >= totalListCount) break;
 										
