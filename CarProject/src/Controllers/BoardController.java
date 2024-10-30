@@ -60,6 +60,7 @@ public class BoardController extends HttpServlet {
 		case "/read.bo": openBoardContentView(request, response); break;
 		case "/password.bo": processBoardContentPassword(request, response); return;
 		case "/update.bo": processBoardContentUpdate(request, response); return;
+		case "/delete.bo": processBoardContentDelete(request, response); return;
 
 		default:
 		}
@@ -146,6 +147,14 @@ public class BoardController extends HttpServlet {
 			throws ServletException, IOException {
 		
 		int result = boardService.updateBoard(request);
+		
+		printWriter.print(result == 1);
+	}
+	
+	private void processBoardContentDelete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		int result = boardService.deleteBoard(request);
 		
 		printWriter.print(result == 1);
 	}

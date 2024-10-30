@@ -80,4 +80,11 @@ public class BoardService {
 		
 		return boardDAO.updateBoard(idx, email, title, content);
 	}
+	
+	public int deleteBoard(HttpServletRequest request) {
+		
+		String idx = request.getParameter("idx");
+		
+		return boardDAO.deleteBoard(idx);
+	}
 }

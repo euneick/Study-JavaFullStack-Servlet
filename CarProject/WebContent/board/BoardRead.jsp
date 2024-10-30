@@ -227,6 +227,35 @@
 				}
 			});
 		});
+		
+		function deletePro(idx) {
+			
+			if (window.confirm("게시글을 삭제하시겠습니까?")) {
+				$.ajax({
+					url: "<%=contextPath%>/Board/delete.bo",
+					type: "post",
+					async: true,
+					data: {
+						idx: idx
+					},
+					dataType: "text",
+					success: function(responsedData) {
+						
+						if (responsedData === "true") {
+							alert("게시글이 삭제되었습니다.");
+							<%-- location.href = '<%=contextPath%>/Board/list.bo'; --%>
+							$("#list").trigger("click");	/* 목록 버튼 강제 클릭 */
+						}
+						else {
+							alert("게시글 삭제를 실패했습니다.");
+						}
+					},
+					error: function() {
+						alert("비동기 통신 장애");
+					}
+				});
+			}
+		}
 	</script>
 </body>
 

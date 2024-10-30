@@ -141,6 +141,8 @@ public class BoardDAO {
 		
 		int result = 0;
 		
+		System.out.println("????");
+		
 		try {
 			connection = dataSource.getConnection();
 			
@@ -253,6 +255,30 @@ public class BoardDAO {
 		catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("DB 수정 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return result;
+	}
+	
+	public int deleteBoard(String idx) {
+		
+		int result = 0;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "delete from board where b_idx=?";
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, Integer.parseInt(idx));
+			
+			result = statement.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 삭제 실패");
 		}
 		finally {
 			Release();
