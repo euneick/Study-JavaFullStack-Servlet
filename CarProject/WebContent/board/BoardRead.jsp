@@ -160,8 +160,9 @@
 		</tr>
 	</table>
 	
-	<form>
+	<form id="frmReply" action="<%=contextPath%>/Board/reply.bo" method="post">
 		<input type="hidden" name="idx" value="<%=idx%>" id="idx">
+		<input type="hidden" name="id" value="<%=loginedId%>">
 	</form>
 
 	<script type="text/javascript">
@@ -256,6 +257,11 @@
 				});
 			}
 		}
+		
+		$("#reply").click(function() {
+			
+			$("#frmReply").submit();
+		});
 	</script>
 </body>
 

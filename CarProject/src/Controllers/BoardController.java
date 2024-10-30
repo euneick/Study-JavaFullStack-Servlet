@@ -61,6 +61,8 @@ public class BoardController extends HttpServlet {
 		case "/password.bo": processBoardContentPassword(request, response); return;
 		case "/update.bo": processBoardContentUpdate(request, response); return;
 		case "/delete.bo": processBoardContentDelete(request, response); return;
+		case "/reply.bo": openBoardReplyView(request, response); break;
+		case "/replyPro.bo": break;
 
 		default:
 		}
@@ -157,5 +159,17 @@ public class BoardController extends HttpServlet {
 		int result = boardService.deleteBoard(request);
 		
 		printWriter.print(result == 1);
+	}
+	
+	private void openBoardReplyView(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		MemberVO replyMember = boardService.selectMember(request.getParameter("id"));
+		
+		request.setAttribute("replyMember", replyMember);
+		request.setAttribute("parentIdx", request.getParameter("idx"));
+		request.setAttribute("center", "board/BoardReply.jsp");
+
+		nextPage = "/CarMain.jsp";
 	}
 }

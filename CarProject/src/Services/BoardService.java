@@ -42,6 +42,11 @@ public class BoardService {
 		return memberDAO.selectMember(id);
 	}
 	
+	public MemberVO selectMember(String id) {
+		
+		return memberDAO.selectMember(id);
+	}
+	
 	public int insertBoard(HttpServletRequest request) {
 
 		BoardVO board = new BoardVO();
