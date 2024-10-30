@@ -177,27 +177,19 @@
 				},
 				dataType: "text",
 				success: function(responsedData) {
+
+					let result = (responsedData === "true");
 					
-					if (responsedData === "true") {
-						$("#pwInput").text("글의 비밀번호가 일치합니다.").css("color", "blue");
-						
-						document.getElementById("email").disabled = false;
-						document.getElementById("title").disabled = false;
-						document.getElementById("content").disabled = false;
-						
-						$("#update").css("visibility", "visible");
-						$("#delete").css("visibility", "visible");
-					}
-					else {
-						$("#pwInput").text("글의 비밀번호가 맞지 않습니다.").css("color", "red");
-						
-						document.getElementById("email").disabled = true;
-						document.getElementById("title").disabled = true;
-						document.getElementById("content").disabled = true;
-						
-						$("#update").css("visibility", "hidden");
-						$("#delete").css("visibility", "hidden");
-					}
+					$("#pwInput")
+						.text(result ? "글의 비밀번호가 일치합니다." : "글의 비밀번호가 일치하지 않습니다.")
+						.css("color", result? "blue" : "red");
+					
+					document.getElementById("email").disabled = !result;
+					document.getElementById("title").disabled = !result;
+					document.getElementById("content").disabled = !result;
+					
+					$("#update").css("visibility", result? "visible" : "hidden");
+					$("#delete").css("visibility", result? "visible" : "hidden");
 				},
 				error: function() {
 					alert("비동기 통신 장애");
@@ -220,20 +212,15 @@
 				dataType: "text",
 				success: function(responsedData) {
 					
-					if (responsedData === "true") {
-						$("#pwInput").html("<strong>게시글을 수정했습니다.</strong>").css("color", "green");
-						
-						document.getElementById("email").disabled = true;
-						document.getElementById("title").disabled = true;
-						document.getElementById("content").disabled = true;
-					}
-					else {
-						$("#pwInput").html("게시글 수정에 실패했습니다.").css("color", "red");
-						
-						document.getElementById("email").disabled = false;
-						document.getElementById("title").disabled = false;
-						document.getElementById("content").disabled = false;
-					}
+					let result = (responsedData === "true");
+					
+					$("#pwInput")
+						.html(result ? "<strong>게시글을 수정했습니다.</strong>" : "게시글 수정에 실패했습니다.")
+						.css("color", result ? "green" : "red");
+					
+					document.getElementById("email").disabled = result;
+					document.getElementById("title").disabled = result;
+					document.getElementById("content").disabled = result;
 				},
 				error: function() {
 					alert("비동기 통신 장애");
