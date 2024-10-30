@@ -183,7 +183,7 @@
 					let result = window.confirm("게시판 목록으로 이동하시겠습니까?");
 					
 					if (result) {
-						location.href = '<%=contextPath%>/Board/writePro.bo?currentBlock=<%=currentBlock%>&currentPage=<%=currentPage%>';
+						location.href = '<%=contextPath%>/Board/list.bo?currentBlock=<%=currentBlock%>&currentPage=<%=currentPage%>';
 					}
 				},
 				error: function() {
