@@ -68,9 +68,15 @@ public class BoardController extends HttpServlet {
 	private void openBoardListView(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		ArrayList<BoardVO> boardsList = boardService.selectBoards();
+		HttpSession session = request.getSession();
+		String loginedId = (String) session.getAttribute("id");
 		
+		ArrayList<BoardVO> boardsList = boardService.selectBoards();
+				
 		request.setAttribute("boardsList", boardsList);
+		request.setAttribute("id", loginedId);
+		request.setAttribute("currentPage", request.getParameter("currentPage"));
+		request.setAttribute("currentBlock", request.getParameter("currentBlock"));
 		request.setAttribute("center", "board/list.jsp");
 		
 		nextPage = "/CarMain.jsp";

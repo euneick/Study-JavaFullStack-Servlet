@@ -37,6 +37,27 @@
 
 	ArrayList<BoardVO> boardsList = (ArrayList<BoardVO>) request.getAttribute("boardsList");
 	int totalListCount = boardsList.size();
+	
+	int countPerPage = 5;
+	int totalPage = 0;
+	int currentPage = 0;
+	int firstIdxPerPage = 0;		// 각 페이지 마다 맨 처음 보여질 게시글 번호
+	
+	int countPerBlock = 3;
+	int totalBlock = 0;
+	int currentBlock = 0;
+	
+	if (request.getAttribute("currentPage") != null) {
+		currentPage = Integer.parseInt(request.getAttribute("currentPage").toString());
+	}	
+	firstIdxPerPage = currentPage * countPerPage;	
+	totalPage = (int) Math.ceil((double) totalListCount / countPerPage);
+
+	totalBlock = (int) Math.ceil((double) totalPage / countPerBlock);
+	
+	if (request.getAttribute("currentBlock") != null) {
+		currentBlock = Integer.parseInt(request.getAttribute("currentBlock").toString());
+	}
 %>
 	<table width="97%" border="0" cellspacing="0" cellpadding="0">
 		<tr height="40"> 
@@ -82,8 +103,11 @@
 								<%
 								}
 								else {
-									for(int i = 0; i < totalListCount; i++) {
-										BoardVO board = boardsList.get(i);										
+									System.out.println("firstIdxPerPage : " + firstIdxPerPage);
+									for(int i = firstIdxPerPage; i < firstIdxPerPage + countPerPage; i++) {
+										if (i >= totalListCount) break;
+										
+										BoardVO board = boardsList.get(i);
 									%>
 										<tr align="center" height="120%">
 											<td align="left"><%=board.getIdx()%></td>
@@ -144,7 +168,46 @@
 		 	</td>
 		</tr>
 		<tr align="center"> 
-			<td colspan="3" align="center">Go To Page</td> 
+			<td colspan="3" align="center">
+				<!-- Go To Page -->
+			<%
+				if (totalListCount != 0) {
+					if (currentBlock > 0) {
+					%>
+						<a href="<%=contextPath%>/Board/list.bo?
+							currentBlock=<%=currentBlock - 1%>&currentPage=<%=(currentBlock - 1) * countPerBlock%>">
+							◀ 이전 <%=countPerBlock%>개
+						</a>
+					<%
+					}
+					
+					for (int i = 0; i < countPerBlock; i++) {
+						int pageNumber = (currentBlock * countPerBlock) + i;
+					%>
+						&nbsp;&nbsp;&nbsp;
+						<a href="<%=contextPath%>/Board/list.bo?
+							currentBlock=<%=currentBlock%>&currentPage=<%=pageNumber%>">
+							<%=pageNumber + 1%>
+						<%
+							if (pageNumber + 1 == totalPage)
+								break;
+						%>
+						</a>
+						&nbsp;&nbsp;&nbsp;
+					<%
+					}
+					
+					if (currentBlock + 1 < totalBlock) {
+					%>
+						<a href="<%=contextPath%>/Board/list.bo?
+							currentBlock=<%=currentBlock + 1%>&currentPage=<%=(currentBlock + 1) * countPerBlock%>">
+							▶ 다음 <%=countPerBlock%>개
+						</a>
+					<%
+					}
+				}
+			%>
+			</td> 
 		</tr>
 	</table>
 </body>
