@@ -117,10 +117,12 @@
 										BoardVO board = boardsList.get(i);
 									%>
 										<tr align="center" height="120%">
-											<td align="left"><%=board.getIdx()%></td>											
-											<a href="javascript:openBoardContent('<%=board.getIdx()%>')">
-												<td align="left"><%=board.getTitle()%></td>
-											</a>		
+											<td align="left"><%=board.getIdx()%></td>
+											<td align="left">
+												<a href="javascript:openBoardContent('<%=board.getIdx()%>')">
+													<%=board.getTitle()%>
+												</a>
+											</td>		
 											<td align="left"><%=board.getName()%></td>
 											<td align="left"><%=board.getDate()%></td>
 											<td align="left"><%=board.getCnt()%></td>
