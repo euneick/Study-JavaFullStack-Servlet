@@ -16,6 +16,7 @@
 	<!-- <link rel="stylesheet" type="text/css" href="/MVCBoard/style.css"/> -->
 	<script type="text/javascript">
 		function onSearchClick() {
+			
 			var word = document.getElementById("word").value;
 			
 			if (word == null || word == "") {
@@ -27,7 +28,14 @@
 			else {
 				document.frmSearch.submit();
 			}
-		}		
+		}
+		
+		function openBoardContent(boardIdx) {
+			
+			document.frmRead.action = "<%=contextPath%>/Board/read.bo";
+			document.frmRead.idx.value = boardIdx;
+			document.frmRead.submit();
+		}
 	</script>
 </head>
 
@@ -109,12 +117,14 @@
 										BoardVO board = boardsList.get(i);
 									%>
 										<tr align="center" height="120%">
-											<td align="left"><%=board.getIdx()%></td>
-											<td align="left"><%=board.getTitle()%></td>
+											<td align="left"><%=board.getIdx()%></td>											
+											<a href="javascript:openBoardContent('<%=board.getIdx()%>')">
+												<td align="left"><%=board.getTitle()%></td>
+											</a>		
 											<td align="left"><%=board.getName()%></td>
 											<td align="left"><%=board.getDate()%></td>
 											<td align="left"><%=board.getCnt()%></td>
-										</tr>										
+										</tr>								
 									<%
 									}
 								}
@@ -209,6 +219,12 @@
 			</td> 
 		</tr>
 	</table>
+	
+	<form name="frmRead">
+		<input type="hidden" name="idx">
+		<input type="hidden" name="currentPage" value="<%=currentPage%>">
+		<input type="hidden" name="currentBlock" value="<%=currentBlock%>">
+	</form>
 </body>
 
 </html>

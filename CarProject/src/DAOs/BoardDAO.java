@@ -168,4 +168,42 @@ public class BoardDAO {
 		
 		return result;
 	}
+	
+	public BoardVO selectBoard(String idx) {
+		
+		BoardVO board = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "select * from board where b_idx=?";
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, Integer.parseInt(idx));
+			
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				board = new BoardVO(
+						resultSet.getInt("b_idx"),
+						resultSet.getString("b_id"),
+						resultSet.getString("b_pw"),
+						resultSet.getString("b_name"),
+						resultSet.getString("b_email"),
+						resultSet.getString("b_title"),
+						resultSet.getString("b_content"),
+						resultSet.getInt("b_group"),
+						resultSet.getInt("b_level"),
+						resultSet.getDate("b_date"),
+						resultSet.getInt("b_cnt"));
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 조회 실패");
+		}
+		finally {
+			Release();
+		}
+		return board;
+	}
 }

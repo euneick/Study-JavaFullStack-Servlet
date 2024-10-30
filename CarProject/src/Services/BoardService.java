@@ -55,4 +55,11 @@ public class BoardService {
 		
 		return boardDAO.insertBoard(board);
 	}
+	
+	public BoardVO selectBoard(HttpServletRequest request) {
+
+		String idx = request.getParameter("idx");
+		
+		return boardDAO.selectBoard(idx);		
+	}
 }
