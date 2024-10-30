@@ -117,7 +117,8 @@
 										BoardVO board = boardsList.get(i);
 									%>
 										<tr align="center" height="120%">
-											<td align="left"><%=board.getIdx()%></td>
+											<%-- <td align="left"><%=board.getIdx()%></td> --%>
+											<td align="left"><%=(totalListCount - i)%></td>
 											<td align="left">
 												<a href="javascript:openBoardContent('<%=board.getIdx()%>')">
 													<%=board.getTitle()%>
