@@ -58,6 +58,7 @@ public class BoardController extends HttpServlet {
 		case "/writePro.bo": processBoardWrite(request, response); return;
 		case "/searchlist.bo": processBoardSearch(request, response); break;
 		case "/read.bo": openBoardContentView(request, response); break;
+		case "/password.bo": processBoardContentPassword(request, response); return;
 
 		default:
 		}
@@ -124,10 +125,19 @@ public class BoardController extends HttpServlet {
 		String currentBlock = request.getParameter("currentBlock");
 		
 		request.setAttribute("board", board);
+		request.setAttribute("idx", request.getParameter("idx"));
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("currentBlock", currentBlock);
 		request.setAttribute("center", "board/BoardRead.jsp");
 
 		nextPage = "/CarMain.jsp";
+	}
+	
+	private void processBoardContentPassword(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		boolean result = boardService.checkBoardPassword(request);
+		
+		printWriter.print(result);
 	}
 }

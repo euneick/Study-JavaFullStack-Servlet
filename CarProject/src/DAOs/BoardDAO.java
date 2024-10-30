@@ -206,4 +206,31 @@ public class BoardDAO {
 		}
 		return board;
 	}
+	
+	public boolean checkBoardPassword(String idx, String password) {
+		
+		boolean result = false;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "select * from board where b_idx=? and b_pw=? order by b_idx desc";
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, Integer.parseInt(idx));
+			statement.setString(2, password);
+			
+			resultSet = statement.executeQuery();
+			
+			result = resultSet.next();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 조회 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return result;
+	}
 }

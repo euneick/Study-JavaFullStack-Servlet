@@ -62,4 +62,12 @@ public class BoardService {
 		
 		return boardDAO.selectBoard(idx);		
 	}
+	
+	public boolean checkBoardPassword(HttpServletRequest request) {
+
+		String idx = request.getParameter("idx");
+		String pass = request.getParameter("pass");
+		
+		return boardDAO.checkBoardPassword(idx, pass);
+	}
 }
