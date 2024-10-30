@@ -59,6 +59,7 @@ public class BoardController extends HttpServlet {
 		case "/searchlist.bo": processBoardSearch(request, response); break;
 		case "/read.bo": openBoardContentView(request, response); break;
 		case "/password.bo": processBoardContentPassword(request, response); return;
+		case "/update.bo": processBoardContentUpdate(request, response); return;
 
 		default:
 		}
@@ -139,5 +140,13 @@ public class BoardController extends HttpServlet {
 		boolean result = boardService.checkBoardPassword(request);
 		
 		printWriter.print(result);
+	}
+	
+	private void processBoardContentUpdate(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		int result = boardService.updateBoard(request);
+		
+		printWriter.print(result == 1);
 	}
 }

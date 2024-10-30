@@ -204,6 +204,42 @@
 				}
 			});
 		});
+		
+		$("#update").click(function() {
+			
+			$.ajax({
+				url: "<%=contextPath%>/Board/update.bo",
+				type: "post",
+				async: true,
+				data: {
+					email: $("#email").val(),
+					title: $("#title").val(),
+					content: $("#content").val(),
+					idx: <%=idx%>
+				},
+				dataType: "text",
+				success: function(responsedData) {
+					
+					if (responsedData === "true") {
+						$("#pwInput").html("<strong>게시글을 수정했습니다.</strong>").css("color", "green");
+						
+						document.getElementById("email").disabled = true;
+						document.getElementById("title").disabled = true;
+						document.getElementById("content").disabled = true;
+					}
+					else {
+						$("#pwInput").html("게시글 수정에 실패했습니다.").css("color", "red");
+						
+						document.getElementById("email").disabled = false;
+						document.getElementById("title").disabled = false;
+						document.getElementById("content").disabled = false;
+					}
+				},
+				error: function() {
+					alert("비동기 통신 장애");
+				}
+			});
+		});
 	</script>
 </body>
 

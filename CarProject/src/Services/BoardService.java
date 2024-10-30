@@ -70,4 +70,14 @@ public class BoardService {
 		
 		return boardDAO.checkBoardPassword(idx, pass);
 	}
+	
+	public int updateBoard(HttpServletRequest request) {
+		
+		String idx = request.getParameter("idx");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String email = request.getParameter("email");
+		
+		return boardDAO.updateBoard(idx, email, title, content);
+	}
 }

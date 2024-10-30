@@ -233,4 +233,31 @@ public class BoardDAO {
 		
 		return result;
 	}
+	
+	public int updateBoard(String idx, String email, String title, String content) {
+		
+		int result = 0;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "update board set b_email=?, b_title=?, b_content=? where b_idx=?";
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, email);
+			statement.setString(2, title);
+			statement.setString(3, content);
+			statement.setInt(4, Integer.parseInt(idx));
+			
+			result = statement.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 수정 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return result;
+	}
 }
