@@ -153,7 +153,7 @@
 		            		%>
 		            			<input type="image" id="newContent" 
 		            					src="<%=contextPath%>/board/images/write.gif"
-		            					onclick="location.href='<%=contextPath%>/Board/write.bo';">
+		            					onclick="location.href='<%=contextPath%>/Board/write.bo?currentPage=<%=currentPage%>&currentBlock=<%=currentBlock%>';">
 		            		<%
 			            	}
 			            %>

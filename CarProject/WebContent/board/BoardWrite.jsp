@@ -15,6 +15,9 @@
 	String name = member.getName();
 	String id = member.getId();
 	String email = member.getEmail();
+	
+	String currentPage = (String) request.getAttribute("currentPage");
+	String currentBlock = (String) request.getAttribute("currentBlock");
 %>
 
 <!DOCTYPE html>
@@ -148,7 +151,7 @@
 			
 			event.preventDefault();		// a 태그 기본 이벤트 제거
 			
-			location.href = "<%=contextPath%>/Board/list.bo";
+			location.href = "<%=contextPath%>/Board/list.bo?currentBlock=<%=currentBlock%>&currentPage=<%=currentPage%>";
 		});
 		
 		$("#registration1").click(function(event) {
@@ -156,7 +159,7 @@
 			event.preventDefault();		// a 태그 기본 이벤트 제거
 			
 			$.ajax({
-				url: "<%=contextPath%>/Board/writePro.bo",
+				url: "<%=contextPath%>/Board/writePro.bo?currentBlock=<%=currentBlock%>&currentPage=<%=currentPage%>",
 				type: "post",
 				async: true,
 				data: {
@@ -180,7 +183,7 @@
 					let result = window.confirm("게시판 목록으로 이동하시겠습니까?");
 					
 					if (result) {
-						location.href = '<%=contextPath%>/Board/list.bo';
+						location.href = '<%=contextPath%>/Board/writePro.bo?currentBlock=<%=currentBlock%>&currentPage=<%=currentPage%>';
 					}
 				},
 				error: function() {

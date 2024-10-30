@@ -88,6 +88,8 @@ public class BoardController extends HttpServlet {
 		MemberVO member = boardService.selectMember(request);
 		
 		request.setAttribute("member", member);
+		request.setAttribute("currentPage", request.getParameter("currentPage"));
+		request.setAttribute("currentBlock", request.getParameter("currentBlock"));
 		request.setAttribute("center", "board/BoardWrite.jsp");
 		
 		nextPage = "/CarMain.jsp";
