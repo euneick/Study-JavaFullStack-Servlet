@@ -41,7 +41,7 @@
 	int countPerPage = 5;
 	int totalPage = 0;
 	int currentPage = 0;
-	int firstIdxPerPage = 0;		// 각 페이지 마다 맨 처음 보여질 게시글 번호
+	int firstIdxPerPage = 0;		// 각 페이지 마다 맨 처음 보여질 게시글의 index 
 	
 	int countPerBlock = 3;
 	int totalBlock = 0;
