@@ -28,7 +28,7 @@
 				return;
 			}
 			
-			window.open("ChatWindow.jsp?chatId=" + chatId.value, "", "width=320, height=400");
+			window.open("ChatWindow.jsp?chatId=" + chatId.value, "", "width=330, height=450");
 			chatId.value = "";
 		}
 	</script>
