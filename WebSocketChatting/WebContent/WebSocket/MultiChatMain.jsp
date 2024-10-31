@@ -15,6 +15,7 @@
 	대화명 : <input type="text" id="chatId">
 	<button onclick="openChatWindow();">채팅 참여</button>
 	
+	
 	<script type="text/javascript">
 		function openChatWindow() {
 			
@@ -28,6 +29,7 @@
 			}
 			
 			window.open("ChatWindow.jsp?chatId=" + chatId.val(), "", "width=320, height=400");
+			chatId.val() = "";
 		}
 	</script>
 </body>
