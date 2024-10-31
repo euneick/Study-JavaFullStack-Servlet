@@ -17,6 +17,7 @@
   -->
   <context-param>
   	<param-name>chatAddress</param-name>
-  	<param-value>ws://localhost:8090/WebSocketChatting</param-value>
+  	<!-- <param-value>ws://localhost:8090/WebSocketChatting</param-value> -->
+  	<param-value>ws://112.160.227.201:8090/WebSocketChatting</param-value>
   </context-param>
 </web-app>
