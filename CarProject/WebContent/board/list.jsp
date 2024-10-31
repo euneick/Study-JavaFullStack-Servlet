@@ -46,12 +46,12 @@
 	ArrayList<BoardVO> boardsList = (ArrayList<BoardVO>) request.getAttribute("boardsList");
 	int totalListCount = boardsList.size();
 	
-	int countPerPage = 5;
+	int countPerPage = 10;
 	int totalPage = 0;
 	int currentPage = 0;
 	int firstIdxPerPage = 0;		// 각 페이지 마다 맨 처음 보여질 게시글의 index 
 	
-	int countPerBlock = 3;
+	int countPerBlock = 5;
 	int totalBlock = 0;
 	int currentBlock = 0;
 	
@@ -121,9 +121,15 @@
 											<td align="center"><%=(totalListCount - i)%></td>
 											<td align="left">
 											<%
-												int level = board.getLevel();
-												for (int space = 0; space < level; space++) {
-													%>&nbsp;&nbsp;&nbsp;<%													
+												int replyImgWidth = 0;
+											
+												if (board.getLevel() > 0) {
+													replyImgWidth = board.getLevel() * 10;
+												%>
+													<img src="<%=contextPath%>/board/images/level.gif" 
+														width="<%=replyImgWidth%>" height="15">
+													<img src="<%=contextPath%>/board/images/re.gif">
+												<%
 												}
 											%>
 												<a href="javascript:openBoardContent('<%=board.getIdx()%>')">
