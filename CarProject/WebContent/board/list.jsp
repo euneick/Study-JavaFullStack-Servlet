@@ -96,11 +96,11 @@
 		        		<td colspan="4">
 							<table border="0" width="100%" cellpadding="2" cellspacing="0">
 								<tr align="center" bgcolor="#D0D0D0" height="120%">
-									<td align="left">번호</td>
-									<td align="left">제목</td>
-									<td align="left">이름</td>
-									<td align="left">날짜</td>
-									<td align="left">조회수</td>
+									<td align="center" width="5%">번호</td>
+									<td align="left" width="70%">제목</td>
+									<td align="center" width="10%">이름</td>
+									<td align="center" width="10%">날짜</td>
+									<td align="center" width="5%">조회수</td>
 								</tr>
 							<%
 								if (boardsList.isEmpty()) {
@@ -118,15 +118,15 @@
 									%>
 										<tr align="center" height="120%">
 											<%-- <td align="left"><%=board.getIdx()%></td> --%>
-											<td align="left"><%=(totalListCount - i)%></td>
+											<td align="center"><%=(totalListCount - i)%></td>
 											<td align="left">
 												<a href="javascript:openBoardContent('<%=board.getIdx()%>')">
 													<%=board.getTitle()%>
 												</a>
 											</td>		
-											<td align="left"><%=board.getName()%></td>
-											<td align="left"><%=board.getDate()%></td>
-											<td align="left"><%=board.getCnt()%></td>
+											<td align="center"><%=board.getName()%></td>
+											<td align="center"><%=board.getDate()%></td>
+											<td align="center"><%=board.getCnt()%></td>
 										</tr>								
 									<%
 									}
