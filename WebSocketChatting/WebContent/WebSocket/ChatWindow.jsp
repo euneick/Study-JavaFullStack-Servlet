@@ -21,7 +21,7 @@
 		
 		function sendMesseage() {
 			
-			chatWindow.innerHTML += "<div class='myMsg'>" + chatMessage.value + "</div>";
+			chatWindow.innerHTML += "<div class='myMsg'><span>" + chatMessage.value + "</span></div>";
 			webSocket.send(chatId + '|' + chatMessage.value);
 			chatMessage.value = "";
 			chatWindow.scrollTop = chatWindow.scrollHeight;
@@ -57,7 +57,7 @@
 				if (content.match("/")) {
 					if (content.match("/" + chatId)) {
 						let temp = content.replace(("/" + chatId), "[귓속말] : ");
-						chatWindow.innerHTML += "<div>" + sender + "" + temp + "</div>";
+						chatWindow.innerHTML += "<div><span class='whisper'>" + sender + "" + temp + "</span></div>";
 					}
 				}
 				else {
@@ -107,6 +107,14 @@
 		
 		.myMsg { 
 		    text-align: right;          /* 내 메시지를 오른쪽 정렬로 설정 */
+		}
+		
+		.myMsg span {			
+		    background-color: aqua;
+		}
+		
+		.whisper {
+			background-color: pink;
 		}
 	</style>
 </head>
