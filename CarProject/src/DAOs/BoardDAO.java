@@ -146,9 +146,13 @@ public class BoardDAO {
 		try {
 			connection = dataSource.getConnection();
 			
-			String sql = "insert into board(b_idx, b_id, b_pw, b_name, b_email, "
+			String sql = "update board set b_group=b_group+1";
+			statement = connection.prepareStatement(sql);
+			statement.executeUpdate();
+			
+			sql = "insert into board(b_idx, b_id, b_pw, b_name, b_email, "
 					+ "b_title, b_content, b_group, b_level, b_date, b_cnt) "
-					+ "values(border_b_idx.nextval, ?, ?, ?, ?, ?, ?, 1, 0, sysdate, 0)";
+					+ "values(border_b_idx.nextval, ?, ?, ?, ?, ?, ?, 0, 0, sysdate, 0)";
 			statement = connection.prepareStatement(sql);
 			int index = 1;
 			statement.setString(index++, board.getId());
