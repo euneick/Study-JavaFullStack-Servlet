@@ -9,4 +9,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!--
+  	웹 소켓 채팅을 위한 웹 소켓 서버페이지 요청 주소 설정
+  		ws://		일반 웹 소켓 서버페이지 연결 요청 주소
+  		wss://		보안 웹 소켓 서버페이지(SSL/TLS가 적용 된 경우) 연결 요청 주소
+  -->
+  <context-param>
+  	<param-name>chatAddress</param-name>
+  	<param-value>ws://localhost:8090/WebSocketChatting</param-value>
+  </context-param>
 </web-app>
