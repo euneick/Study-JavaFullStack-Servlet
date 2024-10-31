@@ -92,4 +92,19 @@ public class BoardService {
 		
 		return boardDAO.deleteBoard(idx);
 	}
+	
+	public int insertReplyBoard(HttpServletRequest request) {
+		
+		String parentIdx = request.getParameter("parentIdx");
+		
+		BoardVO board = new BoardVO();
+		board.setId(request.getParameter("id"));
+		board.setName(request.getParameter("writer"));
+		board.setEmail(request.getParameter("email"));
+		board.setTitle(request.getParameter("title"));
+		board.setContent(request.getParameter("content"));
+		board.setPw(request.getParameter("pass"));
+		
+		return boardDAO.insertReplyBoard(parentIdx, board);
+	}
 }

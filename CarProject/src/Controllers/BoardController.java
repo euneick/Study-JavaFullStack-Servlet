@@ -62,7 +62,7 @@ public class BoardController extends HttpServlet {
 		case "/update.bo": processBoardContentUpdate(request, response); return;
 		case "/delete.bo": processBoardContentDelete(request, response); return;
 		case "/reply.bo": openBoardReplyView(request, response); break;
-		case "/replyPro.bo": break;
+		case "/replyPro.bo": processBoardReply(request, response); break;
 
 		default:
 		}
@@ -171,5 +171,13 @@ public class BoardController extends HttpServlet {
 		request.setAttribute("center", "board/BoardReply.jsp");
 
 		nextPage = "/CarMain.jsp";
+	}
+	
+	private void processBoardReply(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		int result = boardService.insertReplyBoard(request);
+
+		nextPage = "/Board/list.bo";
 	}
 }

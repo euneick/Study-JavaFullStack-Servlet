@@ -120,6 +120,12 @@
 											<%-- <td align="left"><%=board.getIdx()%></td> --%>
 											<td align="center"><%=(totalListCount - i)%></td>
 											<td align="left">
+											<%
+												int level = board.getLevel();
+												for (int space = 0; space < level; space++) {
+													%>&nbsp;&nbsp;&nbsp;<%													
+												}
+											%>
 												<a href="javascript:openBoardContent('<%=board.getIdx()%>')">
 													<%=board.getTitle()%>
 												</a>

@@ -31,7 +31,7 @@
 <body>
 	<p id="t" align="center" style="background-color: aqua">답변글 작성 화면</p>
 
-	<form action="<%=contextPath%>/Board/replyPro.do" method="post" onsubmit="return check();">
+	<form action="<%=contextPath%>/Board/replyPro.bo" method="post" onsubmit="return check();">
 		<%--답변글(자식글)을 DB에 Insert하기 위해 주글(부모글)의 글번호를 같이 전달 합니다. --%>
 		<input type="hidden" name="parentIdx" value="<%=parentIdx%>">
 		<%--답변글을 작성하는 사람의 ID를 전달합니다. --%>

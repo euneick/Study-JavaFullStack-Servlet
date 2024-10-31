@@ -51,7 +51,7 @@ public class BoardDAO {
 		try {
 			connection = dataSource.getConnection();
 			
-			String sql = "select * from board order by b_idx desc";
+			String sql = "select * from board order by b_group asc";
 			statement = connection.prepareStatement(sql);
 			
 			resultSet = statement.executeQuery();
@@ -94,10 +94,10 @@ public class BoardDAO {
 		if (key.equals("titleContent"))
 			sql = "select * from board "
 					+ "where b_title like '%" + word + "%' "
-					+ "or b_content like '%" + word + "%' order by b_idx desc";
+					+ "or b_content like '%" + word + "%' order by b_group asc";
 		else if (key.equals("name"))
 			sql = "select * from board "
-					+ "where b_name like '%" + word + "%' order by b_idx desc";
+					+ "where b_name like '%" + word + "%' order by b_group asc";
 
 		ArrayList<BoardVO> boards = new ArrayList<BoardVO>();
 		
@@ -141,8 +141,6 @@ public class BoardDAO {
 		
 		int result = 0;
 		
-		System.out.println("????");
-		
 		try {
 			connection = dataSource.getConnection();
 			
@@ -167,6 +165,100 @@ public class BoardDAO {
 		catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("DB 추가 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return result;
+	}
+	
+	public int insertReplyBoard(String parentIdx, BoardVO board) {
+		
+		int result = 0;
+		
+		try {
+			connection = dataSource.getConnection();
+			/*
+			String sql ="select * from board where b_idx=?";
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, Integer.parseInt(parentIdx));
+			
+			resultSet = statement.executeQuery();
+			
+			if (!resultSet.next()) return 0;			
+			
+			sql = "update board set b_group = b_group + 1 where b_group > ?";
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, resultSet.getInt("b_group"));
+			
+			statement.executeUpdate();
+			
+			sql = "insert into board(b_idx, b_id, b_pw, b_name, b_email, "
+					+ "b_title, b_content, b_group, b_level, b_date, b_cnt) "
+					+ "values(border_b_idx.nextval, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, 0)";
+			statement = connection.prepareStatement(sql);
+			int index = 1;
+			statement.setString(index++, board.getId());
+			statement.setString(index++, board.getPw());
+			statement.setString(index++, board.getName());
+			statement.setString(index++, board.getEmail());
+			statement.setString(index++, board.getTitle());
+			statement.setString(index++, board.getContent());
+			statement.setInt(index++, resultSet.getInt("b_group") + 1);
+			statement.setInt(index++, resultSet.getInt("b_level") + 1);			
+			*/
+			/*
+			String sql = 
+					"BEGIN " 
+						+ "UPDATE board SET b_group = b_group + 1 "
+						+ "WHERE b_group > (SELECT b_group FROM board WHERE b_idx = ?); "
+				
+						+ "INSERT INTO board(b_idx, b_id, b_pw, b_name, b_email, b_title, b_content, "
+							+ "b_group, b_level, b_date, b_cnt) "
+							+ "VALUES(border_b_idx.nextval, ?, ?, ?, ?, ?, ?, "
+							+ "(SELECT b_group + 1 FROM board WHERE b_idx = ?), "
+							+ "(SELECT b_level + 1 FROM board WHERE b_idx = ?), SYSDATE, 0); "
+					+ "END;";
+			*/
+			
+			String sql = "DECLARE \r\n" + 
+					"    parent_group NUMBER; \r\n" + 
+					"    parent_level NUMBER; \r\n" + 
+					"    BEGIN \r\n" + 
+					"        SELECT b_group, b_level \r\n" + 
+					"        INTO parent_group, parent_level \r\n" + 
+					"        FROM board \r\n" + 
+					"        WHERE b_idx = ?;\r\n" + 
+					"    \r\n" + 
+					"        UPDATE board \r\n" + 
+					"        SET b_group = b_group + 1 \r\n" + 
+					"        WHERE b_group > parent_group; \r\n" + 
+					"    \r\n" + 
+					"        INSERT INTO board ( \r\n" + 
+					"            b_idx, b_id, b_pw, b_name, b_email, b_title, b_content, \r\n" + 
+					"            b_group, b_level, b_date, b_cnt\r\n" + 
+					"        ) VALUES (\r\n" + 
+					"            border_b_idx.nextval, ?, ?, ?, ?, ?, ?, \r\n" + 
+					"            parent_group + 1, parent_level + 1, SYSDATE, 0\r\n" + 
+					"        );\r\n" + 
+					"        \r\n" + 
+					"        COMMIT;\r\n" + 
+					"    END;";
+			statement = connection.prepareStatement(sql);			
+			int index = 1;
+			statement.setInt(index++, Integer.parseInt(parentIdx));
+			statement.setString(index++, board.getId());
+			statement.setString(index++, board.getPw());
+			statement.setString(index++, board.getName());
+			statement.setString(index++, board.getEmail());
+			statement.setString(index++, board.getTitle());
+			statement.setString(index++, board.getContent());
+			
+			result = statement.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 		finally {
 			Release();
@@ -220,7 +312,7 @@ public class BoardDAO {
 		try {
 			connection = dataSource.getConnection();
 			
-			String sql = "select * from board where b_idx=? and b_pw=? order by b_idx desc";
+			String sql = "select * from board where b_idx=? and b_pw=? order by b_group asc";
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, Integer.parseInt(idx));
 			statement.setString(2, password);
