@@ -147,7 +147,7 @@
 			</td>
 			<!-- 고객센터 -->
 			<td align="center" bgcolor="red" width="20%">
-				<a href="<%=contextPath %>/FileBoard/list.bo?nowBlock=0&nowPage=0">
+				<a href="<%=contextPath %>/FileBoard/list.bo?currentBlock=0&currentPage=0">
 					<div style="font-size: 2.5rem; color: white;">공지사항</div>
 				</a>
 			</td>
