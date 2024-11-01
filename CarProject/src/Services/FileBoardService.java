@@ -57,7 +57,7 @@ public class FileBoardService {
 		return memberDAO.selectMember(id);
 	}
 	
-	public int getInsertedBoardIdx(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public synchronized int getInsertedBoardIdx(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		Map<String, String> articleMap = uploadFile(request, response);
 		
@@ -75,20 +75,23 @@ public class FileBoardService {
 		
 		int articleNO = fileBoardDAO.getInsertedBoardIdx(board);
 		
-		if (sfile != null && sfile.length() != 0) {
-			File srcFile = new File(REPOSITORY_PATH + "\\temp\\" + sfile);
-			File destDir = new File(REPOSITORY_PATH + "\\" + articleNO);
-			
-			if (!destDir.exists())
-				destDir.mkdirs();
-			
-			FileUtils.moveToDirectory(srcFile, destDir, true);
+		
+		synchronized (this) {
+			if (sfile != null && sfile.length() != 0) {
+				File srcFile = new File(REPOSITORY_PATH + "\\temp\\" + sfile);
+				File destDir = new File(REPOSITORY_PATH + "\\" + articleNO);
+				
+				if (!destDir.exists())
+					destDir.mkdirs();
+				
+				FileUtils.moveToDirectory(srcFile, destDir, true);
+			}
 		}
 		
 		return articleNO;
 	}
 
-	private Map<String, String> uploadFile(HttpServletRequest request, HttpServletResponse response)
+	private synchronized Map<String, String> uploadFile(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		Map<String, String> articleMap = new HashMap<String, String>();
@@ -123,10 +126,11 @@ public class FileBoardService {
 					
 					File uploadFile = new File(repository + "\\temp\\" + fileName);
 					
-					articleMap.put(fileItem.getFieldName(), fileName);
-					
-					// 실제 파일 업로드
-					fileItem.write(uploadFile);
+					synchronized (this) {
+						articleMap.put(fileItem.getFieldName(), fileName);
+						
+						fileItem.write(uploadFile);			// 실제 파일 업로드						
+					}
 				}
 				else {
 					articleMap.put(fileItem.getFieldName(), fileItem.getString("utf-8"));
