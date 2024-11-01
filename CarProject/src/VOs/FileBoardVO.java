@@ -21,10 +21,12 @@ public class FileBoardVO {
 	
 	public FileBoardVO() {
 	}
+	
+	
 
 	public FileBoardVO(int idx, String id, String pw, String name, String email, String title, String content,
-			int group, int level, Date date, int cnt, String ofile, String sfile, int downCount) {
-
+			int group, int level, int cnt, String ofile, String sfile, int downCount) {
+		
 		this.idx = idx;
 		this.id = id;
 		this.pw = pw;
@@ -34,11 +36,17 @@ public class FileBoardVO {
 		this.content = content;
 		this.group = group;
 		this.level = level;
-		this.date = date;
 		this.cnt = cnt;
 		this.ofile = ofile;
 		this.sfile = sfile;
 		this.downCount = downCount;
+	}
+
+	public FileBoardVO(int idx, String id, String pw, String name, String email, String title, String content,
+			int group, int level, Date date, int cnt, String ofile, String sfile, int downCount) {
+
+		this(idx, id, pw, name, email, title, content, group, level, cnt, ofile, sfile, downCount);		
+		this.date = date;
 	}
 
 	public int getIdx() {
