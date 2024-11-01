@@ -9,6 +9,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import VOs.BoardVO;
 import VOs.FileBoardVO;
 
 public class FileBoardDAO {
@@ -52,6 +53,61 @@ public class FileBoardDAO {
 			connection = dataSource.getConnection();
 			
 			String sql = "SELECT * FROM fileboard ORDER BY b_group ASC";
+			statement = connection.prepareStatement(sql);
+			
+			resultSet = statement.executeQuery();
+			
+			while (resultSet.next()) {
+				
+				FileBoardVO board = new FileBoardVO(
+						resultSet.getInt("b_idx"),
+						resultSet.getString("b_id"),
+						resultSet.getString("b_pw"),
+						resultSet.getString("b_name"),
+						resultSet.getString("b_email"),
+						resultSet.getString("b_title"),
+						resultSet.getString("b_content"),
+						resultSet.getInt("b_group"),
+						resultSet.getInt("b_level"),
+						resultSet.getDate("b_date"),
+						resultSet.getInt("b_cnt"),
+						resultSet.getString("ofile"),
+						resultSet.getString("sfile"),
+						resultSet.getInt("downcount"));
+				
+				boards.add(board);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 조회 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return boards;
+	}
+	
+	public ArrayList<FileBoardVO> selectSearchedBoards(String key, String word) {
+				
+		if (word.equals("")) return selectFileBoards();
+
+		String sql = "";
+		
+		if (key.equals("titleContent"))
+			sql = "select * from fileboard "
+					+ "where b_title like '%" + word + "%' "
+					+ "or b_content like '%" + word + "%' order by b_group asc";
+		else if (key.equals("name"))
+			sql = "select * from fileboard "
+					+ "where b_name like '%" + word + "%' order by b_group asc";
+
+		ArrayList<FileBoardVO> boards = new ArrayList<FileBoardVO>();
+		
+		try {
+			connection = dataSource.getConnection();			
+			
 			statement = connection.prepareStatement(sql);
 			
 			resultSet = statement.executeQuery();

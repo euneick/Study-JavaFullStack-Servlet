@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Services.FileBoardService;
+import VOs.BoardVO;
 import VOs.FileBoardVO;
 
 @WebServlet("/FileBoard/*")
@@ -53,6 +54,7 @@ public class FileBoardController extends HttpServlet {
 		
 		switch (action) {
 		case "/list.bo": openFileBoardListView(request, response); break;
+		case "/searchlist.bo": processBoardSearch(request, response); break;
 
 		default:
 		}
@@ -73,6 +75,17 @@ public class FileBoardController extends HttpServlet {
 		request.setAttribute("id", loginedId);
 		request.setAttribute("currentPage", request.getParameter("currentPage"));
 		request.setAttribute("currentBlock", request.getParameter("currentBlock"));
+		request.setAttribute("center", "fileBoard/list.jsp");
+		
+		nextPage = "/CarMain.jsp";
+	}
+	
+	private void processBoardSearch(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		ArrayList<FileBoardVO> boardsList = fileBoardService.selectSearchedBoards(request);
+
+		request.setAttribute("boardsList", boardsList);
 		request.setAttribute("center", "fileBoard/list.jsp");
 		
 		nextPage = "/CarMain.jsp";
