@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import Services.FileBoardService;
 import VOs.BoardVO;
 import VOs.FileBoardVO;
+import VOs.MemberVO;
 
 @WebServlet("/FileBoard/*")
 public class FileBoardController extends HttpServlet {
@@ -55,6 +56,8 @@ public class FileBoardController extends HttpServlet {
 		switch (action) {
 		case "/list.bo": openFileBoardListView(request, response); break;
 		case "/searchlist.bo": processBoardSearch(request, response); break;
+		case "/write.bo": openBoardWriteView(request, response); break;
+		case "/writePro.bo": processBoardWrite(request, response); return;
 
 		default:
 		}
@@ -89,5 +92,48 @@ public class FileBoardController extends HttpServlet {
 		request.setAttribute("center", "fileBoard/list.jsp");
 		
 		nextPage = "/CarMain.jsp";
+	}
+	
+	private void openBoardWriteView(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		MemberVO member = fileBoardService.selectMember(request);
+		
+		request.setAttribute("member", member);
+		request.setAttribute("currentPage", request.getParameter("currentPage"));
+		request.setAttribute("currentBlock", request.getParameter("currentBlock"));
+		request.setAttribute("center", "fileBoard/BoardWrite.jsp");
+		
+		nextPage = "/CarMain.jsp";
+	}
+	
+	private void processBoardWrite(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		int newBoardIdx = 0;
+		
+		try {
+			newBoardIdx = fileBoardService.getInsertedBoardIdx(request, response);
+			
+			printWriter.print("<script>");
+			printWriter.print("alert('게시글이 추가되었습니다.');");
+			printWriter.print("location.href = '" + request.getContextPath() + "/FileBoard/list.bo';");
+			printWriter.print("</script>");
+			
+			printWriter.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			
+			printWriter.print("<script>");
+			printWriter.print("alert('게시글 추가에 실패했습니다.');");
+			printWriter.print("location.href = '" + request.getContextPath() + "/FileBoard/write.bo';");
+			printWriter.print("</script>");
+			
+			printWriter.close();
+		}
+		finally {
+			if (printWriter != null) printWriter.close();
+		}
 	}
 }

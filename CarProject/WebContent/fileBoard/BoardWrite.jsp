@@ -31,7 +31,8 @@
 </head>
 
 <body>
-	<form action="#">
+	<form action="<%=contextPath%>/FileBoard/writePro.bo?currentBlock=<%=currentBlock%>&currentPage=<%=currentPage%>" 
+		method="post" enctype="multipart/form-data">
 		<table width="90%" border="0" cellspacing="0" cellpadding="0">
 			<tr height="40">
 				<td width="41%" style="text-align: left">&nbsp;&nbsp;&nbsp; <img
@@ -132,7 +133,8 @@
 									<!-- 등록 버튼 -->
 									<div align="right">
 										<a href="#" id="registration1">
-											<img src="<%=contextPath%>/board/images/confirm.gif" border="0" />
+											<%-- <img src="<%=contextPath%>/board/images/confirm.gif" border="0" /> --%>
+											<input type="submit" value="글 등록">
 										</a>
 									</div>
 								</td>
@@ -162,6 +164,7 @@
 			location.href = "<%=contextPath%>/FileBoard/list.bo?currentBlock=<%=currentBlock%>&currentPage=<%=currentPage%>";
 		});
 		
+		<%-- 
 		$("#registration1").click(function(event) {
 			
 			event.preventDefault();		// a 태그 기본 이벤트 제거
@@ -176,7 +179,8 @@
 					email: $("input[name=email]").val(),
 					title: $("input[name=title]").val(),
 					content: $("textarea[name=content]").val(),
-					pass: $("input[name=pass]").val()
+					pass: $("input[name=pass]").val(),
+					fileName: $("input[name=fileName]").val()
 				},
 				dataType: "text",
 				success: function(responsedData) {
@@ -199,6 +203,7 @@
 				}
 			});
 		});
+		--%>
 	</script>
 </body>
 

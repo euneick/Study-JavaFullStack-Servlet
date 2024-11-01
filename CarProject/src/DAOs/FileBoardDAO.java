@@ -143,4 +143,69 @@ public class FileBoardDAO {
 		
 		return boards;
 	}
+	
+	public int getInsertedBoardIdx(FileBoardVO board) {
+		
+		int lastIdx = getLastIdx();
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "update fileBoard set b_group=b_group+1";
+			statement = connection.prepareStatement(sql);
+			statement.executeUpdate();
+			
+			sql = "insert into fileBoard(b_idx, b_id, b_pw, b_name, b_email, "
+					+ "b_title, b_content, b_group, b_level, b_date, b_cnt, sfile, downcount) "
+					+ "values(?, ?, ?, ?, ?, ?, ?, 0, 0, sysdate, 0, ?, 0)";
+			statement = connection.prepareStatement(sql);
+			int index = 1;
+			statement.setInt(index++, lastIdx);
+			statement.setString(index++, board.getId());
+			statement.setString(index++, board.getPw());
+			statement.setString(index++, board.getName());
+			statement.setString(index++, board.getEmail());
+			statement.setString(index++, board.getTitle());
+			statement.setString(index++, board.getContent());
+			statement.setString(index++, board.getSfile());
+			
+			statement.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 추가 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return lastIdx;
+	}
+	
+	private int getLastIdx() {
+		
+		int result = 0;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "select max(b_idx) as idx from fileboard";
+			statement = connection.prepareStatement(sql);
+			
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				result = resultSet.getInt("idx") + 1;
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 추가 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return result;
+	}
 }
