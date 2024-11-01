@@ -1,7 +1,10 @@
 package Services;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -149,5 +152,41 @@ public class FileBoardService {
 		String idx = request.getParameter("idx");
 		
 		return fileBoardDAO.selectBoard(idx);		
+	}
+	
+	public void downloadFile(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		String idx = request.getParameter("idx");
+		String sfile = request.getParameter("sfile");
+		
+		File file = new File(REPOSITORY_PATH + "\\" + idx + "\\" + sfile);
+		
+		// 파일의 정보를 읽고 내보낼 출력 스트림 객체
+		OutputStream out = response.getOutputStream();
+
+		// no-cache로 설정하면 브라우저는 응답받은 결과를 캐싱하지 않음
+		response.setHeader("Cache-Control", "no-cache");
+		response.addHeader("Cache-Control", "no-store");	// 뒤로가기 등을 통해 페이지 이동하는 경우를 대비하여 no-store 추가
+		response.setHeader("Content-Disposition",
+				"attachment; fileName=\"" + URLEncoder.encode(sfile, "utf-8") + "\";");
+		
+		// 다운로드 할 파일을 바이트 단위로 읽어들일 버퍼 통로 생성
+		FileInputStream in = new FileInputStream(file);
+		
+		// 다운로드 할 파일을 8KB 씩 읽어 저장할 버퍼
+		byte[] buffer = new byte[1024 * 8];
+		
+		while (true) {
+			int count = in.read(buffer);	// 파일의 내용을 8KB단위로 읽어 변수에 저장
+			
+			if (count == -1) break;
+			
+			out.write(buffer, 0, count);
+		}
+		
+		in.close();
+		out.close();
+		
+		fileBoardDAO.increaseBoardDownCount(idx);
 	}
 }

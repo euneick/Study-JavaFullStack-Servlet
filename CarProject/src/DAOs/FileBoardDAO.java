@@ -255,4 +255,23 @@ public class FileBoardDAO {
 		
 		return board;
 	}
+	
+	public void increaseBoardDownCount(String idx) {
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "UPDATE fileboard SET downcount=downcount+1 WHERE b_idx=?";
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, Integer.parseInt(idx));
+			
+			statement.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			Release();
+		}
+	}
 }

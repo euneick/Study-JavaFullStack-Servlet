@@ -46,9 +46,7 @@ public class FileBoardController extends HttpServlet {
 			throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=utf-8");
-		
-		printWriter = response.getWriter();
+		response.setContentType("text/html; charset=utf-8");		
 
 		String action = request.getPathInfo();
 		System.out.println("action : " + action);
@@ -59,6 +57,7 @@ public class FileBoardController extends HttpServlet {
 		case "/write.bo": openBoardWriteView(request, response); break;
 		case "/writePro.bo": processBoardWrite(request, response); return;
 		case "/read.bo": openBoardContentView(request, response); break;
+		case "/fileDown.bo": processFileDownload(request, response); return;
 
 		default:
 		}
@@ -112,6 +111,7 @@ public class FileBoardController extends HttpServlet {
 			throws ServletException, IOException {
 		
 		int newBoardIdx = 0;
+		printWriter = response.getWriter();
 		
 		try {
 			newBoardIdx = fileBoardService.getInsertedBoardIdx(request, response);
@@ -153,5 +153,11 @@ public class FileBoardController extends HttpServlet {
 		request.setAttribute("center", "fileBoard/BoardRead.jsp");
 
 		nextPage = "/CarMain.jsp";
+	}
+	
+	private void processFileDownload(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		fileBoardService.downloadFile(request, response);
 	}
 }

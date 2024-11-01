@@ -12,6 +12,8 @@
 	String email = board.getEmail();
 	String title = board.getTitle();
 	String content = board.getContent().replace("/r/n", "<br>");
+	String sfile = board.getSfile();
+	int downCount = board.getDownCount();
 
 	String idx = (String) request.getAttribute("idx");
 	String currentPage = (String) request.getAttribute("currentPage");
@@ -91,6 +93,20 @@
 											<td colspan="3" bgcolor="#f5f5f5" style="text-align: left">
 												&nbsp;&nbsp; 
 												<input type="text" name="title" id="title" value="<%=title%>" disabled>
+											</td>
+										</tr>
+										<tr>
+											<td height="31" bgcolor="#e4e4e4" class="text2">
+												<div align="center">다운로드</div>
+											</td>
+											<td colspan="2" bgcolor="#f5f5f5" style="text-align: left">
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<a href="<%=contextPath%>/FileBoard/fileDown.bo?idx=<%=idx%>&sfile=<%=sfile%>">
+													<%=sfile%>
+												</a>
+											</td>
+											<td bgcolor="#f5f5f5">
+												<p>다운로드 수 : <%=downCount%></p>
 											</td>
 										</tr>
 										<tr>
