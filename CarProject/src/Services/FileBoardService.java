@@ -143,4 +143,11 @@ public class FileBoardService {
 		
 		return articleMap;
 	}
+	
+	public FileBoardVO selectBoard(HttpServletRequest request) {
+
+		String idx = request.getParameter("idx");
+		
+		return fileBoardDAO.selectBoard(idx);		
+	}
 }

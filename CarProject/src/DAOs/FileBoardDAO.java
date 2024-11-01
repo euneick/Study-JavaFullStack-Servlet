@@ -208,4 +208,51 @@ public class FileBoardDAO {
 		
 		return result;
 	}
+	
+	public FileBoardVO selectBoard(String idx) {
+		
+		FileBoardVO board = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String sql = "UPDATE fileboard SET b_cnt=b_cnt+1 WHERE b_idx=?";
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, Integer.parseInt(idx));
+			
+			statement.executeUpdate();
+			
+			sql = "select * from fileboard where b_idx=?";
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, Integer.parseInt(idx));
+			
+			resultSet = statement.executeQuery();
+			if (resultSet.next()) {
+				board = new FileBoardVO(
+						resultSet.getInt("b_idx"),
+						resultSet.getString("b_id"),
+						resultSet.getString("b_pw"),
+						resultSet.getString("b_name"),
+						resultSet.getString("b_email"),
+						resultSet.getString("b_title"),
+						resultSet.getString("b_content"),
+						resultSet.getInt("b_group"),
+						resultSet.getInt("b_level"),
+						resultSet.getDate("b_date"),
+						resultSet.getInt("b_cnt"),
+						resultSet.getString("ofile"),
+						resultSet.getString("sfile"),
+						resultSet.getInt("downcount"));
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 조회 실패");
+		}
+		finally {
+			Release();
+		}
+		
+		return board;
+	}
 }

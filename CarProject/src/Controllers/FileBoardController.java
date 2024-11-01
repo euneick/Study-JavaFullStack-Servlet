@@ -58,6 +58,7 @@ public class FileBoardController extends HttpServlet {
 		case "/searchlist.bo": processBoardSearch(request, response); break;
 		case "/write.bo": openBoardWriteView(request, response); break;
 		case "/writePro.bo": processBoardWrite(request, response); return;
+		case "/read.bo": openBoardContentView(request, response); break;
 
 		default:
 		}
@@ -135,5 +136,22 @@ public class FileBoardController extends HttpServlet {
 		finally {
 			if (printWriter != null) printWriter.close();
 		}
+	}
+	
+	private void openBoardContentView(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		FileBoardVO board = fileBoardService.selectBoard(request);		
+
+		String currentPage = request.getParameter("currentPage");
+		String currentBlock = request.getParameter("currentBlock");
+		
+		request.setAttribute("board", board);
+		request.setAttribute("idx", request.getParameter("idx"));
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("currentBlock", currentBlock);
+		request.setAttribute("center", "fileBoard/BoardRead.jsp");
+
+		nextPage = "/CarMain.jsp";
 	}
 }
