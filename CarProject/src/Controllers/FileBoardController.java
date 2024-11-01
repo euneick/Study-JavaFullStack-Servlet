@@ -2,6 +2,7 @@ package Controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -10,8 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Services.FileBoardService;
+import VOs.FileBoardVO;
 
 @WebServlet("/FileBoard/*")
 public class FileBoardController extends HttpServlet {
@@ -61,5 +64,17 @@ public class FileBoardController extends HttpServlet {
 	private void openFileBoardListView(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		HttpSession session = request.getSession();
+		String loginedId = (String) session.getAttribute("id");
+		
+		ArrayList<FileBoardVO> boardsList = fileBoardService.selectFileBoards();
+
+		request.setAttribute("boardsList", boardsList);
+		request.setAttribute("id", loginedId);
+		request.setAttribute("currentPage", request.getParameter("currentPage"));
+		request.setAttribute("currentBlock", request.getParameter("currentBlock"));
+		request.setAttribute("center", "fileBoard/list.jsp");
+		
+		nextPage = "/CarMain.jsp";
 	}
 }
