@@ -21,8 +21,6 @@ public class FileBoardVO {
 	
 	public FileBoardVO() {
 	}
-	
-	
 
 	public FileBoardVO(int idx, String id, String pw, String name, String email, String title, String content,
 			int group, int level, int cnt, String ofile, String sfile, int downCount) {
@@ -53,55 +51,111 @@ public class FileBoardVO {
 		return idx;
 	}
 
+	public void setIdx(int idx) {
+		this.idx = idx;
+	}
+
 	public String getId() {
 		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getPw() {
 		return pw;
 	}
 
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
+
 	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getTitle() {
 		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getContent() {
 		return content;
 	}
 
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 	public int getGroup() {
 		return group;
+	}
+
+	public void setGroup(int group) {
+		this.group = group;
 	}
 
 	public int getLevel() {
 		return level;
 	}
 
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
 	public Date getDate() {
 		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public int getCnt() {
 		return cnt;
 	}
 
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+
 	public String getOfile() {
 		return ofile;
+	}
+
+	public void setOfile(String ofile) {
+		this.ofile = ofile;
 	}
 
 	public String getSfile() {
 		return sfile;
 	}
 
+	public void setSfile(String sfile) {
+		this.sfile = sfile;
+	}
+
 	public int getDownCount() {
 		return downCount;
+	}
+
+	public void setDownCount(int downCount) {
+		this.downCount = downCount;
 	}
 }
