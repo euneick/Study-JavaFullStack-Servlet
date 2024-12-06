@@ -51,13 +51,15 @@ create table board(
 -- board테이블에  글정보들 추가
 
 insert into board(name, pwd, subject, content, pos, depth, count, ip, join_date, id)
-values('이순신', '1234', '제목1', '글내용1', 0, 0, 0, 'localhost', now(), 'lee');
+values('이순신', '1234', '제목1', '글내용1', 0, 0, 0, 'localhost', now(), 'lee'),
+('이순신', '1234', '제목2', '글내용2', 0, 0, 0, 'localhost', now(), 'lee'),
+('이순신', '1234', '제목3', '글내용3', 0, 0, 0, 'localhost', now(), 'lee'),
+('이순신', '1234', '제목4', '글내용4', 0, 0, 0, 'localhost', now(), 'lee'),
+('이순신', '1234', '제목5', '글내용5', 0, 0, 0, 'localhost', now(), 'lee'),
+('이순신', '1234', '제목6', '글내용6', 0, 0, 0, 'localhost', now(), 'lee'),
+('이순신', '1234', '제목7', '글내용7', 0, 0, 0, 'localhost', now(), 'lee');
 
-insert into board(name, pwd, subject, content, pos, depth, count, ip, join_date, id)
-values('이순신', '1234', '제목22', '글내용22', 0, 0, 0, 'localhost', now(), 'lee');
-
-insert into board(name, pwd, subject, content, pos, depth, count, ip, join_date, id)
-values('이순신', '1234', '제목333', '글내용333', 0, 0, 0, 'localhost', now(), 'lee');
+commit;
 
 delete from board;
 drop table board;
